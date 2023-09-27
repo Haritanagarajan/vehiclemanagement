@@ -32,10 +32,10 @@ const Login = () => {
           if (response.ok) {
             setvusername("");
             setvpassword("");
-            toast.success("Registration Successful");
+            toast.success("Login Successful");
           }
           else {
-            throw new Error("Registration failed");
+            throw new Error("Login failed");
           }
         })
         .catch((error) => {
