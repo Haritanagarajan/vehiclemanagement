@@ -1,0 +1,13 @@
+.submit {
+    font-style: italic;
+    font-weight: bold;
+}
+
+.registerform {
+    font-weight: bold;
+}
+
+.error {
+    color: red;
+    font-size: 14px;
+}
