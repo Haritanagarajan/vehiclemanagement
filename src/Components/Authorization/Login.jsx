@@ -1,10 +1,11 @@
 import React, { useContext, useState, useEffect } from 'react';
 import loginimage from '../Assets/loginimage.jpg';
 import '../Styles/Register.css';
-import { Navigate } from 'react-router-dom';
-import { UserContext } from '../Context/Context';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
+import { UserContext } from '../Context/userContext';
+
 
 const Login = () => {
 
@@ -12,39 +13,38 @@ const Login = () => {
   const [vpassword, setvpassword] = useState("");
   const [error, setError] = useState("");
 
-  const handleLogin = (e) => {
-    e.preventDefault();
+  const { userDetails, setuserDetails } = useContext(UserContext);
+  const Navigate = useNavigate();
 
+
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
     if (Object.keys != null) {
       const newUser = {
         vusername,
         vpassword,
       };
-      fetch("https:/localhost:7229/api/Users/ValidateUser", {
-        method: "POST",
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(newUser),
-      })
-        .then((response) => {
-          if (response.ok) {
-            setvusername("");
-            setvpassword("");
-            toast.success("Login Successful");
-          }
-          else {
-            throw new Error("Login failed");
+
+      try {
+        const response = await axios.post("https:/localhost:7229/api/Users/ValidateUser", newUser, {
+          headers: {
+            'Content-Type': 'application/json',
           }
         })
-        .catch((error) => {
-          console.error("Error during registration:", error);
-        });
-
-    };
+        const result = await response.data;
+        setuserDetails(result);
+        if(result){
+          Navigate('/Home');
+        }
+      } catch (error) {
+        console.log(error);
+        throw error;
+      }
+    }
   }
 
+  console.log("userDetails", userDetails);
 
   return (
     <>

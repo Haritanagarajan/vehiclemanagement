@@ -65,7 +65,9 @@ const Register = () => {
                 vroleid: 2
 
             };
-            fetch("https:/localhost:7229/api/Users", {
+
+
+            fetch("https:/localhost:7229/api/Users/PostVuser", {
                 method: "POST",
                 headers: {
                     'Accept': 'application/json',
@@ -75,6 +77,7 @@ const Register = () => {
             })
                 .then((response) => {
                     if (response.ok) {
+                        console.log(response.data);
                         setvusername("");
                         setvemail("");
                         setvpassword("");

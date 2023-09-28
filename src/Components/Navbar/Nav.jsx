@@ -14,12 +14,18 @@ import MenuItem from '@mui/material/MenuItem';
 import CarRepairIcon from '@mui/icons-material/CarRepair';
 import { Link } from 'react-router-dom';
 import '../Styles/Nav.css';
-
+import { UserContext } from '../Context/userContext';
+import { useContext } from 'react';
+import { Navigate } from 'react-router-dom';
 
 
 function Nav() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const { userDetails, setuserDetails } = useContext(UserContext);
+  const isCustomerRole = userDetails.roles == "Customer";
+
+  console.log(isCustomerRole);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -36,7 +42,15 @@ function Nav() {
     setAnchorElUser(null);
   };
 
+  const handlelogout = () => {
+    localStorage.removeItem("userDetails");
+    <Navigate to='/Login' />
+    window.location.reload();
+  }
+
   return (
+
+
     <AppBar position="static" sx={{ backgroundColor: 'black' }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
@@ -57,6 +71,7 @@ function Nav() {
             }}
           >
             VehiPro
+
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -89,7 +104,19 @@ function Nav() {
               }}
             >
               <MenuItem onClick={handleCloseNavMenu}>
-                <Typography textAlign="center">Register</Typography>
+                <Typography textAlign="center">
+                  <Link to='/Register' id="smallscreenregister">
+                    Register
+                  </Link>
+                </Typography>
+              </MenuItem>
+
+              <MenuItem>
+                <Typography textAlign="center">
+                  <Link to='/Login' id="smallscreenregister">
+                    Login
+                  </Link>
+                </Typography>
               </MenuItem>
             </Menu>
           </Box>
@@ -114,27 +141,65 @@ function Nav() {
           </Typography>
 
 
+
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            <Button
-              onClick={handleCloseNavMenu}
-              sx={{ my: 2, color: 'white', display: 'block' }}
-            >
-              <Link to='/Register' id='authorize'>
-                Register
-              </Link>
-            </Button>
+            {!isCustomerRole ? (
+              <Button
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: 'white', display: 'block' }}
+              >
+                <Link to='/Register' id='authorize'>
+                  Register
+                </Link>
+              </Button>
+            ) : null}
           </Box>
 
-          <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <Button 
-              onClick={handleCloseNavMenu}
-              sx={{ color: 'white', display: 'block' }}
-            >
-              <Link to='/Login' id='authorize'>
-                Login
-              </Link>
-            </Button>
+
+
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+            {isCustomerRole ? (
+              <Button
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: 'white', display: 'block' }}
+              >
+                <p onClick={handlelogout}>
+                  Logout
+                </p>
+              </Button>
+            ) : null}
           </Box>
+
+
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+            {isCustomerRole ? (
+              <Button
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: 'white', display: 'block' }}
+              >
+                <Link to='/Home' id='authorize'>
+                  Home
+                </Link>
+              </Button>
+            ) : null}
+          </Box>
+
+
+
+          <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+            {!isCustomerRole ? (
+
+              <Button
+                onClick={handleCloseNavMenu}
+                sx={{ color: 'white', display: 'block' }}
+              >
+                <Link to='/Login' id='authorize'>
+                  Login
+                </Link>
+              </Button>
+            ) : null}
+          </Box>
+
 
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
