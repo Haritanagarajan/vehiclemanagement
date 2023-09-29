@@ -34,7 +34,7 @@ const Login = () => {
         })
         const result = await response.data;
         setuserDetails(result);
-        if(result){
+        if (result) {
           Navigate('/Home');
         }
       } catch (error) {

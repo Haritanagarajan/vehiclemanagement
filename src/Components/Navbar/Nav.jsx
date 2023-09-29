@@ -16,7 +16,7 @@ import { Link } from 'react-router-dom';
 import '../Styles/Nav.css';
 import { UserContext } from '../Context/userContext';
 import { useContext } from 'react';
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 
 function Nav() {
@@ -24,8 +24,11 @@ function Nav() {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const { userDetails, setuserDetails } = useContext(UserContext);
   const isCustomerRole = userDetails.roles == "Customer";
+  const isAdminRole = userDetails.roles == "Admin";
+  const navigate = useNavigate();
 
   console.log(isCustomerRole);
+  console.log(isAdminRole);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -44,7 +47,7 @@ function Nav() {
 
   const handlelogout = () => {
     localStorage.removeItem("userDetails");
-    <Navigate to='/Login' />
+    navigate('/Login');
     window.location.reload();
   }
 
@@ -143,7 +146,7 @@ function Nav() {
 
 
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {!isCustomerRole ? (
+            {!isCustomerRole && !isAdminRole ? (
               <Button
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block' }}
@@ -155,10 +158,21 @@ function Nav() {
             ) : null}
           </Box>
 
-
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+            {isAdminRole ? (
+              <Button
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: 'white', display: 'block' }}
+              >
+                <Link to='/Admin' id='authorize'>
+                  Admin
+                </Link>
+              </Button>
+            ) : null}
+          </Box>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {isCustomerRole ? (
+            {isCustomerRole || isAdminRole ? (
               <Button
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block' }}
@@ -187,7 +201,7 @@ function Nav() {
 
 
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            {!isCustomerRole ? (
+            {!isCustomerRole && !isAdminRole ? (
 
               <Button
                 onClick={handleCloseNavMenu}
@@ -195,6 +209,20 @@ function Nav() {
               >
                 <Link to='/Login' id='authorize'>
                   Login
+                </Link>
+              </Button>
+            ) : null}
+          </Box>
+
+
+          <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+            {isCustomerRole ? (
+              <Button
+                onClick={handleCloseNavMenu}
+                sx={{ color: 'white', display: 'block' }}
+              >
+                <Link to='/CarService' id='authorize'>
+                  CarServices
                 </Link>
               </Button>
             ) : null}

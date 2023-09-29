@@ -5,6 +5,8 @@ import Register from '../src/Components/Authorization/Register';
 import Login from '../src/Components/Authorization/Login';
 import { UserContextProvider } from './Components/Context/userContext';
 import Home from './Components/HomePage/Home';
+import Admin from './Components/Admin/Admin';
+import CarService from './Components/CarServices/CarService';
 
 function App() {
   return (
@@ -15,6 +17,8 @@ function App() {
           <Route exact path='/Register' element={<Register />} />
           <Route exact path='/Login' element={<Login />} />
           <Route exact path='/Home' element={<Home />} />
+          <Route exact path='/Admin' element={<Admin />} />
+          <Route exact path='/CarService' element={<CarService />} />
         </Routes>
       </UserContextProvider>
     </div>
