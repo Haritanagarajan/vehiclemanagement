@@ -22,34 +22,27 @@ const CarService = () => {
 
 
     return (
-        <div className='container mb-3'>
-            <h1 className='blogs text-center '>CarServices</h1>
+        <div className='container mb-3 mt-5'>
+            <h1 className='blogs text-center '>Pick your CarServices</h1>
             <div className='row' >
                 {carservice.map((services) => (
                     <div className="col-md-6" key={services.id}>
-                        <Link to={`/Notesdisplay/${services.id}`} style={{ textDecoration: 'none' }}>
-                            <div className="cards">
-                                <div className='card-title'>
-                                    {services.serviceName}
-                                </div>
-                                <div className='card-body  text-center '>
-                                    {services.warranty}
-                                    <br />
-                                    {services.subservice1}
-                                    <br />
-                                    {services.subservice2}
-                                    <br />
-                                    {services.subservice3}
-                                    <br />
-                                    {services.subservice3}
-                                    <br />
-                                    {services.timeTaken}
-                                    <br />
-                                    {services.servicecost}
-                                </div>
+                        {/* <Link to={`/Notesdisplay/${services.id}`} style={{ textDecoration: 'none' }}> */}
+                        <div className="card carservicescard">
+                            <div className='card-title carservicestitle'>
+                                {services.serviceName}
                             </div>
-                        </Link >
-
+                            <div className='card-body  text-center '>
+                                <p>{services.warranty}</p>
+                                <p>{services.subservice1}</p>
+                                <p>{services.subservice2}</p>
+                                <p>{services.subservice3}</p>
+                                <p>{services.subservice3}</p>
+                                <p>{services.timeTaken}</p>
+                                <p>{services.servicecost}</p>
+                            </div>
+                        </div>
+                        {/* </Link > */}
                     </div>
                 ))}
             </div>

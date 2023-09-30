@@ -217,6 +217,37 @@ function Nav() {
 
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             {isCustomerRole ? (
+
+              <Button
+                onClick={handleCloseNavMenu}
+                sx={{ color: 'white', display: 'block' }}
+              >
+                <Link to='/CarBrand' id='authorize'>
+                  CarBrand
+                </Link>
+              </Button>
+            ) : null}
+          </Box>
+
+
+          <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+            {isCustomerRole ? (
+
+              <Button
+                onClick={handleCloseNavMenu}
+                sx={{ color: 'white', display: 'block' }}
+              >
+                <Link to='/BrandCar' id='authorize'>
+                  BrandCar
+                </Link>
+              </Button>
+            ) : null}
+          </Box>
+
+
+
+          <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+            {isCustomerRole ? (
               <Button
                 onClick={handleCloseNavMenu}
                 sx={{ color: 'white', display: 'block' }}

@@ -1,32 +1,18 @@
-.cards {
-
-    background-color: white;
-    margin-left: 30px;
-    padding: 20px;
-    width: 550px;
-    color: white;
-    margin-top: 40px;
-    height: 300px;
-    box-shadow: 1px 2px 4px rgb(165, 162, 162);
-    margin-bottom: 20px;
-
+.carservicescard {
+    height: 60vh;
+    display: flex;
+    justify-content: center;
+    padding: auto;
+    margin: auto;
+    width: 100%;
+    margin-top: 10%;
+    padding-top: 10%;
+    font-weight: bold;
 }
 
-.card-body {
-    background-color: black;
-    width: 545px;
-    height: 250px;
-    margin-top: -15px;
-    margin-left: -17px;
-    font-size: 14px;
-    padding-top: 100px;
-
-
-}
-
-.blogs {
-    color: black;
-    font-weight: 650;
-    font: proxima;
-    margin-top: 10px;
+.carservicestitle {
+    font-size: x-large;
+    font-weight: 500;
+    display: flex;
+    justify-content: center;
 }
