@@ -36,6 +36,8 @@ const CarBrand = () => {
                             <div className="card carbrandcard">
                                 <div className='card-body  text-center '>
                                     {brands.brandName}
+                                    <br />
+                                    {brands.brandid}
                                     {/* <img src={brands.branndImage} class="img-fluid" /> */}
                                 </div>
                             </div>

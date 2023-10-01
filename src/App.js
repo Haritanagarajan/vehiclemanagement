@@ -9,6 +9,8 @@ import Admin from './Components/Admin/Admin';
 import CarService from './Components/CarServices/CarService';
 import CarBrand from './Components/CarBrand/CarBrand';
 import BrandCar from '../src/Components/BrandCar/BrandCar';
+import CarFuel from './Components/CarFuel/CarFuel';
+import { CarDetails } from './Components/CarDetails/CarDetails';
 
 function App() {
   return (
@@ -20,9 +22,11 @@ function App() {
           <Route exact path='/Login' element={<Login />} />
           <Route exact path='/Home' element={<Home />} />
           <Route exact path='/Admin' element={<Admin />} />
-          <Route exact path='/CarService' element={<CarService />} />
+          <Route exact path='/CarService/:carid' element={<CarService />} />
           <Route exact path='/CarBrand' element={<CarBrand />} />
           <Route exact path='/BrandCar/:brandid' element={<BrandCar />} />
+          <Route exact path='/CarFuel' element={<CarFuel />} />
+          <Route exact path='/CarDetails' element={<CarDetails />} />
         </Routes>
       </UserContextProvider>
     </div>

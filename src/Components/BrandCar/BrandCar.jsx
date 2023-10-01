@@ -1,25 +1,25 @@
 
 // https://localhost:7229/api/BrandCars/GetBrandCars
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react'
 import '../Styles/BrandCar.css';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
 
-const CarBrand = () => {
+const BrandCar = () => {
     const [BrandCar, setBrandCar] = useState([]);
     const { brandid } = useParams();
     console.log(brandid)
-    const [CarBrand, setCarBrand] = useState([]);
+
 
 
     const fetchData = async () => {
         try {
             const response = await axios.get(`https://localhost:7229/api/BrandCars/GetBrandCar/${brandid}`)
             const result = await response.data;
-            setBrandCar(result);
-            console.log()
+            const brandCarArray = Array.isArray(result) ? result : [result];
+            setBrandCar(brandCarArray);
         } catch (error) {
             console.log(error);
             throw error;
@@ -27,7 +27,7 @@ const CarBrand = () => {
     }
     useEffect(() => {
         fetchData();
-    });
+    }, [brandid]);
 
 
     return (
@@ -35,25 +35,28 @@ const CarBrand = () => {
             <h1 className='blogs text-center mt-5'>Pick your CarBrands</h1>
             <div className='row'>
                 <p>hello</p>
-                {/* {BrandCar.map((Cars) => (
-                    <div className="col-md-6" key={Cars.carid}> */}
-                {/* {Cars.brandid === CarBrand.brandid && ( */}
-                {/* <div className="card brandcarcard">
-                            <div className='card-body  text-center '>
-                                {Cars.carName}
-                                <br />
-                                {Cars.brandid}
+                {BrandCar.map((cars) => (
+                    <Link to={`/CarService/${cars.carid}`} style={{ textDecoration: 'none' }}>
+                        {/* <Link to='/CarFuel'> */}
+                        <div className="col-md-6" key={cars.carid}>
+                            <div className="card brandcarcard">
+                                <div className='card-body  text-center '>
+                                    {cars.carName}
+                                    <br />
+                                    <p>brand id :{cars.brandid}</p>
+                                    <p>carid id :{cars.carid}</p>
+
+                                </div>
                             </div>
-                        </div> */}
-                {/* )} */}
+                        </div>
+                    </Link>
+                ))}
             </div>
-            {/* ))} */}
         </div>
-        // </div>
     );
 };
 
 
 
 
-export default CarBrand;
+export default BrandCar;

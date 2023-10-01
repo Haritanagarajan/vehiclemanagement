@@ -229,6 +229,20 @@ function Nav() {
             ) : null}
           </Box>
 
+          <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+            {isCustomerRole ? (
+
+              <Button
+                onClick={handleCloseNavMenu}
+                sx={{ color: 'white', display: 'block' }}
+              >
+                <Link to='/CarFuel' id='authorize'>
+                  CarFuel
+                </Link>
+              </Button>
+            ) : null}
+          </Box>
+
 
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             {isCustomerRole ? (
