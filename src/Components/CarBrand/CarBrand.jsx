@@ -14,6 +14,8 @@ const CarBrand = () => {
             const response = await axios.get(`https://localhost:7229/api/CarBrands1/GetCarBrands`)
             const result = await response.data;
             setCarBrand(result);
+            {console.log(result.branndImage)}
+
         } catch (error) {
             console.log(error);
             throw error;
@@ -39,12 +41,12 @@ const CarBrand = () => {
                                     <br />
                                     {brands.brandid}
                                     <img
-                                        src={brands.branndImage}
-                                        alt={brands.brandName}
+                                         src={brands.branndImage}
+                                        // src={brands.ImageSrc}
+                                        // alt={brands.brandName}
                                         onError={(e) => {
                                             console.log('Error loading image:', e);
                                         }}
-                                        className="img-fluid"
                                     />
                                 </div>
                             </div>

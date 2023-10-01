@@ -164,8 +164,8 @@ function Nav() {
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
-                <Link to='/Admin' id='authorize'>
-                  Admin
+                <Link to='/CarBrandIndex' id='authorize'>
+                CarBrandIndex
                 </Link>
               </Button>
             ) : null}
@@ -258,6 +258,7 @@ function Nav() {
             ) : null}
           </Box>
 
+          
 
 
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
