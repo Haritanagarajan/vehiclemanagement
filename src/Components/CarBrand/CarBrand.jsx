@@ -38,7 +38,14 @@ const CarBrand = () => {
                                     {brands.brandName}
                                     <br />
                                     {brands.brandid}
-                                    {/* <img src={brands.branndImage} class="img-fluid" /> */}
+                                    <img
+                                        src={brands.branndImage}
+                                        alt={brands.brandName}
+                                        onError={(e) => {
+                                            console.log('Error loading image:', e);
+                                        }}
+                                        className="img-fluid"
+                                    />
                                 </div>
                             </div>
                         </Link >

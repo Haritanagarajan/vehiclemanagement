@@ -11,6 +11,7 @@ import CarBrand from './Components/CarBrand/CarBrand';
 import BrandCar from '../src/Components/BrandCar/BrandCar';
 import CarFuel from './Components/CarFuel/CarFuel';
 import { CarDetails } from './Components/CarDetails/CarDetails';
+import AdminList from '../src/Components/Admin/AdminList';
 
 function App() {
   return (
@@ -27,6 +28,8 @@ function App() {
           <Route exact path='/BrandCar/:brandid' element={<BrandCar />} />
           <Route exact path='/CarFuel' element={<CarFuel />} />
           <Route exact path='/CarDetails' element={<CarDetails />} />
+          <Route exact path='/AdminList' element={<AdminList/>} />
+
         </Routes>
       </UserContextProvider>
     </div>
