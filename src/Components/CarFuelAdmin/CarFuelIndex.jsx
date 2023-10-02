@@ -44,7 +44,7 @@ const CarFuelIndex = () => {
                                 <img
                                     src={fuel.imageSrc}
                                     alt={fuel.fuelName}
-                                    width='100px'
+                                    width='90px'
                                     onError={(e) => {
                                         console.log('Error loading image:', e);
                                     }}

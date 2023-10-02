@@ -22,6 +22,10 @@ import CarFuelIndex from './Components/CarFuelAdmin/CarFuelIndex';
 import CarFuelCreate from './Components/CarFuelAdmin/CarFuelCreate';
 import { CarFuelDelete } from './Components/CarFuelAdmin/CarFuelDelete';
 import {CarFuelEdit} from './Components/CarFuelAdmin/CarFuelEdit';
+import {CarServiceIndex} from './Components/CarServiceAdmin/CarServiceIndex';
+import {CarServiceDelete} from './Components/CarServiceAdmin/CarServiceDelete';
+import { CarServiceCreate } from './Components/CarServiceAdmin/CarServiceCreate';
+import { CarServiceEdit } from './Components/CarServiceAdmin/CarServiceEdit';
 
 function App() {
   return (
@@ -49,6 +53,10 @@ function App() {
           <Route exact path='/CarFuelCreate' element={<CarFuelCreate />} />
           <Route exact path='/CarFuelEdit/:fuelid' element={<CarFuelEdit />} />
           <Route exact path='/CarFuelIndex' element={<CarFuelIndex />} />
+          <Route exact path='/CarServiceIndex' element={<CarServiceIndex />} />
+          <Route exact path='/CarServiceCreate' element={<CarServiceCreate />} />
+          <Route exact path='/CarServiceEdit/:serviceid' element={<CarServiceEdit />} />
+          <Route exact path='/CarServiceDelete/:serviceid' element={<CarServiceDelete />} />
         </Routes>
       </UserContextProvider>
     </div>

@@ -5,7 +5,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 
-const CarFuelEdit = () => {
+export const CarFuelEdit = () => {
     const [fuelName, setfuelName] = useState();
     const [imageFile, setImageFile] = useState(null);
     const { fuelid } = useParams();
@@ -83,7 +83,6 @@ const CarFuelEdit = () => {
     )
 }
 
-export default CarFuelEdit
 
 
 
