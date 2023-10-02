@@ -2,24 +2,19 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
-const CarBrandIndex = () => {
-    const [carBrands, setCarBrands] = useState([]);
+const BrandCarIndex = () => {
+    const [BrandCar, setBrandCar] = useState([]);
 
     const fetchData = async () => {
         try {
-            const response = await axios.get(`https://localhost:7229/api/CarBrands1/GetCarBrands`);
+            const response = await axios.get(`https://localhost:7229/api/BrandCars/GetBrandCars`);
             const result = await response.data;
-            setCarBrands(result);
+            setBrandCar(result);
         } catch (error) {
             console.log(error);
             throw error;
         }
     }
-
-
-
-    
-
 
 
     useEffect(() => {
@@ -33,21 +28,24 @@ const CarBrandIndex = () => {
                 <thead>
                     <tr>
                         <th>Brand ID</th>
-                        <th>Brand Name</th>
+                        <th>Car Name</th>
+                        <th>Add Amount</th>
                         <th>Image</th>
                         <th>Edit</th>
                         <th>Delete</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {carBrands.map((brand) => (
-                        <tr key={brand.brandid}>
-                            <td>{brand.brandid}</td>
-                            <td>{brand.brandName}</td>
+                    {BrandCar.map((cars) => (
+                        <tr key={cars.carid}>
+                            <td>{cars.brandid}</td>
+                            <td>{cars.carName}</td>
+                            <td>{cars.addAmount}</td>
                             <td>
                                 <img
-                                    src={brand.branndImage}
-                                    alt={brand.brandName}
+                                    src={cars.imageSrc}
+                                    alt={cars.carName}
+                                    width='100px'
                                     onError={(e) => {
                                         console.log('Error loading image:', e);
                                     }}
@@ -55,12 +53,12 @@ const CarBrandIndex = () => {
                                 />
                             </td>
                             <td>
-                                <Link to={`/CarBrandEdit/${brand.brandid}`}>
+                                <Link to={`/BrandCarEdit/${cars.carid}`}>
                                     Edit
                                 </Link>
                             </td>
                             <td>
-                                <Link to={`/CarBrandDelete/${brand.brandid}`}>
+                                <Link to={`/BrandCarDelete/${cars.carid}`}>
                                     Delete
                                 </Link>
                             </td>
@@ -69,10 +67,10 @@ const CarBrandIndex = () => {
                 </tbody>
             </table>
             <div className='text-center'>
-                <Link to="/CarBrandCreate" className='btn btn-primary'>Create</Link>
+                <Link to="/BrandCarCreate" className='btn btn-primary'>Create</Link>
             </div>
         </div>
     );
 };
 
-export default CarBrandIndex;
+export default BrandCarIndex;

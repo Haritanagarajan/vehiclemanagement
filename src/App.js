@@ -10,10 +10,18 @@ import CarBrand from './Components/CarBrand/CarBrand';
 import BrandCar from '../src/Components/BrandCar/BrandCar';
 import CarFuel from './Components/CarFuel/CarFuel';
 import { CarDetails } from './Components/CarDetails/CarDetails';
-import CarBrandCreate from './Components/Admin/CarBrandCreate';
-import CarBrandEdit from './Components/Admin/CarBrandEdit';
-import CarBrandIndex from './Components/Admin/CarBrandIndex';
-import { CarBrandDelete } from './Components/Admin/CarBrandDelete';
+import CarBrandCreate from './Components/CarBrandAdmin/CarBrandCreate';
+import CarBrandEdit from './Components/CarBrandAdmin/CarBrandEdit';
+import CarBrandIndex from './Components/CarBrandAdmin/CarBrandIndex';
+import { CarBrandDelete } from './Components/CarBrandAdmin/CarBrandDelete';
+import BrandCarCreate from './Components/BrandCarAdmin/BrandCarCreate';
+import BrandCarIndex from './Components/BrandCarAdmin/BrandCarIndex';
+import { BrandCarDelete } from './Components/BrandCarAdmin/BrandCarDelete';
+import BrandCarEdit from './Components/BrandCarAdmin/BrandCarEdit';
+import CarFuelIndex from './Components/CarFuelAdmin/CarFuelIndex';
+import CarFuelCreate from './Components/CarFuelAdmin/CarFuelCreate';
+import { CarFuelDelete } from './Components/CarFuelAdmin/CarFuelDelete';
+import {CarFuelEdit} from './Components/CarFuelAdmin/CarFuelEdit';
 
 function App() {
   return (
@@ -33,7 +41,14 @@ function App() {
           <Route exact path='/CarBrandIndex' element={<CarBrandIndex />} />
           <Route exact path='/CarBrandEdit/:brandid' element={<CarBrandEdit />} />
           <Route exact path='/CarBrandDelete/:brandid' element={<CarBrandDelete />} />
-
+          <Route exact path='/BrandCarCreate' element={<BrandCarCreate />} />
+          <Route exact path='/BrandCarEdit/:carid' element={<BrandCarEdit />} />
+          <Route exact path='/BrandCarDelete/:carid' element={<BrandCarDelete />} />
+          <Route exact path='/BrandCarIndex' element={<BrandCarIndex />} />
+          <Route exact path='/CarFuelDelete/:fuelid' element={<CarFuelDelete />} />
+          <Route exact path='/CarFuelCreate' element={<CarFuelCreate />} />
+          <Route exact path='/CarFuelEdit/:fuelid' element={<CarFuelEdit />} />
+          <Route exact path='/CarFuelIndex' element={<CarFuelIndex />} />
         </Routes>
       </UserContextProvider>
     </div>

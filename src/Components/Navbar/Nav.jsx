@@ -172,6 +172,19 @@ function Nav() {
           </Box>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+            {isAdminRole ? (
+              <Button
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: 'white', display: 'block' }}
+              >
+                <Link to='/BrandCarIndex' id='authorize'>
+                BrandCarIndex
+                </Link>
+              </Button>
+            ) : null}
+          </Box>
+
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {isCustomerRole || isAdminRole ? (
               <Button
                 onClick={handleCloseNavMenu}

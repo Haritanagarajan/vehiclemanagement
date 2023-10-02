@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 import loginimage from '../Assets/loginimage.jpg';
-import '../Styles/Register.css';
+// import 'src/Styles/Register.css';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';

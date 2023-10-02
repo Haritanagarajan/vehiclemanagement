@@ -1,0 +1,15 @@
+.carbrandcard {
+    height: 40vh;
+    display: flex;
+    justify-content: center;
+    padding: auto;
+    margin: auto;
+    width: 80%;
+    margin-top: 10%;
+    padding-top: 10%;
+    font-weight: bold;
+}
+
+.imagesrc {
+    object-fit: cover;
+}
