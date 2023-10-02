@@ -1,11 +1,10 @@
-import React from 'react'
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import axios from 'axios';
 
 export const CarServiceEdit = () => {
-    const [carid, setcarid] = useState();
+    const [carid, setcarid] = useState('');
     const [serviceName, setserviceName] = useState();
     const [warranty, setwarranty] = useState();
     const [subservice1, setsubservice1] = useState();
@@ -14,11 +13,8 @@ export const CarServiceEdit = () => {
     const [subservice4, setsubservice4] = useState();
     const [timeTaken, settimeTaken] = useState();
     const [servicecost, setservicecost] = useState();
-    const [CarOptions, setCarOptions] = useState();
+    const [CarOptions, setCarOptions] = useState([]);
     const { serviceid } = useParams();
-
-
-
 
     const handleUpload = async (e) => {
         e.preventDefault();
@@ -37,7 +33,7 @@ export const CarServiceEdit = () => {
         try {
             const response = await axios.put(`https://localhost:7229/api/CarServices/PutCarService/${serviceid}`, formData, {
                 headers: {
-                    'Content-Type': 'multipart/form-data',
+                    'content-Type': 'multipart/form-data'
                 },
             });
 
@@ -50,8 +46,6 @@ export const CarServiceEdit = () => {
             throw error;
         }
     };
-
-
 
     useEffect(() => {
         const fetchData = async () => {
@@ -66,7 +60,6 @@ export const CarServiceEdit = () => {
 
         fetchData();
     }, []);
-
 
 
 
@@ -166,7 +159,7 @@ export const CarServiceEdit = () => {
                             <div class="form-group registerform">
                                 <label class="control-label col-sm-2" for="timeTaken">timeTaken:</label>
                                 <div class="col-sm-10">
-                                    <input type="number" class="form-control" id="timeTaken" placeholder="Enter timeTaken" name="timeTaken" value={timeTaken} onChange={(e) => settimeTaken(e.target.value)} required />
+                                    <input type="number" class="form-control" min="0" max="32767" id="timeTaken" placeholder="Enter timeTaken" name="timeTaken" value={timeTaken} onChange={(e) => settimeTaken(e.target.value)} required />
                                 </div>
                             </div>
 

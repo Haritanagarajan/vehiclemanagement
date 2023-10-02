@@ -35,9 +35,11 @@ export const CarServiceCreate = () => {
         try {
             const response = await axios.post("https://localhost:7229/api/CarServices/PostCarService", formData, {
                 headers: {
-                    'Content-Type': 'multipart/form-data',
+                    'content-Type': 'multipart/form-data',
                 },
+
             });
+
 
             const result = await response.data;
             if (result.Status === 200) {
@@ -61,8 +63,8 @@ export const CarServiceCreate = () => {
                 console.error(error);
             }
         };
-
         fetchData();
+
     }, []);
 
 
@@ -78,6 +80,13 @@ export const CarServiceCreate = () => {
 
 
 
+
+                            <div class="form-group registerform">
+                                <label class="control-label col-sm-2" for="serviceName">serviceName:</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="serviceName" placeholder="Enter service name" name="serviceName" value={serviceName} onChange={(e) => setserviceName(e.target.value)} required />
+                                </div>
+                            </div>
 
                             {CarOptions && CarOptions.length > 0 && (
                                 <div class="form-group registerform">
@@ -102,18 +111,6 @@ export const CarServiceCreate = () => {
                                     </div>
                                 </div>
                             )}
-
-
-
-
-                            <div class="form-group registerform">
-                                <label class="control-label col-sm-2" for="serviceName">serviceName:</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="serviceName" placeholder="Enter service name" name="serviceName" value={serviceName} onChange={(e) => setserviceName(e.target.value)} required />
-                                </div>
-                            </div>
-
-
 
                             <div class="form-group registerform">
                                 <label class="control-label col-sm-2" for="warranty">warranty:</label>
@@ -171,7 +168,7 @@ export const CarServiceCreate = () => {
                             <div class="form-group registerform">
                                 <label class="control-label col-sm-2" for="servicecost">servicecost:</label>
                                 <div class="col-sm-10">
-                                    <input type="number" class="form-control" id="servicecost" placeholder="Enter servicecost" name="servicecost" value={servicecost} onChange={(e) => setservicecost(e.target.value)} required />
+                                    <input type="number" min="0" max="32767"  class="form-control" id="servicecost" placeholder="Enter servicecost" name="servicecost" value={servicecost} onChange={(e) => setservicecost(e.target.value)} required />
                                 </div>
                             </div>
 
