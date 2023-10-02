@@ -2,7 +2,7 @@
 // https://localhost:7229/api/CarBrands1
 
 import React, { useEffect, useState } from 'react';
-import '../Styles/CarBrands.css';
+import '/Styles/CarBrands.css';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 

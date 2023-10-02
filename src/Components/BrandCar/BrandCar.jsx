@@ -2,7 +2,7 @@
 // https://localhost:7229/api/BrandCars/GetBrandCars
 
 import React, { useEffect, useState } from 'react'
-import '../Styles/BrandCar.css';
+import './Styles/BrandCar.css';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
