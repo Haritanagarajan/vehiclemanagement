@@ -30,7 +30,7 @@ import CarFuelDataTable from './Components/CarFuelAdmin/CarFuelDataTable';
 import { CarServiceDataTable } from './Components/CarServiceAdmin/CarServiceDataTable';
 import BrandCarDataTable from './Components/BrandCarAdmin/BrandCarDataTable';
 import CarBrandDataTable from './Components/CarBrandAdmin/CarBrandDataTable';
-
+import { Footer } from './Components/Footer/Footer';
 function App() {
   return (
     <div>
@@ -66,6 +66,7 @@ function App() {
           <Route exact path='/BrandCarDataTable' element={<BrandCarDataTable />} />
           <Route exact path='/CarBrandDataTable' element={<CarBrandDataTable />} />
         </Routes>
+        <Footer/>
       </UserContextProvider>
     </div>
   );

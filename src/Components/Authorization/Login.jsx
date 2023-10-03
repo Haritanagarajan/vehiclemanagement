@@ -11,6 +11,7 @@ const Login = () => {
 
   const [vusername, setvusername] = useState("");
   const [vpassword, setvpassword] = useState("");
+  const [Email, setvemail] = useState("");
   const [error, setError] = useState("");
 
   const { userDetails, setuserDetails } = useContext(UserContext);
@@ -33,6 +34,7 @@ const Login = () => {
           }
         })
         const result = await response.data;
+        console.log(result)
         setuserDetails(result);
         if (result) {
           Navigate('/Home');
@@ -43,6 +45,7 @@ const Login = () => {
       }
     }
   }
+
 
   console.log("userDetails", userDetails);
 
@@ -67,6 +70,14 @@ const Login = () => {
                 <label class="control-label col-sm-2" for="pwd">Password:</label>
                 <div class="col-sm-10">
                   <input type="password" class="form-control" id="Password" placeholder="Enter password" name="vpassword" value={vpassword} onChange={(e) => setvpassword(e.target.value)} required />
+                </div>
+              </div>
+
+
+              <div class="form-group registerform">
+                <label class="control-label col-sm-2" for="vemail">vemail:</label>
+                <div class="col-sm-10">
+                  <input type="email" class="form-control" id="vemail" placeholder="Enter vemail" name="vemail" value={Email} onChange={(e) => setvemail(e.target.value)} required />
                 </div>
               </div>
 

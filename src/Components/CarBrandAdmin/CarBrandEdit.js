@@ -42,10 +42,6 @@ const CarBrandIndex = () => {
     };
 
 
-
-
-
-
     return (
         <>
             <div class="container">

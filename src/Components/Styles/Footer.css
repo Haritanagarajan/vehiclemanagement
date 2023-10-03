@@ -1,0 +1,21 @@
+.foot {
+    background-color: black;
+    color: white;
+    border-radius: 10px;
+}
+
+.cpy {
+    font-size: 13px;
+    font-style: italic;
+}
+
+.footdiv {
+    background-color: black;
+
+}
+
+.followus {
+    font-style: italic;
+    color: white;
+    font-size: 18px;
+}

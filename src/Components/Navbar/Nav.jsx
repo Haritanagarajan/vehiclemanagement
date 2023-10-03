@@ -165,7 +165,7 @@ function Nav() {
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
                 <Link to='/CarBrandIndex' id='authorize'>
-                CarBrandIndex
+                  CarBrandIndex
                 </Link>
               </Button>
             ) : null}
@@ -178,7 +178,7 @@ function Nav() {
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
                 <Link to='/BrandCarIndex' id='authorize'>
-                BrandCarIndex
+                  BrandCarIndex
                 </Link>
               </Button>
             ) : null}
@@ -191,7 +191,7 @@ function Nav() {
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
                 <Link to='/CarFuelIndex' id='authorize'>
-                CarFuelIndex
+                  CarFuelIndex
                 </Link>
               </Button>
             ) : null}
@@ -204,12 +204,12 @@ function Nav() {
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
                 <Link to='/CarServiceIndex' id='authorize'>
-                CarServiceIndex
+                  CarServiceIndex
                 </Link>
               </Button>
             ) : null}
           </Box>
-          
+
 
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {isCustomerRole || isAdminRole ? (
@@ -298,7 +298,7 @@ function Nav() {
             ) : null}
           </Box>
 
-          
+
 
 
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>

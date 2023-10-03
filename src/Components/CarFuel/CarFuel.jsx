@@ -1,15 +1,20 @@
 
 // https://localhost:7229/api/CarFuels/GetCarFuels
 
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import '../Styles/CarFuel.css';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { UserContext } from '../Context/userContext';
 
 const CarFuel = () => {
     const [CarFuel, setCarFuel] = useState([]);
+    const { FuelDetails, setFuelDetails } = useContext(UserContext)
 
 
+    const handleSaveDetails = (fuel) => {
+        setFuelDetails(fuel);
+    }
 
     const fetchData = async () => {
         try {
@@ -33,7 +38,7 @@ const CarFuel = () => {
             <div className='row'>
                 <p>hello</p>
                 {CarFuel.map((fuel) => (
-                     <Link to='/CarDetails'>
+                    <Link to='/CarDetails' onClick={() => handleSaveDetails(fuel)}>
                         <div className="col-md-6" key={fuel.fuelid}>
                             <div className="card carfuelcard">
                                 <div className='card-body  text-center '>
@@ -43,7 +48,7 @@ const CarFuel = () => {
                                 </div>
                             </div>
                         </div>
-                     </Link>
+                    </Link>
                 ))}
             </div>
         </div>

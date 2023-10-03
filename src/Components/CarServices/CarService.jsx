@@ -1,12 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import '../Styles/CarService.css';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
+import { UserContext } from '../Context/userContext';
+
+
 
 const CarService = () => {
     const [carservice, setcarservice] = useState([]);
     const { carid } = useParams();
+    const { ServiceDetails, setServiceDetails } = useContext(UserContext);
+
+
+    const handleSaveDetails = (services) => {
+        setServiceDetails(services);
+    }
+
+
+    console.log("ServiceDetails", ServiceDetails);
 
     const fetchData = async () => {
         try {
@@ -31,22 +43,22 @@ const CarService = () => {
             <div className='row' >
                 {carservice.map((services) => (
                     <div className="col-md-6" key={services.id}>
-                        <Link to='/CarFuel' style={{ textDecoration: 'none' }}>
-                        <div className="card carservicescard">
-                            <div className='card-title carservicestitle'>
-                                {services.serviceName}
+                        <Link to='/CarFuel' style={{ textDecoration: 'none' }} onClick={() => handleSaveDetails(services)}>
+                            <div className="card carservicescard">
+                                <div className='card-title carservicestitle'>
+                                    {services.serviceName}
+                                </div>
+                                <div className='card-body  text-center '>
+                                    <p>{services.warranty}</p>
+                                    <p>carid:{services.carid}</p>
+                                    <p>{services.subservice1}</p>
+                                    <p>{services.subservice2}</p>
+                                    <p>{services.subservice3}</p>
+                                    <p>{services.subservice3}</p>
+                                    <p>{services.timeTaken}</p>
+                                    <p>service cost : {services.servicecost}</p>
+                                </div>
                             </div>
-                            <div className='card-body  text-center '>
-                                <p>{services.warranty}</p>
-                                <p>carid:{services.carid}</p>
-                                <p>{services.subservice1}</p>
-                                <p>{services.subservice2}</p>
-                                <p>{services.subservice3}</p>
-                                <p>{services.subservice3}</p>
-                                <p>{services.timeTaken}</p>
-                                <p>service cost : {services.servicecost}</p>
-                            </div>
-                        </div>
                         </Link >
                     </div>
                 ))}

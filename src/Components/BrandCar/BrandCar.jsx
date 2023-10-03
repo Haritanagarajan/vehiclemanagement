@@ -1,18 +1,21 @@
 
 // https://localhost:7229/api/BrandCars/GetBrandCars
 
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import '../Styles/BrandCar.css';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
+import { UserContext } from '../Context/userContext';
 
 const BrandCar = () => {
     const [BrandCar, setBrandCar] = useState([]);
     const { brandid } = useParams();
-    console.log(brandid)
+    const { BrandDetails, setBrandDetails } = useContext(UserContext);
 
-
+    const handleSaveDetails = (cars) => {
+        setBrandDetails(cars);
+    }
 
     const fetchData = async () => {
         try {
@@ -29,6 +32,7 @@ const BrandCar = () => {
         fetchData();
     }, [brandid]);
 
+    console.log("BrandDetails", BrandDetails);
 
     return (
         <div className='container mb-3'>
@@ -36,7 +40,7 @@ const BrandCar = () => {
             <div className='row'>
                 <p>hello</p>
                 {BrandCar.map((cars) => (
-                    <Link to={`/CarService/${cars.carid}`} style={{ textDecoration: 'none' }}>
+                    <Link to={`/CarService/${cars.carid}`} style={{ textDecoration: 'none' }} onClick={() => handleSaveDetails(cars)}>
                         {/* <Link to='/CarFuel'> */}
                         <div className="col-md-6" key={cars.carid}>
                             <div className="card brandcarcard">
