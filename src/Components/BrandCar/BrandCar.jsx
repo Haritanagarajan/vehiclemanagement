@@ -49,7 +49,7 @@ const BrandCar = () => {
                                     <br />
                                     <p>brand id :{cars.brandid}</p>
                                     <p>carid id :{cars.carid}</p>
-
+                                    <img src={cars.imageSrc} alt=  {cars.carName} width='80px' />
                                 </div>
                             </div>
                         </div>

@@ -31,6 +31,7 @@ import { CarServiceDataTable } from './Components/CarServiceAdmin/CarServiceData
 import BrandCarDataTable from './Components/BrandCarAdmin/BrandCarDataTable';
 import CarBrandDataTable from './Components/CarBrandAdmin/CarBrandDataTable';
 import { Footer } from './Components/Footer/Footer';
+import { Gpay } from './Components/Payment/Gpay';
 function App() {
   return (
     <div>
@@ -65,8 +66,9 @@ function App() {
           <Route exact path='/CarServiceDataTable' element={<CarServiceDataTable />} />
           <Route exact path='/BrandCarDataTable' element={<BrandCarDataTable />} />
           <Route exact path='/CarBrandDataTable' element={<CarBrandDataTable />} />
+          <Route exact path='/Gpay' element={<Gpay />} />
         </Routes>
-        <Footer/>
+        {/* <Footer/> */}
       </UserContextProvider>
     </div>
   );

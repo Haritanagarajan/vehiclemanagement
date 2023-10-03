@@ -15,10 +15,12 @@ const Login = () => {
   const [error, setError] = useState("");
 
   const { userDetails, setuserDetails } = useContext(UserContext);
+  const { userName, setuserName } = useContext(UserContext);
+
   const Navigate = useNavigate();
 
-
-
+  setuserName(vusername);
+console.log(userName)
   const handleLogin = async (e) => {
     e.preventDefault();
     if (Object.keys != null) {

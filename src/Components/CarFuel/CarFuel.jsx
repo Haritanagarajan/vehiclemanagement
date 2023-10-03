@@ -45,6 +45,7 @@ const CarFuel = () => {
                                     {fuel.fuelid}
                                     <br />
                                     {fuel.fuelName}
+                                    <img src={fuel.imageSrc} alt={fuel.fuelName} width='80px' />
                                 </div>
                             </div>
                         </div>
