@@ -21,11 +21,15 @@ import BrandCarEdit from './Components/BrandCarAdmin/BrandCarEdit';
 import CarFuelIndex from './Components/CarFuelAdmin/CarFuelIndex';
 import CarFuelCreate from './Components/CarFuelAdmin/CarFuelCreate';
 import { CarFuelDelete } from './Components/CarFuelAdmin/CarFuelDelete';
-import {CarFuelEdit} from './Components/CarFuelAdmin/CarFuelEdit';
-import {CarServiceIndex} from './Components/CarServiceAdmin/CarServiceIndex';
-import {CarServiceDelete} from './Components/CarServiceAdmin/CarServiceDelete';
+import { CarFuelEdit } from './Components/CarFuelAdmin/CarFuelEdit';
+import { CarServiceIndex } from './Components/CarServiceAdmin/CarServiceIndex';
+import { CarServiceDelete } from './Components/CarServiceAdmin/CarServiceDelete';
 import { CarServiceCreate } from './Components/CarServiceAdmin/CarServiceCreate';
 import { CarServiceEdit } from './Components/CarServiceAdmin/CarServiceEdit';
+import CarFuelDataTable from './Components/CarFuelAdmin/CarFuelDataTable';
+import { CarServiceDataTable } from './Components/CarServiceAdmin/CarServiceDataTable';
+import BrandCarDataTable from './Components/BrandCarAdmin/BrandCarDataTable';
+import CarBrandDataTable from './Components/CarBrandAdmin/CarBrandDataTable';
 
 function App() {
   return (
@@ -57,6 +61,10 @@ function App() {
           <Route exact path='/CarServiceCreate' element={<CarServiceCreate />} />
           <Route exact path='/CarServiceEdit/:serviceid' element={<CarServiceEdit />} />
           <Route exact path='/CarServiceDelete/:serviceid' element={<CarServiceDelete />} />
+          <Route exact path='/CarFuelDataTable' element={<CarFuelDataTable />} />
+          <Route exact path='/CarServiceDataTable' element={<CarServiceDataTable />} />
+          <Route exact path='/BrandCarDataTable' element={<BrandCarDataTable />} />
+          <Route exact path='/CarBrandDataTable' element={<CarBrandDataTable />} />
         </Routes>
       </UserContextProvider>
     </div>

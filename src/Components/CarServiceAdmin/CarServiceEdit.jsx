@@ -33,8 +33,8 @@ export const CarServiceEdit = () => {
         try {
             const response = await axios.put(`https://localhost:7229/api/CarServices/PutCarService/${serviceid}`, formData, {
                 headers: {
-                    'content-Type': 'multipart/form-data'
-                },
+                    'Content-Type': 'application/json',
+                }
             });
 
             const result = await response.data;

@@ -35,8 +35,8 @@ export const CarServiceCreate = () => {
         try {
             const response = await axios.post("https://localhost:7229/api/CarServices/PostCarService", formData, {
                 headers: {
-                    'content-Type': 'multipart/form-data',
-                },
+                    'Content-Type': 'application/json',
+                  }
 
             });
 
