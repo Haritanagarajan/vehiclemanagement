@@ -14,6 +14,12 @@ export function UserContextProvider({ children }) {
         return storeduserName ? JSON.parse(storeduserName) : {};
     });
 
+
+    const [uEmail, setuEmail] = useState(() => {
+        const storeduEmail = localStorage.getItem("uEmail");
+        return storeduEmail ? JSON.parse(storeduEmail) : {};
+    });
+
     const [CarDetails, setCarDetails] = useState(() => {
         const storedCarDetails = localStorage.getItem("CarDetails");
         return storedCarDetails ? JSON.parse(storedCarDetails) : {};
@@ -45,6 +51,11 @@ export function UserContextProvider({ children }) {
 
 
     useEffect(() => {
+        localStorage.setItem("uEmail", JSON.stringify(uEmail));
+    }, [uEmail]);
+
+
+    useEffect(() => {
         localStorage.setItem("userName", JSON.stringify(userName));
     }, [userName]);
 
@@ -70,7 +81,7 @@ export function UserContextProvider({ children }) {
 
 
     return (
-        <UserContext.Provider value={{ userDetails, setuserDetails, CarDetails, setCarDetails, BrandDetails, setBrandDetails, FuelDetails, setFuelDetails, ServiceDetails, setServiceDetails ,userName,setuserName}}>
+        <UserContext.Provider value={{ userDetails, setuserDetails, CarDetails, setCarDetails, BrandDetails, setBrandDetails, FuelDetails, setFuelDetails, ServiceDetails, setServiceDetails, userName, setuserName, uEmail, setuEmail }}>
             {children}
         </UserContext.Provider>
     );

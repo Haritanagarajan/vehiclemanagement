@@ -10,9 +10,10 @@ import { useContext } from 'react';
 
 
 export const Gpay = () => {
-    const { FuelDetails, CarDetails, BrandDetails, ServiceDetails, userDetails, userName } = useContext(
+    const { FuelDetails, CarDetails, BrandDetails, ServiceDetails, userDetails, userName, uEmail } = useContext(
         UserContext
     );
+
     const [isPaymentSuccessful, setIsPaymentSuccessful] = useState(false);
 
     const handlePaymentSuccess = () => {
@@ -32,6 +33,8 @@ export const Gpay = () => {
         e.preventDefault();
         const data1 = {
             Vuserid: userDetails.vUserid,
+            From: "20bsca150vigneshr@skacas.ac.in",
+            To: uEmail
         };
 
         try {
@@ -56,6 +59,7 @@ export const Gpay = () => {
             const data = {
                 VUserid: userDetails.vUserid,
                 VUserName: userName,
+                Email: uEmail,
                 Brandid: CarDetails.brandid,
                 BrandImage: CarDetails.imageSrc,
                 Carid: BrandDetails.carid,
@@ -68,8 +72,8 @@ export const Gpay = () => {
             };
 
             try {
-                const response = await axios.post('https://localhost:7229/api/CarDetails/PostCarDetail', data);
-
+                const response = await axios.post('https://localhost:7229/api/CarDetails/PostCarDetail/Details', data);
+                //https://localhost:7229/api/CarDetails/PostCarDetail
                 if (response.status === 200) {
                     alert('Data saved successfully');
                 }
@@ -130,6 +134,7 @@ export const Gpay = () => {
                 />
 
             </>
+            {console.log(uEmail)}
         </div>
     )
 }

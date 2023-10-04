@@ -7,7 +7,7 @@ import axios from 'axios';
 
 
 export const CarDetails = () => {
-  const { FuelDetails, CarDetails, BrandDetails, ServiceDetails, userDetails } = useContext(
+  const { FuelDetails, CarDetails, BrandDetails, ServiceDetails, userDetails, userName, uEmail } = useContext(
     UserContext
   );
 

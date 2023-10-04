@@ -11,22 +11,25 @@ const Login = () => {
 
   const [vusername, setvusername] = useState("");
   const [vpassword, setvpassword] = useState("");
-  const [Email, setvemail] = useState("");
+  const [Email, setEmail] = useState("");
   const [error, setError] = useState("");
 
   const { userDetails, setuserDetails } = useContext(UserContext);
   const { userName, setuserName } = useContext(UserContext);
-
+  const { uEmail, setuEmail } = useContext(UserContext);
   const Navigate = useNavigate();
 
   setuserName(vusername);
-console.log(userName)
+
+  setuEmail(Email)
+
+
   const handleLogin = async (e) => {
     e.preventDefault();
     if (Object.keys != null) {
       const newUser = {
         vusername,
-        vpassword,
+        vpassword
       };
 
       try {
@@ -77,9 +80,9 @@ console.log(userName)
 
 
               <div class="form-group registerform">
-                <label class="control-label col-sm-2" for="vemail">vemail:</label>
+                <label class="control-label col-sm-2" for="Email">Email:</label>
                 <div class="col-sm-10">
-                  <input type="email" class="form-control" id="vemail" placeholder="Enter vemail" name="vemail" value={Email} onChange={(e) => setvemail(e.target.value)} required />
+                  <input type="email" class="form-control" id="Email" placeholder="Enter Email" name="Email" value={Email} onChange={(e) => setEmail(e.target.value)} required />
                 </div>
               </div>
 
