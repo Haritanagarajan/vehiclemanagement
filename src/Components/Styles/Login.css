@@ -1,0 +1,10 @@
+.logincontainer {
+    justify-content: center;
+    align-items: center;
+    box-shadow: 10px 20px 30px rgb(243, 238, 238);
+    background-color: rgb(124, 6, 6);
+}
+
+.login {
+    background-color: white;
+}

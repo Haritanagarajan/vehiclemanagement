@@ -38,25 +38,25 @@ const CarService = () => {
 
 
     return (
-        <div className='container mb-3 mt-5'>
-            <h1 className='blogs text-center '>Pick your CarServices</h1>
+        <div className='container-fluid carservice'>
+            <h1 className='blogs text-center pick text-white '>Pick your CarServices</h1>
             <div className='row' >
                 {carservice.map((services) => (
                     <div className="col-md-6" key={services.id}>
                         <Link to='/CarFuel' style={{ textDecoration: 'none' }} onClick={() => handleSaveDetails(services)}>
                             <div className="card carservicescard">
                                 <div className='card-title carservicestitle'>
-                                    {services.serviceName}
+                                    <p className='picks text-center'>{services.serviceName}</p>
                                 </div>
                                 <div className='card-body  text-center '>
-                                    <p>{services.warranty}</p>
-                                    <p>carid:{services.carid}</p>
-                                    <p>{services.subservice1}</p>
-                                    <p>{services.subservice2}</p>
-                                    <p>{services.subservice3}</p>
-                                    <p>{services.subservice3}</p>
-                                    <p>{services.timeTaken}</p>
-                                    <p>service cost : {services.servicecost}</p>
+                                    <p>Warranty : {services.warranty}</p>
+                                    {/* <p>carid:{services.carid}</p> */}
+                                    <p>SubServices : {services.subservice1}</p>
+                                    <p>SubServices : {services.subservice2}</p>
+                                    <p>SubServices : {services.subservice3}</p>
+                                    <p>SubServices : {services.subservice4}</p>
+                                    <p>TimeTaken to complete :  {services.timeTaken}</p>
+                                    <p>Service cost : {services.servicecost}</p>
                                 </div>
                             </div>
                         </Link >

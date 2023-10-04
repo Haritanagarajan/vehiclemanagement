@@ -1,11 +1,24 @@
-.brandcarcard{
-    height:30vh;
-    display:flex;
-    justify-content: center;
-    padding:auto;
-    margin:auto;
-    width:30%;
-    margin-top:10%;
-    padding-top: 10%;
-    font-weight:bold;
+.brandcarcard {  
+    background-color: black;
+    width: 80%;
+    margin-top: 30px;
+
+}
+
+.carname {
+    text-decoration: none;
+    color: white;
+    background-color: rgb(124, 6, 6);
+    width: 30%;
+    margin-left: 100px;
+    margin-top:30px;
+}
+
+.brandcar {
+    background-size: cover;
+    background-position: center 122px;
+    background-attachment: fixed;
+    min-height: 100vh;
+    background-repeat: no-repeat;
+    background-color: black;
 }

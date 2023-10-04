@@ -71,7 +71,7 @@ export default function CarFuelDataTable() {
         setFilter(result);
     }, [search]);
 
-   
+
 
     const tableHeaderStyle = {
         headCells: {
@@ -84,7 +84,7 @@ export default function CarFuelDataTable() {
     };
 
     return (
-        <div>
+        <div className="container mt-5 text-center">
             <h1>Car Fuel Data List</h1>
             <DataTable
                 columns={columns}

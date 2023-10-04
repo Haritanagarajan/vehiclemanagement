@@ -1,8 +1,28 @@
-#authorize{
+#authorize {
     text-decoration: none;
-    color:white;
+    color: white;
 }
-#smallscreenregister{
+
+#smallscreenregister {
     text-decoration: none;
-    color:black;
+    color: black;
+}
+
+.logout {
+    background-color: red;
+    border: none;
+    width: 100px;
+    height: 45px;
+    color: white;
+    font-weight: bold;
+    border-radius: 30px;
+}
+
+.navv {
+    font-style: italic;
+}
+
+.vehipro {
+    text-decoration: none;
+    color: white;
 }

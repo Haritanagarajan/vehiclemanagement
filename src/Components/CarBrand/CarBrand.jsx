@@ -39,8 +39,8 @@ const CarBrand = () => {
 
 
     return (
-        <div className='container mb-3'>
-            <h1 className='blogs text-center mt-5'>Pick your CarBrands</h1>
+        <div className='container-fluid carbrand'>
+            <h1 className='text-center pick text-white'>Pick your CarBrands</h1>
             <div className='row' >
                 {CarBrand.map((brands) => (
                     <div className="col-md-6" key={brands.brandid}>
@@ -50,7 +50,7 @@ const CarBrand = () => {
                                 <div className='card-body  text-center '>
                                     {/* {brands.brandName}
                                     <br /> */}
-                                    {brands.brandid}
+                                    {/* {brands.brandid} */}
                                     <img
                                         src={brands.imageSrc}
                                         width='200px'

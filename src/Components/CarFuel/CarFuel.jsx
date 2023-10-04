@@ -33,20 +33,15 @@ const CarFuel = () => {
 
 
     return (
-        <div className='container mb-3'>
-            <h1 className='blogs text-center mt-5'>Pick your CarBrands</h1>
-            <div className='row'>
-                <p>hello</p>
+        <div className='container-fluid carfuel d-flex justify-content-center'>
+            <h1 className='blogs text-center pick text-white'>Pick your CarBrands</h1>
+            <div className='row '>
                 {CarFuel.map((fuel) => (
                     <Link to='/CarDetails' onClick={() => handleSaveDetails(fuel)}>
-                        <div className="col-md-6" key={fuel.fuelid}>
-                            <div className="card carfuelcard">
-                                <div className='card-body  text-center '>
-                                    {fuel.fuelid}
-                                    <br />
-                                    {fuel.fuelName}
-                                    <img src={fuel.imageSrc} alt={fuel.fuelName} width='80px' />
-                                </div>
+                        <div className="col-6 d-flex justify-content-center" key={fuel.fuelid}>
+                            <div className='card-body  text-center '>
+                                <p className='fuelname mt-5 pt-5'>{fuel.fuelName}</p>
+                                <img src={fuel.imageSrc} alt={fuel.fuelName} width='200px' />
                             </div>
                         </div>
                     </Link>

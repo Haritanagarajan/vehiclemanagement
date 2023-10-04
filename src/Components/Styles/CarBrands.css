@@ -1,10 +1,10 @@
 .carbrandcard {
-    height: 40vh;
+    height: 43vh;
     display: flex;
     justify-content: center;
     padding: auto;
     margin: auto;
-    width: 80%;
+    width: 50%;
     margin-top: 10%;
     padding-top: 10%;
     font-weight: bold;
@@ -12,4 +12,18 @@
 
 .imagesrc {
     object-fit: cover;
+}
+
+.pick {
+    font-weight: 400;
+    font-size:25px ;
+}
+
+.carbrand {
+    background-size: cover;
+    background-position: center 122px;
+    background-color: black;
+    background-attachment: fixed;
+    min-height: 120vh;
+    background-repeat: no-repeat;
 }

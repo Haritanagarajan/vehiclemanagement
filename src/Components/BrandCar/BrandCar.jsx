@@ -35,26 +35,23 @@ const BrandCar = () => {
     console.log("BrandDetails", BrandDetails);
 
     return (
-        <div className='container mb-3'>
-            <h1 className='blogs text-center mt-5'>Pick your CarBrands</h1>
-            <div className='row'>
-                <p>hello</p>
-                {BrandCar.map((cars) => (
-                    <Link to={`/CarService/${cars.carid}`} style={{ textDecoration: 'none' }} onClick={() => handleSaveDetails(cars)}>
-                        {/* <Link to='/CarFuel'> */}
-                        <div className="col-md-6" key={cars.carid}>
-                            <div className="card brandcarcard">
-                                <div className='card-body  text-center '>
-                                    {cars.carName}
-                                    <br />
-                                    <p>brand id :{cars.brandid}</p>
-                                    <p>carid id :{cars.carid}</p>
-                                    <img src={cars.imageSrc} alt=  {cars.carName} width='80px' />
+        <div className='container-fluid brandcar d-flex justify-content-center'>
+            <div className='col-6'>
+                <h1 className='blogs text-center pick text-white '>Pick your CarBrands</h1>
+                <div className='row'>
+                    {BrandCar.map((cars) => (
+                        <Link to={`/CarService/${cars.carid}`} style={{ textDecoration: 'none' }} onClick={() => handleSaveDetails(cars)}>
+                            <div className="" key={cars.carid}>
+                                {/* <div className="card brandcarcard text-center justify-content-center "> */}
+                                <p className='carname d-flex justify-content-center'>{cars.carName}</p>
+                                <div className=''>
+                                    <img src={cars.imageSrc} alt={cars.carName} width='300px' height='230px' />
                                 </div>
                             </div>
-                        </div>
-                    </Link>
-                ))}
+                            {/* </div> */}
+                        </Link>
+                    ))}
+                </div>
             </div>
         </div>
     );

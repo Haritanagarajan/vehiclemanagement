@@ -17,7 +17,6 @@ export const Gpay = () => {
     const [isPaymentSuccessful, setIsPaymentSuccessful] = useState(false);
 
     const handlePaymentSuccess = () => {
-        // Display a success toast
         toast.success('Payment successful!', {
             position: 'top-right',
             autoClose: 5000,
@@ -29,8 +28,7 @@ export const Gpay = () => {
         setIsPaymentSuccessful(true);
     };
 
-    const handleMail = async (e) => {
-        e.preventDefault();
+    const handleMail = async () => {
         const data1 = {
             Vuserid: userDetails.vUserid,
             From: "20bsca150vigneshr@skacas.ac.in",
@@ -41,7 +39,7 @@ export const Gpay = () => {
             const response = await axios.post('https://localhost:7229/api/CarDetails/Mailer', data1);
 
             if (response.status === 200) {
-                alert('Data saved successfully');
+                // alert('Data saved successfully');
             }
         } catch (error) {
             console.error('Error:', error);
@@ -76,6 +74,7 @@ export const Gpay = () => {
                 //https://localhost:7229/api/CarDetails/PostCarDetail
                 if (response.status === 200) {
                     alert('Data saved successfully');
+                    handleMail();
                 }
             } catch (error) {
                 console.error('Error:', error);
@@ -117,7 +116,7 @@ export const Gpay = () => {
                         transactionInfo: {
                             totalPriceStatus: 'FINAL',
                             totalPriceLabel: 'Total',
-                            totalPrice: '100.00',
+                            totalPrice: '100',
                             currencyCode: 'USD',
                             countryCode: 'US',
                         },
@@ -127,14 +126,12 @@ export const Gpay = () => {
                         handlePaymentSuccess();
                         const isSuccessful = true;
                         if (isSuccessful) {
-                            handlePaymentSuccess();
                             handleSubmit();
                         }
                     }}
                 />
 
             </>
-            {console.log(uEmail)}
         </div>
     )
 }

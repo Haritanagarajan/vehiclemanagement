@@ -23,6 +23,8 @@ function Nav() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const { userDetails, setuserDetails } = useContext(UserContext);
+  const { userName, setuserName } = useContext(UserContext);
+
   const isCustomerRole = userDetails.roles == "Customer";
   const isAdminRole = userDetails.roles == "Admin";
   const navigate = useNavigate();
@@ -33,6 +35,7 @@ function Nav() {
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
+
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
@@ -54,7 +57,7 @@ function Nav() {
   return (
 
 
-    <AppBar position="static" sx={{ backgroundColor: 'black' }}>
+    <AppBar position="static" sx={{ backgroundColor: 'black' }} className='navv'>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <CarRepairIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
@@ -73,7 +76,8 @@ function Nav() {
               textDecoration: 'none',
             }}
           >
-            VehiPro
+            <Link to='/Home' class='vehipro'>   VehiPro</Link>
+
 
           </Typography>
 
@@ -106,23 +110,119 @@ function Nav() {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-              <MenuItem onClick={handleCloseNavMenu}>
-                <Typography textAlign="center">
-                  <Link to='/Register' id="smallscreenregister">
-                    Register
-                  </Link>
-                </Typography>
-              </MenuItem>
 
-              <MenuItem>
-                <Typography textAlign="center">
-                  <Link to='/Login' id="smallscreenregister">
-                    Login
-                  </Link>
-                </Typography>
-              </MenuItem>
+              {!isCustomerRole && !isAdminRole ? (
+                <MenuItem onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">
+                    <Link to='/Register' id="smallscreenregister">
+                      Register
+                    </Link>
+                  </Typography>
+                </MenuItem>
+              ) : null}
+
+
+              {isAdminRole ? (
+                <MenuItem onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">
+                    <Link to='/CarFuelDataTable' id="smallscreenregister">
+                      Fuel
+                    </Link>
+                  </Typography>
+                </MenuItem>
+              ) : null}
+
+
+              {isAdminRole ? (
+                <MenuItem onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">
+                    <Link to='/CarBrandDataTable' id="smallscreenregister">
+                      Cars
+                    </Link>
+                  </Typography>
+                </MenuItem>
+              ) : null}
+
+              {isAdminRole ? (
+                <MenuItem onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">
+                    <Link to='/BrandCarDataTable' id="smallscreenregister">
+                      Brands
+                    </Link>
+                  </Typography>
+                </MenuItem>
+              ) : null}
+
+
+
+              {isAdminRole ? (
+                <MenuItem onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">
+                    <Link to='/CarServiceDataTable' id="smallscreenregister">
+                      services
+                    </Link>
+                  </Typography>
+                </MenuItem>
+              ) : null}
+
+
+              {isCustomerRole ? (
+                <MenuItem onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">
+                    <Link to='/CarBrand' id="smallscreenregister">
+                      Book Service
+                    </Link>
+                  </Typography>
+                </MenuItem>
+              ) : null}
+
+              {!isCustomerRole && !isAdminRole ? (
+                <MenuItem>
+                  <Typography textAlign="center">
+                    <Link to='/Login' id="smallscreenregister">
+                      Login
+                    </Link>
+                  </Typography>
+                </MenuItem>
+              ) : null}
+
+              {isCustomerRole ? (
+                <MenuItem>
+                  <Typography textAlign="center">
+                    <Link to='/Login' id="smallscreenregister" onClick={handlelogout} className='' style={{ color: 'red' }}>
+                      Logout
+                    </Link>
+                  </Typography>
+                </MenuItem>
+              ) : null}
+
+
+              {isAdminRole ? (
+                <MenuItem>
+                  <Typography textAlign="center">
+                    <Link to='/Login' id="smallscreenregister" onClick={handlelogout} className='' style={{ color: 'red' }}>
+                      Logout
+                    </Link>
+                  </Typography>
+                </MenuItem>
+              ) : null}
+
             </Menu>
           </Box>
+          {/* 
+          <Box sx={{ display: { xs: 'none', md: 'flex' } }} >
+            {isCustomerRole || isAdminRole ? (
+              <Button 
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: 'white', display: 'block' }} class='pt-2 logout' 
+              >
+                <p onClick={handlelogout}>
+                  Logout
+                </p>
+              </Button>
+            ) : null}
+          </Box> */}
+
           <CarRepairIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
           <Typography
             variant="h5"
@@ -158,14 +258,40 @@ function Nav() {
             ) : null}
           </Box>
 
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+          <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             {isAdminRole ? (
               <Button
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
-                <Link to='/CarBrandIndex' id='authorize'>
-                  CarBrandIndex
+                <Link to='/CarBrandDataTable' id='authorize'>
+                  Brands
+                </Link>
+              </Button>
+            ) : null}
+          </Box>
+
+          <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+            {isAdminRole ? (
+              <Button
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: 'white', display: 'block' }}
+              >
+                <Link to='/BrandCarDataTable' id='authorize'>
+                  Cars
+                </Link>
+              </Button>
+            ) : null}
+          </Box>
+
+          <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+            {isAdminRole ? (
+              <Button
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: 'white', display: 'block' }}
+              >
+                <Link to='/CarFuelDataTable' id='authorize'>
+                  Fuels
                 </Link>
               </Button>
             ) : null}
@@ -177,55 +303,18 @@ function Nav() {
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
-                <Link to='/BrandCarIndex' id='authorize'>
-                  BrandCarIndex
-                </Link>
-              </Button>
-            ) : null}
-          </Box>
-
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {isAdminRole ? (
-              <Button
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                <Link to='/CarFuelIndex' id='authorize'>
-                  CarFuelIndex
-                </Link>
-              </Button>
-            ) : null}
-          </Box>
-
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {isAdminRole ? (
-              <Button
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                <Link to='/CarServiceIndex' id='authorize'>
-                  CarServiceIndex
+                <Link to='/CarServiceDataTable' id='authorize'>
+                  Services
                 </Link>
               </Button>
             ) : null}
           </Box>
 
 
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {isCustomerRole || isAdminRole ? (
-              <Button
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                <p onClick={handlelogout}>
-                  Logout
-                </p>
-              </Button>
-            ) : null}
-          </Box>
 
 
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+
+          {/* <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {isCustomerRole ? (
               <Button
                 onClick={handleCloseNavMenu}
@@ -236,11 +325,24 @@ function Nav() {
                 </Link>
               </Button>
             ) : null}
-          </Box>
+          </Box> */}
+
+          {/* <Box sx={{ display: { xs: 'none', md: 'flex' } }} class=''>
+            {isCustomerRole ? (
+
+              <Button
+                onClick={handleCloseNavMenu}
+                sx={{ color: 'white', display: 'block' }}
+              >
+                <Link to='/CarBrand' id='authorize'>
+                  Book your Service
+                </Link>
+              </Button>
+            ) : null}
+          </Box> */}
 
 
-
-          <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+          <Box sx={{ display: { xs: 'none', md: 'flex' } }} >
             {!isCustomerRole && !isAdminRole ? (
 
               <Button
@@ -254,22 +356,22 @@ function Nav() {
             ) : null}
           </Box>
 
-
-          <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            {isCustomerRole ? (
-
+          <Box sx={{ display: { xs: 'none', md: 'flex' } }} class='me-3'>
+            {isCustomerRole || isAdminRole ? (
               <Button
                 onClick={handleCloseNavMenu}
-                sx={{ color: 'white', display: 'block' }}
+                sx={{ my: 2, color: 'white', display: 'block' }} class='pt-2 logout'
               >
-                <Link to='/CarBrand' id='authorize'>
-                  CarBrand
-                </Link>
+                <p onClick={handlelogout}>
+                  Logout
+                </p>
               </Button>
             ) : null}
           </Box>
 
-          <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+
+
+          {/* <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             {isCustomerRole ? (
 
               <Button
@@ -281,10 +383,10 @@ function Nav() {
                 </Link>
               </Button>
             ) : null}
-          </Box>
+          </Box> */}
 
 
-          <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+          {/* <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             {isCustomerRole ? (
 
               <Button
@@ -296,12 +398,12 @@ function Nav() {
                 </Link>
               </Button>
             ) : null}
-          </Box>
+          </Box> */}
 
 
 
 
-          <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+          {/* <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             {isCustomerRole ? (
               <Button
                 onClick={handleCloseNavMenu}
@@ -312,34 +414,12 @@ function Nav() {
                 </Link>
               </Button>
             ) : null}
-          </Box>
+          </Box> */}
 
+          <Avatar style={{ backgroundColor: 'rgb(124, 6, 6)', color: 'white' }}>
+            {userName[0]}
+          </Avatar>
 
-          <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: '45px' }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-
-            </Menu>
-          </Box>
         </Toolbar>
       </Container>
     </AppBar >

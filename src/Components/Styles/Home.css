@@ -1,4 +1,23 @@
-#Homeimage{
+#Homeimage {
     background-size: cover;
-    background-position: center;
+    background-color: black;
+    min-height: 100vh;
+}
+
+.welcome {
+    font-style: italic;
+    color: white;
+    font-size: 20px;
+    text-align: center;
+}
+
+
+.welcome1 {
+    font-style: italic;
+    color: white;
+    font-size: 20px;
+    background-color: rgb(124, 6, 6);
+    text-decoration: none;
+    width:30%;
+
 }

@@ -132,13 +132,13 @@ const Register = () => {
 
     return (
         <>
-            <div class="container">
+            <div class="container text-white mt-3 mb-2">
                 <div className='row justify-content-center'>
-                    <div class="col-6">
-                        <h2 id='register' class="mt-3 pt-5 pb-3">Register your Details</h2>
-                        <form class="form-horizontal">
+                    <div class="col-lg-6 logincontainer">
+                        <h2 id='register' class="mt-3 pt-5 pb-3 text-center">Register your Details</h2>
+                        <form class="form-horizontal ps-2">
 
-                            <div class="form-group registerform">
+                            <div class="form-group registerform pt-3">
                                 <label class="control-label col-sm-2" for="Username">Username:</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" id="Username" placeholder="Enter Username" name="vusername" value={vusername} onChange={(e) => setvusername(e.target.value)} />
@@ -147,7 +147,7 @@ const Register = () => {
                             </div>
 
 
-                            <div class="form-group registerform">
+                            <div class="form-group registerform pt-3">
                                 <label class="control-label col-sm-2" for="email">Email:</label>
                                 <div class="col-sm-10">
                                     <input type="email" class="form-control" id="email" placeholder="Enter email" name="vemail" value={vemail} onChange={(e) => setvemail(e.target.value)} />
@@ -157,7 +157,7 @@ const Register = () => {
 
 
 
-                            <div class="form-group registerform">
+                            <div class="form-group registerform pt-3">
                                 <label class="control-label col-sm-2" for="pwd">Password:</label>
                                 <div class="col-sm-10">
                                     <input type="password" class="form-control" id="Password" placeholder="Enter password" name="vpassword" value={vpassword} onChange={(e) => setvpassword(e.target.value)} />
@@ -166,7 +166,7 @@ const Register = () => {
                             </div>
 
 
-                            <div class="form-group registerform">
+                            <div class="form-group registerform pt-3">
                                 <label class="control-label col-sm-2" for="pwd">ConfirmPassword:</label>
                                 <div class="col-sm-10">
                                     <input type="password" class="form-control" id="ConfirmPassword" placeholder="Enter password again" name="vconfirmPassword" value={vconfirmPassword} onChange={(e) => setvconfirmPassword(e.target.value)} />
@@ -175,7 +175,7 @@ const Register = () => {
                             </div>
 
 
-                            <div class="form-group registerform" >
+                            <div class="form-group registerform pt-3" >
                                 <label class="control-label col-sm-2" for="Contact">Contact:</label>
                                 <div class="col-sm-10">
                                     <input type="number" class="form-control" id="Contact" placeholder="Enter Contact" name="vmobile" value={vmobile} onChange={(e) => setvmobile(e.target.value)} />
@@ -183,16 +183,16 @@ const Register = () => {
                                 </div>
                             </div>
 
-                            <div class="form-group mt-3 registerform">
+                            <div class="form-group mt-3 registerform pt-3 pb-5">
                                 <div class="col-sm-offset-2 col-sm-10">
-                                    <button type="button" class="btn submit" onClick={handleRegister}>Submit</button>
+                                    <button type="button" class="btn submit login" onClick={handleRegister}>Submit</button>
                                 </div>
                             </div>
                         </form>
                     </div>
-                    <div class="col-lg-6 d-none d-sm-block d-sm-none d-md-block d-md-none d-lg-block   ">
+                    {/* <div class="col-lg-6 d-none d-sm-block d-sm-none d-md-block d-md-none d-lg-block   ">
                         <img src={loginimage} alt="carts" class="mt-5 pt-5" id='vehicleimage' />
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </>
