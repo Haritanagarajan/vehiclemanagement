@@ -183,6 +183,7 @@ export const Gpay = () => {
                 />
                 <ToastContainer />
             </>
+            {/* <Link to='/Razorpays'>Paynow</Link> */}
         </div>
     )
 }
