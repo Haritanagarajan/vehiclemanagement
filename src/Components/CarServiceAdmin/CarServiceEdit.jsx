@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useContext } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import axios from 'axios';
+import { UserContext } from '../Context/userContext';
 
 export const CarServiceEdit = () => {
     const [carid, setcarid] = useState('');
@@ -15,6 +16,7 @@ export const CarServiceEdit = () => {
     const [servicecost, setservicecost] = useState();
     const [CarOptions, setCarOptions] = useState([]);
     const { serviceid } = useParams();
+    const { userDetails, setuserDetails } = useContext(UserContext);
 
     const handleUpload = async (e) => {
         e.preventDefault();
@@ -34,6 +36,8 @@ export const CarServiceEdit = () => {
             const response = await axios.put(`https://localhost:7229/api/CarServices/PutCarService/${serviceid}`, formData, {
                 headers: {
                     'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${userDetails.tokenResult}`,
+
                 }
             });
 

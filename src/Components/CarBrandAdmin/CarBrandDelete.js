@@ -2,9 +2,12 @@ import React from 'react'
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
+import { useContext } from 'react';
+import { UserContext } from '../Context/userContext';
 
 export const CarBrandDelete = () => {
     const { brandid } = useParams();
+    const { userDetails, setuserDetails } = useContext(UserContext);
 
 
     const handleDelete = async (e) => {
@@ -15,6 +18,7 @@ export const CarBrandDelete = () => {
             const response = await axios.delete(`https://localhost:7229/api/CarBrands1/DeleteCarBrand/${brandid}`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
+                    'Authorization': `Bearer ${userDetails.tokenResult}`,
                 },
             });
 

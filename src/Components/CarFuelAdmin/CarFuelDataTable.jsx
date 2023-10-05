@@ -1,10 +1,13 @@
 import React from "react";
 import DataTable from "react-data-table-component";
-import { useState, useEffect } from "react";
+import { useState, useEffect,useContext } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { UserContext } from '../Context/userContext';
 
 export default function CarFuelDataTable() {
+    const { userDetails, setuserDetails } = useContext(UserContext);
+
     const columns = [
         {
             name: 'Fuel ID',
@@ -50,8 +53,11 @@ export default function CarFuelDataTable() {
     const fetchData = async () => {
         try {
             const response = await axios.get(
-                'https://localhost:7229/api/CarFuels/GetCarFuels'
-            );
+                'https://localhost:7229/api/CarFuels/GetCarFuels', {
+                headers: {
+                    'Authorization': `Bearer ${userDetails.tokenResult}`,
+                }
+            });
             const result = response.data;
             setData(result);
             setFilter(result);

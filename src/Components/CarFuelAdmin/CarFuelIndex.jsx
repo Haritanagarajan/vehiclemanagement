@@ -1,22 +1,38 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState ,useContext} from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { UserContext } from '../Context/userContext';
 
 const CarFuelIndex = () => {
     const [carFuel, setcarFuel] = useState([]);
+    const { userDetails, setuserDetails } = useContext(UserContext);
+
+    // const fetchData = async () => {
+    //     try {
+    //         const response = await axios.get(`https://localhost:7229/api/CarFuels/GetCarFuels`);
+    //         const result = await response.data;
+    //         setcarFuel(result);
+    //     } catch (error) {
+    //         console.log(error);
+    //         throw error;
+    //     }
+    // }
 
     const fetchData = async () => {
         try {
-            const response = await axios.get(`https://localhost:7229/api/CarFuels/GetCarFuels`);
+            const response = await axios.get(`https://localhost:7229/api/CarFuels/GetCarFuels`, {
+                headers: {
+                    'Authorization': `Bearer ${userDetails.tokenResult}`,
+                }
+            });
             const result = await response.data;
             setcarFuel(result);
         } catch (error) {
             console.log(error);
             throw error;
         }
-    }
-
-
+    };
+    
 
     useEffect(() => {
         fetchData();

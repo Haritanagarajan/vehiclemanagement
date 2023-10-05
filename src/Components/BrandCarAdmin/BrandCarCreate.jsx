@@ -1,8 +1,10 @@
 import React from 'react'
-import { useState, useEffect } from 'react';
+import { useState, useEffect,useContext } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import axios from 'axios';
+import { UserContext } from '../Context/userContext';
+
 
 //carid = no
 //carname yes ..
@@ -16,6 +18,7 @@ const BrandCarCreate = () => {
     const [brandid, setbrandid] = useState();
     const [imageFile, setImageFile] = useState(null);
     const [brandOptions, setBrandOptions] = useState([]);
+    const { userDetails, setuserDetails } = useContext(UserContext);
 
 
     const fileupload = (e) => {
@@ -49,20 +52,39 @@ const BrandCarCreate = () => {
     };
 
 
+    // useEffect(() => {
+    //     const fetchData = async () => {
+    //         try {
+    //             const response = await axios.get(`https://localhost:7229/api/CarBrands1/GetCarBrands`);
+    //             const result = response.data;
+    //             setBrandOptions(result);
+    //         } catch (error) {
+    //             console.error(error);
+    //         }
+    //     };
+
+    //     fetchData();
+    // }, []);
+
+
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(`https://localhost:7229/api/CarBrands1/GetCarBrands`);
+                const response = await axios.get(`https://localhost:7229/api/CarBrands1/GetCarBrands`, {
+                    headers: {
+                        'Authorization': `Bearer ${userDetails.tokenResult}`,
+                    }
+                });
                 const result = response.data;
                 setBrandOptions(result);
             } catch (error) {
                 console.error(error);
             }
         };
-
+    
         fetchData();
     }, []);
-
+    
 
 
     return (

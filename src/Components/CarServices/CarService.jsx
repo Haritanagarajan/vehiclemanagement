@@ -11,6 +11,7 @@ const CarService = () => {
     const [carservice, setcarservice] = useState([]);
     const { carid } = useParams();
     const { ServiceDetails, setServiceDetails } = useContext(UserContext);
+    const { userDetails, setuserDetails } = useContext(UserContext);
 
 
     const handleSaveDetails = (services) => {
@@ -20,9 +21,24 @@ const CarService = () => {
 
     console.log("ServiceDetails", ServiceDetails);
 
+    // const fetchData = async () => {
+    //     try {
+    //         const response = await axios.get(`https://localhost:7229/api/CarServices/GetCarService/${carid}`)
+    //         const result = await response.data;
+    //         const carservicearray = Array.isArray(result) ? result : [result];
+    //         setcarservice(carservicearray);
+    //     } catch (error) {
+    //         console.log(error);
+    //         throw error;
+    //     }
+    // }
     const fetchData = async () => {
         try {
-            const response = await axios.get(`https://localhost:7229/api/CarServices/GetCarService/${carid}`)
+            const response = await axios.get(`https://localhost:7229/api/CarServices/GetCarService/${carid}`, {
+                headers: {
+                    'Authorization': `Bearer ${userDetails.tokenResult}`,
+                }
+            });
             const result = await response.data;
             const carservicearray = Array.isArray(result) ? result : [result];
             setcarservice(carservicearray);
@@ -30,8 +46,8 @@ const CarService = () => {
             console.log(error);
             throw error;
         }
-    }
-
+    };
+    
     useEffect(() => {
         fetchData();
     }, []);

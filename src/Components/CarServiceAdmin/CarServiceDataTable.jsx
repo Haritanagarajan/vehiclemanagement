@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState,useContext } from 'react';
 import DataTable from 'react-data-table-component';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { UserContext } from '../Context/userContext';
 
 
 export const CarServiceDataTable = () => {
     const [carService, setCarService] = useState([]);
     const [search, setSearch] = useState('');
+    const { userDetails, setuserDetails } = useContext(UserContext);
 
     const columns = [
         {
@@ -66,7 +68,11 @@ export const CarServiceDataTable = () => {
     const fetchData = async () => {
         try {
             const response = await axios.get(
-                'https://localhost:7229/api/CarServices/GetCarServices'
+                'https://localhost:7229/api/CarServices/GetCarServices',{
+                    headers: {
+                        'Authorization': `Bearer ${userDetails.tokenResult}`,
+                    }
+                }
             );
             const result = await response.data;
             setCarService(result);

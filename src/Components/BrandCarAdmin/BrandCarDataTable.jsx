@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState ,useContext} from 'react';
 import DataTable from 'react-data-table-component';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { UserContext } from '../Context/userContext';
 
 
 
 const BrandCarDataTable = () => {
     const [brandCar, setBrandCar] = useState([]);
     const [search, setSearch] = useState('');
+    const { userDetails, setuserDetails } = useContext(UserContext);
 
     const columns = [
         {
@@ -50,10 +52,26 @@ const BrandCarDataTable = () => {
         },
     ];
 
+    // const fetchData = async () => {
+    //     try {
+    //         const response = await axios.get(
+    //             'https://localhost:7229/api/BrandCars/GetBrandCars'
+    //         );
+    //         const result = await response.data;
+    //         setBrandCar(result);
+    //     } catch (error) {
+    //         console.error(error);
+    //     }
+    // };
     const fetchData = async () => {
         try {
             const response = await axios.get(
-                'https://localhost:7229/api/BrandCars/GetBrandCars'
+                'https://localhost:7229/api/BrandCars/GetBrandCars',
+                {
+                    headers: {
+                        'Authorization': `Bearer ${userDetails.tokenResult}`,
+                    }
+                }
             );
             const result = await response.data;
             setBrandCar(result);
@@ -61,6 +79,7 @@ const BrandCarDataTable = () => {
             console.error(error);
         }
     };
+    
 
     useEffect(() => {
         fetchData();

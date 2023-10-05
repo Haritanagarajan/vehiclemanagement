@@ -1,14 +1,16 @@
 import React from 'react'
-import { useState, useEffect } from 'react';
+import { useState, useEffect ,useContext} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import { UserContext } from '../Context/userContext';
 
 const CarBrandIndex = () => {
     const [brandName, setbrandName] = useState();
     const [imageFile, setImageFile] = useState(null);
     const { brandid } = useParams();
+    const { userDetails, setuserDetails } = useContext(UserContext);
 
      console.log(brandid)
 
@@ -28,6 +30,7 @@ const CarBrandIndex = () => {
             const response = await axios.put(`https://localhost:7229/api/CarBrands1/PutCarBrand/${brandid}`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
+                    'Authorization': `Bearer ${userDetails.tokenResult}`,
                 },
             });
           

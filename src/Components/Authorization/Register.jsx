@@ -1,12 +1,14 @@
 import React from 'react'
 import loginimage from '../Assets/loginimage.jpg';
 import '../Styles/Register.css';
-import { useState, useEffect } from 'react';
+import { useState, useEffect,useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
+import { UserContext } from '../Context/userContext';
 
 
 const Register = () => {
+    const { userDetails, setuserDetails } = useContext(UserContext);
 
     const [vusername, setvusername] = useState("");
     const [vpassword, setvpassword] = useState("");
@@ -72,6 +74,7 @@ const Register = () => {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${userDetails.tokenResult}`,
                 },
                 body: JSON.stringify(newUser),
             })

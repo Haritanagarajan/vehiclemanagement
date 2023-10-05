@@ -1,12 +1,14 @@
 import React from 'react'
-import { useState, useEffect } from 'react';
+import { useState, useEffect ,useContext} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import axios from 'axios';
+import { UserContext } from '../Context/userContext';
 
 const CarFuelCreate = () => {
     const [fuelName, setfuelName] = useState();
     const [imageFile, setImageFile] = useState(null);
+    const { userDetails, setuserDetails } = useContext(UserContext);
 
 
     const fileupload = (e) => {
@@ -24,6 +26,8 @@ const CarFuelCreate = () => {
             const response = await axios.post("https://localhost:7229/api/CarFuels/PostCarFuel", formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
+                    'Authorization': `Bearer ${userDetails.tokenResult}`,
+
                 },
             });
 

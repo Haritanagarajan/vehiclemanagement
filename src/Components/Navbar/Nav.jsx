@@ -17,6 +17,8 @@ import '../Styles/Nav.css';
 import { UserContext } from '../Context/userContext';
 import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 function Nav() {
@@ -24,6 +26,9 @@ function Nav() {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const { userDetails, setuserDetails } = useContext(UserContext);
   const { userName, setuserName } = useContext(UserContext);
+  const { FuelDetails, CarDetails, BrandDetails, ServiceDetails, uEmail } = useContext(
+    UserContext
+  );
 
   const isCustomerRole = userDetails.roles == "Customer";
   const isAdminRole = userDetails.roles == "Admin";
@@ -50,8 +55,25 @@ function Nav() {
 
   const handlelogout = () => {
     localStorage.removeItem("userDetails");
+    localStorage.removeItem('role');
+    localStorage.removeItem('userName');
+    localStorage.removeItem('FuelDetails');
+    localStorage.removeItem('CarDetails');
+    localStorage.removeItem('BrandDetails');
+    localStorage.removeItem('ServiceDetails');
+    localStorage.removeItem('uEmail');
+    toast.success('Logout successful!', {
+      position: 'top-right',
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      className: 'error-success',
+    });
     navigate('/Login');
-    window.location.reload();
+    // window.location.reload();
   }
 
   return (

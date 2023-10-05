@@ -10,15 +10,32 @@ import { UserContext } from '../Context/userContext';
 const CarFuel = () => {
     const [CarFuel, setCarFuel] = useState([]);
     const { FuelDetails, setFuelDetails } = useContext(UserContext)
+    const { userDetails, setuserDetails } = useContext(UserContext);
 
 
     const handleSaveDetails = (fuel) => {
         setFuelDetails(fuel);
     }
 
+    // const fetchData = async () => {
+    //     try {
+    //         const response = await axios.get(`https://localhost:7229/api/CarFuels/GetCarFuels`)
+    //         const result = await response.data;
+    //         const carfuelarray = Array.isArray(result) ? result : [result];
+    //         setCarFuel(carfuelarray);
+    //     } catch (error) {
+    //         console.log(error);
+    //         throw error;
+    //     }
+    // }
+
     const fetchData = async () => {
         try {
-            const response = await axios.get(`https://localhost:7229/api/CarFuels/GetCarFuels`)
+            const response = await axios.get(`https://localhost:7229/api/CarFuels/GetCarFuels`, {
+                headers: {
+                    'Authorization': `Bearer ${userDetails.tokenResult}`,
+                }
+            });
             const result = await response.data;
             const carfuelarray = Array.isArray(result) ? result : [result];
             setCarFuel(carfuelarray);
@@ -26,7 +43,8 @@ const CarFuel = () => {
             console.log(error);
             throw error;
         }
-    }
+    };
+    
     useEffect(() => {
         fetchData();
     });

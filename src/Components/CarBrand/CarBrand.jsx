@@ -11,6 +11,7 @@ import { UserContext } from '../Context/userContext';
 const CarBrand = () => {
     const [CarBrand, setCarBrand] = useState([]);
     const { CarDetails, setCarDetails } = useContext(UserContext);
+    const { userDetails, setuserDetails } = useContext(UserContext);
 
 
     const handleSaveDetails = (brand) => {
@@ -20,18 +21,34 @@ const CarBrand = () => {
     console.log("CarDetails", CarDetails);
 
 
+    // const fetchData = async () => {
+    //     try {
+    //         const response = await axios.get(`https://localhost:7229/api/CarBrands1/GetCarBrands`)
+    //         const result = await response.data;
+    //         setCarBrand(result);
+    //         { console.log(result.branndImage) }
+
+    //     } catch (error) {
+    //         console.log(error);
+    //         throw error;
+    //     }
+    // }
     const fetchData = async () => {
         try {
-            const response = await axios.get(`https://localhost:7229/api/CarBrands1/GetCarBrands`)
+            const response = await axios.get(`https://localhost:7229/api/CarBrands1/GetCarBrands`, {
+                headers: {
+                    'Authorization': `Bearer ${userDetails.tokenResult}`,
+                }
+            });
             const result = await response.data;
             setCarBrand(result);
-            { console.log(result.branndImage) }
-
+            console.log(result.branndImage);
         } catch (error) {
             console.log(error);
             throw error;
         }
-    }
+    };
+    
 
     useEffect(() => {
         fetchData();

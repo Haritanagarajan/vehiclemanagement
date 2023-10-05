@@ -1,14 +1,16 @@
 import React from 'react'
-import { useState, useEffect } from 'react';
+import { useState, useEffect,useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import { UserContext } from '../Context/userContext';
 
 export const CarFuelEdit = () => {
     const [fuelName, setfuelName] = useState();
     const [imageFile, setImageFile] = useState(null);
     const { fuelid } = useParams();
+    const { userDetails, setuserDetails } = useContext(UserContext);
 
     console.log(fuelid)
 
@@ -28,6 +30,9 @@ export const CarFuelEdit = () => {
             const response = await axios.put(`https://localhost:7229/api/CarFuels/PutCarFuel/${fuelid}`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
+                   
+                        'Authorization': `Bearer ${userDetails.tokenResult}`,
+                  
                 },
             });
 

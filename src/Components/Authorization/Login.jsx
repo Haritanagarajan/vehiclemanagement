@@ -3,9 +3,10 @@ import loginimage from '../Assets/loginimage.jpg';
 import '../Styles/Login.css';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { ToastContainer, toast } from 'react-toastify';
 import { UserContext } from '../Context/userContext';
-import brick from '../Assets/brick.avif';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const Login = () => {
 
@@ -13,14 +14,12 @@ const Login = () => {
   const [vpassword, setvpassword] = useState("");
   const [Email, setEmail] = useState("");
   const [error, setError] = useState("");
-
   const { userDetails, setuserDetails } = useContext(UserContext);
   const { userName, setuserName } = useContext(UserContext);
   const { uEmail, setuEmail } = useContext(UserContext);
   const Navigate = useNavigate();
 
   setuserName(vusername);
-
   setuEmail(Email)
 
 
@@ -36,12 +35,26 @@ const Login = () => {
         const response = await axios.post("https:/localhost:7229/api/Users/ValidateUser", newUser, {
           headers: {
             'Content-Type': 'application/json',
+            'Authorization': `Bearer ${userDetails.tokenResult}`,
           }
         })
+
         const result = await response.data;
-        console.log(result)
-        setuserDetails(result);
+
         if (result) {
+          console.log(result)
+          setuserDetails(result);
+          localStorage.setItem('role', result.roles)
+          toast.success('Login successful!', {
+            position: 'top-right',
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            className: 'error-success',
+          });
           Navigate('/Home');
         }
       } catch (error) {
@@ -56,6 +69,7 @@ const Login = () => {
 
   return (
     <>
+
       <div class="container text-white">
         <div className='row justify-content-center'>
           <div class="col-6 logincontainer mt-5">
@@ -89,7 +103,8 @@ const Login = () => {
 
               <div class="form-group mt-3 registerform pt-3 pb-5">
                 <div class="col-sm-offset-2 col-sm-10">
-                  <button type="submit" class="btn submit login">Login</button>
+                  <button type="submit" class="btn submit login">Login</button>      <ToastContainer />
+
                   {error && <p className="text-danger">{error}</p>}
                 </div>
               </div>
@@ -99,6 +114,7 @@ const Login = () => {
           {/* <div class="col-lg-6 d-none d-sm-block d-sm-none d-md-block d-md-none d-lg-block   ">
             <img src={loginimage} alt="carts" class="mt-5 pt-5" id='vehicleimage' />
           </div> */}
+          <ToastContainer />
         </div>
       </div>
     </>

@@ -1,8 +1,9 @@
 import React from 'react'
-import { useState, useEffect } from 'react';
+import { useState, useEffect,useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import axios from 'axios';
+import { UserContext } from '../Context/userContext';
 
 export const CarServiceCreate = () => {
     const [carid, setcarid] = useState();
@@ -15,6 +16,7 @@ export const CarServiceCreate = () => {
     const [timeTaken, settimeTaken] = useState();
     const [servicecost, setservicecost] = useState();
     const [CarOptions, setCarOptions] = useState();
+    const { userDetails, setuserDetails } = useContext(UserContext);
 
 
 
@@ -36,7 +38,10 @@ export const CarServiceCreate = () => {
             const response = await axios.post("https://localhost:7229/api/CarServices/PostCarService", formData, {
                 headers: {
                     'Content-Type': 'application/json',
-                  }
+
+                    'Authorization': `Bearer ${userDetails.tokenResult}`,
+
+                }
 
             });
 
@@ -168,7 +173,7 @@ export const CarServiceCreate = () => {
                             <div class="form-group registerform">
                                 <label class="control-label col-sm-2" for="servicecost">servicecost:</label>
                                 <div class="col-sm-10">
-                                    <input type="number" min="0" max="32767"  class="form-control" id="servicecost" placeholder="Enter servicecost" name="servicecost" value={servicecost} onChange={(e) => setservicecost(e.target.value)} required />
+                                    <input type="number" min="0" max="32767" class="form-control" id="servicecost" placeholder="Enter servicecost" name="servicecost" value={servicecost} onChange={(e) => setservicecost(e.target.value)} required />
                                 </div>
                             </div>
 

@@ -13,20 +13,9 @@ export const Gpay = () => {
     const { FuelDetails, CarDetails, BrandDetails, ServiceDetails, userDetails, userName, uEmail } = useContext(
         UserContext
     );
+    const navigate = useNavigate();
 
-    const [isPaymentSuccessful, setIsPaymentSuccessful] = useState(false);
 
-    const handlePaymentSuccess = () => {
-        toast.success('Payment successful!', {
-            position: 'top-right',
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-        });
-        setIsPaymentSuccessful(true);
-    };
 
     const handleMail = async () => {
         const data1 = {
@@ -37,56 +26,121 @@ export const Gpay = () => {
 
         try {
             const response = await axios.post('https://localhost:7229/api/CarDetails/Mailer', data1);
-
-            if (response.status === 200) {
-                // alert('Data saved successfully');
+            if (response) {
+                toast.success('Payment6 and Mail is successfully!', {
+                    position: 'top-right',
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    className: 'error-success',
+                });
             }
         } catch (error) {
             console.error('Error:', error);
-            alert('An error occurred while saving data');
+            toast.success(' and Mail is successfully!', {
+                position: 'top-right',
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                className: 'error-success',
+            });
+            navigate('/ThankYou');
         }
 
     };
 
+    // const handleSubmit = async () => {
 
+    //     const data = {
+    //         VUserid: userDetails.vUserid,
+    //         VUserName: userName,
+    //         Email: uEmail,
+    //         Brandid: CarDetails.brandid,
+    //         BrandImage: CarDetails.imageSrc,
+    //         Carid: BrandDetails.carid,
+    //         CarImage: BrandDetails.imageSrc,
+    //         Fuelid: FuelDetails.fuelid,
+    //         FuelImage: FuelDetails.imageSrc,
+    //         Serviceid: ServiceDetails.serviceid,
+    //         CreatedDate: new Date(),
+    //         DueDate: new Date(),
+    //     };
 
+    //     try {
+    //         const response = await axios.post('https://localhost:7229/api/CarDetails/PostCarDetail/Details', data);
+
+    //         if (response) {
+    //             handleMail();
+    //         }
+    //     } catch (error) {
+    //         console.error('Error:', error);
+    //         toast.error('Error while processing your Payment', {
+    //             position: 'top-right',
+    //             autoClose: 3000,
+    //             hideProgressBar: false,
+    //             closeOnClick: true,
+    //             pauseOnHover: true,
+    //             draggable: true,
+    //             progress: undefined,
+    //             className: 'error-success',
+    //         });
+    //     }
+
+    // }
 
 
     const handleSubmit = async () => {
-        if (isPaymentSuccessful) {
-            const data = {
-                VUserid: userDetails.vUserid,
-                VUserName: userName,
-                Email: uEmail,
-                Brandid: CarDetails.brandid,
-                BrandImage: CarDetails.imageSrc,
-                Carid: BrandDetails.carid,
-                CarImage: BrandDetails.imageSrc,
-                Fuelid: FuelDetails.fuelid,
-                FuelImage: FuelDetails.imageSrc,
-                Serviceid: ServiceDetails.serviceid,
-                CreatedDate: new Date(),
-                DueDate: new Date(),
-            };
-
-            try {
-                const response = await axios.post('https://localhost:7229/api/CarDetails/PostCarDetail/Details', data);
-                //https://localhost:7229/api/CarDetails/PostCarDetail
-                if (response.status === 200) {
-                    alert('Data saved successfully');
-                    handleMail();
-                }
-            } catch (error) {
-                console.error('Error:', error);
-                alert('An error occurred while saving data');
-            }
+        const data = {
+            VUserid: userDetails.vUserid,
+            VUserName: userName,
+            Email: uEmail,
+            Brandid: CarDetails.brandid,
+            BrandImage: CarDetails.imageSrc,
+            Carid: BrandDetails.carid,
+            CarImage: BrandDetails.imageSrc,
+            Fuelid: FuelDetails.fuelid,
+            FuelImage: FuelDetails.imageSrc,
+            Serviceid: ServiceDetails.serviceid,
+            CreatedDate: new Date(),
+            DueDate: new Date(),
         };
+
+        try {
+            const response = await axios.post('https://localhost:7229/api/CarDetails/PostCarDetail/Details', data, {
+                headers: {
+                    'Authorization': `Bearer ${userDetails.tokenResult}`,
+                }
+            });
+
+            if (response) {
+                handleMail();
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            toast.error('Error while processing your Payment', {
+                position: 'top-right',
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                className: 'error-success',
+            });
+        }
     }
+
     return (
         <div className="mt-3 d-flex justify-content-center">
 
             <>
-                <button onClick={handleMail}>Mail</button>
+                {/* <button onClick={handleMail}>Mail</button> */}
                 {/* Gpay option */}
                 <GooglePayButton
                     environment="TEST"
@@ -123,14 +177,11 @@ export const Gpay = () => {
                     }}
                     onLoadPaymentData={(paymentRequest) => {
                         console.log('load payment data', paymentRequest);
-                        handlePaymentSuccess();
-                        const isSuccessful = true;
-                        if (isSuccessful) {
-                            handleSubmit();
-                        }
+                        handleSubmit();
+
                     }}
                 />
-
+                <ToastContainer />
             </>
         </div>
     )

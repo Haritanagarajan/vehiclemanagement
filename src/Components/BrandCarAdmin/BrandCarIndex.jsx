@@ -1,22 +1,38 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState ,useContext} from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { UserContext } from '../Context/userContext';
 
 const BrandCarIndex = () => {
     const [BrandCar, setBrandCar] = useState([]);
+    const { userDetails, setuserDetails } = useContext(UserContext);
+
+    // const fetchData = async () => {
+    //     try {
+    //         const response = await axios.get(`https://localhost:7229/api/BrandCars/GetBrandCars`);
+    //         const result = await response.data;
+    //         setBrandCar(result);
+    //     } catch (error) {
+    //         console.log(error);
+    //         throw error;
+    //     }
+    // }
 
     const fetchData = async () => {
         try {
-            const response = await axios.get(`https://localhost:7229/api/BrandCars/GetBrandCars`);
+            const response = await axios.get(`https://localhost:7229/api/BrandCars/GetBrandCars`, {
+                headers: {
+                    'Authorization': `Bearer ${userDetails.tokenResult}`,
+                }
+            });
             const result = await response.data;
             setBrandCar(result);
         } catch (error) {
-            console.log(error);
+            console.error(error);
             throw error;
         }
-    }
-
-
+    };
+    
     useEffect(() => {
         fetchData();
     }, []);

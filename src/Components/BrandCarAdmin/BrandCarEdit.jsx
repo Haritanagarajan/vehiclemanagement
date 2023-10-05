@@ -1,8 +1,10 @@
 import React from 'react'
-import { useState, useEffect } from 'react';
+import { useState, useEffect,useContext } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import axios from 'axios';
+import { UserContext } from '../Context/userContext';
+
 
 //carid = no
 //carname yes ..
@@ -17,6 +19,7 @@ const BrandCarEdit = () => {
     const [imageFile, setImageFile] = useState(null);
     const [brandOptions, setBrandOptions] = useState([]);
     const { carid } = useParams();
+    const { userDetails, setuserDetails } = useContext(UserContext);
 
 
     const fileupload = (e) => {
@@ -37,6 +40,7 @@ const BrandCarEdit = () => {
             const response = await axios.put(`https://localhost:7229/api/BrandCars/PutBrandCar/${carid}`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
+                    'Authorization': `Bearer ${userDetails.tokenResult}`,
                 },
             });
 

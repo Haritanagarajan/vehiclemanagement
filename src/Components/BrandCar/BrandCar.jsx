@@ -12,14 +12,32 @@ const BrandCar = () => {
     const [BrandCar, setBrandCar] = useState([]);
     const { brandid } = useParams();
     const { BrandDetails, setBrandDetails } = useContext(UserContext);
+    const { userDetails, setuserDetails } = useContext(UserContext);
+
 
     const handleSaveDetails = (cars) => {
         setBrandDetails(cars);
     }
 
+    // const fetchData = async () => {
+    //     try {
+    //         const response = await axios.get(`https://localhost:7229/api/BrandCars/GetBrandCar/${brandid}`)
+    //         const result = await response.data;
+    //         const brandCarArray = Array.isArray(result) ? result : [result];
+    //         setBrandCar(brandCarArray);
+    //     } catch (error) {
+    //         console.log(error);
+    //         throw error;
+    //     }
+    // }
     const fetchData = async () => {
         try {
-            const response = await axios.get(`https://localhost:7229/api/BrandCars/GetBrandCar/${brandid}`)
+            const response = await axios.get(`https://localhost:7229/api/BrandCars/GetBrandCar/${brandid}`, {
+                headers: {
+                    'Authorization': `Bearer ${userDetails.tokenResult}`,
+                }
+            });
+    
             const result = await response.data;
             const brandCarArray = Array.isArray(result) ? result : [result];
             setBrandCar(brandCarArray);
@@ -28,6 +46,7 @@ const BrandCar = () => {
             throw error;
         }
     }
+    
     useEffect(() => {
         fetchData();
     }, [brandid]);
