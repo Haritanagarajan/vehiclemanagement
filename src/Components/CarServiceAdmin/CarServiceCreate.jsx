@@ -17,37 +17,49 @@ export const CarServiceCreate = () => {
     const [servicecost, setservicecost] = useState();
     const [CarOptions, setCarOptions] = useState();
     const { userDetails, setuserDetails } = useContext(UserContext);
+    const Navigate = useNavigate();
+
+    const [error, SetError] = useState('')
 
 
 
+    const validateWarranty = () => {
+        let isValid = true;
+        if (!error) {
+            SetError('This field is required');
+            isValid = false;
+        }
+        else {
+            SetError('');
+        }
+        return isValid;
+    };
 
     const handleUpload = async (e) => {
         e.preventDefault();
-        const formData = new FormData();
-        formData.append('carid', carid);
-        formData.append('serviceName', serviceName);
-        formData.append('warranty', warranty);
-        formData.append('subservice1', subservice1);
-        formData.append('subservice2', subservice2);
-        formData.append('subservice3', subservice3);
-        formData.append('subservice4', subservice4);
-        formData.append('timeTaken', timeTaken);
-        formData.append('servicecost', servicecost);
+        if (validateWarranty()) {
+            const formData = new FormData();
+            formData.append('carid', carid);
+            formData.append('serviceName', serviceName);
+            formData.append('warranty', warranty);
+            formData.append('subservice1', subservice1);
+            formData.append('subservice2', subservice2);
+            formData.append('subservice3', subservice3);
+            formData.append('subservice4', subservice4);
+            formData.append('timeTaken', timeTaken);
+            formData.append('servicecost', servicecost);
 
-        try {
-            const response = await axios.post("https://localhost:7229/api/CarServices/PostCarService", formData, {
-                headers: {
-                    'Content-Type': 'application/json',
+            try {
+                const response = await axios.post("https://localhost:7229/api/CarServices/PostCarService", formData, {
+                    headers: {
+                        'Content-Type': 'application/json',
 
-                    'Authorization': `Bearer ${userDetails.tokenResult}`,
+                        'Authorization': `Bearer ${userDetails.tokenResult}`,
 
-                }
+                    }
 
-            });
+                });
 
-
-            const result = await response.data;
-            if (result.Status === 200) {
                 toast.success('successfully created !', {
                     position: 'top-right',
                     autoClose: 3000,
@@ -58,20 +70,25 @@ export const CarServiceCreate = () => {
                     progress: undefined,
                     className: 'error-success',
                 });
+                Navigate('/CarServiceDataTable')
+                // const result = await response.data;
+                // if (result.Status === 200) {
+
+                // }
+            } catch (error) {
+                console.log(error);
+                toast.error('Error occurred while creating !', {
+                    position: 'top-right',
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    className: 'error-success',
+                });
+                throw error;
             }
-        } catch (error) {
-            console.log(error);
-            toast.error('Error occurred while creating !', {
-                position: 'top-right',
-                autoClose: 3000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                className: 'error-success',
-            });
-            throw error;
         }
     };
 
@@ -110,6 +127,7 @@ export const CarServiceCreate = () => {
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" id="serviceName" placeholder="Enter service name" name="serviceName" value={serviceName} onChange={(e) => setserviceName(e.target.value)} required />
                                 </div>
+                                <span className="text-danger">{error}</span>
                             </div>
 
                             {CarOptions && CarOptions.length > 0 && (
@@ -132,6 +150,7 @@ export const CarServiceCreate = () => {
                                                 </option>
                                             ))}
                                         </select>
+                                        <span className="text-danger">{error}</span>
                                     </div>
                                 </div>
                             )}
@@ -141,6 +160,7 @@ export const CarServiceCreate = () => {
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" id="warranty" placeholder="Enter warranty" name="warranty" value={warranty} onChange={(e) => setwarranty(e.target.value)} required />
                                 </div>
+                                <span className="text-danger">{error}</span>
                             </div>
 
 
@@ -149,6 +169,7 @@ export const CarServiceCreate = () => {
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" id="subservice1" placeholder="Enter subservice1" name="subservice1" value={subservice1} onChange={(e) => setsubservice1(e.target.value)} required />
                                 </div>
+                                <span className="text-danger">{error}</span>
                             </div>
 
 
@@ -157,6 +178,7 @@ export const CarServiceCreate = () => {
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" id="subservice2" placeholder="Enter subservice2" name="subservice2" value={subservice2} onChange={(e) => setsubservice2(e.target.value)} required />
                                 </div>
+                                <span className="text-danger">{error}</span>
                             </div>
 
 
@@ -168,6 +190,7 @@ export const CarServiceCreate = () => {
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" id="subservice3" placeholder="Enter subservice3" name="subservice3" value={subservice3} onChange={(e) => setsubservice3(e.target.value)} required />
                                 </div>
+                                <span className="text-danger">{error}</span>
                             </div>
 
 
@@ -177,6 +200,7 @@ export const CarServiceCreate = () => {
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" id="subservice4" placeholder="Enter subservice4" name="subservice4" value={subservice4} onChange={(e) => setsubservice4(e.target.value)} required />
                                 </div>
+                                <span className="text-danger">{error}</span>
                             </div>
 
 
@@ -187,6 +211,7 @@ export const CarServiceCreate = () => {
                                 <div class="col-sm-10">
                                     <input type="number" class="form-control" id="timeTaken" placeholder="Enter timeTaken" name="timeTaken" value={timeTaken} onChange={(e) => settimeTaken(e.target.value)} required />
                                 </div>
+                                <span className="text-danger">{error}</span>
                             </div>
 
                             <div class="form-group registerform">
@@ -194,6 +219,7 @@ export const CarServiceCreate = () => {
                                 <div class="col-sm-10">
                                     <input type="number" min="0" max="32767" class="form-control" id="servicecost" placeholder="Enter servicecost" name="servicecost" value={servicecost} onChange={(e) => setservicecost(e.target.value)} required />
                                 </div>
+                                <span className="text-danger">{error}</span>
                             </div>
 
 
@@ -208,7 +234,7 @@ export const CarServiceCreate = () => {
                         <p style={{ fontStyle: 'italic' }}>Upload services for Car Brand</p>
                     </div>
                 </div>
-                <ToastContainer/>
+                <ToastContainer />
 
             </div>
         </>

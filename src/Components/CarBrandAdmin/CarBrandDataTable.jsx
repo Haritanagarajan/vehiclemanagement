@@ -37,13 +37,13 @@ const CarBrandDataTable = () => {
         {
             name: 'Edit',
             cell: (row) => (
-                <Link to={`/CarBrandEdit/${row.brandid}`}>Edit</Link>
+                <Link to={`/CarBrandEdit/${row.brandid}`}><i class="fa-solid fa-pen-to-square" style={{color:'black'}}></i></Link>
             ),
         },
         {
             name: 'Delete',
             cell: (row) => (
-                <Link to={`/CarBrandDelete/${row.brandid}`}>Delete</Link>
+                <Link to={`/CarBrandDelete/${row.brandid}`}><i class="fa-solid fa-trash" style={{color:'black'}}></i></Link>
             ),
         },
     ];

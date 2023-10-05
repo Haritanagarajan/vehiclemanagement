@@ -11,8 +11,32 @@ const CarBrandIndex = () => {
     const [imageFile, setImageFile] = useState(null);
     const { brandid } = useParams();
     const { userDetails, setuserDetails } = useContext(UserContext);
+    const [brandNameError, setBrandNameError] = useState('');
+    const [imageFileError, setImageFileError] = useState('');
+    const Navigate = useNavigate();
 
     console.log(brandid)
+    const validateForm = () => {
+        let isValid = true;
+
+        // Validate brandName
+        if (!brandName) {
+            setBrandNameError('Please enter brandName');
+            isValid = false;
+        } else {
+            setBrandNameError('');
+        }
+
+        // Validate imageFile
+        if (!imageFile) {
+            setImageFileError('Please upload an image');
+            isValid = false;
+        } else {
+            setImageFileError('');
+        }
+
+        return isValid;
+    };
 
     const fileupload = (e) => {
         setImageFile(e.target.files[0]);
@@ -21,22 +45,20 @@ const CarBrandIndex = () => {
 
     const handleUpload = async (e) => {
         e.preventDefault();
-        const formData = new FormData();
-        formData.append('brandName', brandName);
-        formData.append('imageFile', imageFile);
-        formData.append('brandid', brandid);
+        if (validateForm()) {
+            const formData = new FormData();
+            formData.append('brandName', brandName);
+            formData.append('imageFile', imageFile);
+            formData.append('brandid', brandid);
 
-        try {
-            const response = await axios.put(`https://localhost:7229/api/CarBrands1/PutCarBrand/${brandid}`, formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                    'Authorization': `Bearer ${userDetails.tokenResult}`,
-                },
-            });
-
-            const result = await response.data;
-            if (result) {
-                toast.success('Successfully edited !', {
+            try {
+                const response = await axios.put(`https://localhost:7229/api/CarBrands1/PutCarBrand/${brandid}`, formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                        'Authorization': `Bearer ${userDetails.tokenResult}`,
+                    },
+                });
+                toast.success('successfully created !', {
                     position: 'top-right',
                     autoClose: 3000,
                     hideProgressBar: false,
@@ -46,20 +68,25 @@ const CarBrandIndex = () => {
                     progress: undefined,
                     className: 'error-success',
                 });
+                Navigate('/CarBrandDataTable')
+                // const result = await response.data;
+                // if (result) {
+
+                // }
+            } catch (error) {
+                console.log(error);
+                toast.error('Error occurred while editing !', {
+                    position: 'top-right',
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    className: 'error-success',
+                });
+                throw error;
             }
-        } catch (error) {
-            console.log(error);
-            toast.error('Error occurred while editing !', {
-                position: 'top-right',
-                autoClose: 3000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                className: 'error-success',
-            });
-            throw error;
         }
     };
 
@@ -77,6 +104,7 @@ const CarBrandIndex = () => {
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" id="Username" placeholder="Enter brandName" name="brandName" value={brandName} onChange={(e) => setbrandName(e.target.value)} required />
                                 </div>
+                                <span className="text-danger">{brandNameError}</span>
                             </div>
 
 
@@ -86,6 +114,7 @@ const CarBrandIndex = () => {
                                 <div class="col-sm-10">
                                     <input type="file" class="form-control" id="imageSrc" accept="image/*" placeholder="Upload yor brand image " name="imageSrc" onChange={fileupload} required />
                                 </div>
+                                <span className="text-danger">{imageFileError}</span>
                             </div>
 
 
@@ -100,8 +129,7 @@ const CarBrandIndex = () => {
                         <p style={{ fontStyle: 'italic' }}>Upload images for Car Brand</p>
                     </div>
                 </div>
-                <ToastContainer/>
-
+                <ToastContainer />
             </div>
         </>
     )

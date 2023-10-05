@@ -4,7 +4,7 @@ import { UserContext } from '../Context/userContext';
 import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import Gpay from '../Payment/Gpay';
+import Paypal from '../Payment/PayPal';
 
 export const CarDetails = () => {
   const { FuelDetails, CarDetails, BrandDetails, ServiceDetails, userDetails, userName, uEmail } = useContext(
@@ -14,7 +14,7 @@ export const CarDetails = () => {
   const navigate = useNavigate();
 
   const handlepayment = () => {
-    navigate('/Gpay');
+    navigate('/Paypal');
   }
 
 
@@ -44,6 +44,7 @@ export const CarDetails = () => {
                 <h3>Fuel Details</h3>
                 <p>Fuel Name: {FuelDetails.fuelName}</p>
                 <button className='btn bg-black text-white' onClick={handlepayment}>PayNow</button>
+                {/* <Paypal /> */}
               </div>
             </div>
           </div>

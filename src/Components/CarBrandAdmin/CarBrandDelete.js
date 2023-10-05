@@ -1,5 +1,5 @@
 import React from 'react'
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import { useContext } from 'react';
@@ -8,7 +8,7 @@ import { UserContext } from '../Context/userContext';
 export const CarBrandDelete = () => {
     const { brandid } = useParams();
     const { userDetails, setuserDetails } = useContext(UserContext);
-
+    const Navigate = useNavigate();
 
     const handleDelete = async (e) => {
         e.preventDefault();
@@ -21,20 +21,21 @@ export const CarBrandDelete = () => {
                     'Authorization': `Bearer ${userDetails.tokenResult}`,
                 },
             });
+            toast.success('Successfully created !', {
+                position: 'top-right',
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                className: 'error-success',
+            });
+            Navigate('/CarBrandDataTable');
+            // const result = await response.data;
+            // if (result) {
 
-            const result = await response.data;
-            if (result) {
-                toast.success('Successfully created !', {
-                    position: 'top-right',
-                    autoClose: 3000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    className: 'error-success',
-                });
-            }
+            // }
         } catch (error) {
             console.log(error);
             toast.error('Error occurred while Deleting !', {
@@ -53,11 +54,10 @@ export const CarBrandDelete = () => {
 
 
     return (
-        <div>
-            <p>Are you sure you want to delete this id</p>
-            <button className='btn' onClick={handleDelete}>Delete</button>
-            <ToastContainer/>
-
+        <div className='container-fluid d-flex justify-content-center mt-5'>
+            <h3>Are you sure you want to delete this id</h3>
+            <button className='btn mt-5 text-white' onClick={handleDelete} style={{ backgroundColor: 'black' }}>Delete</button>
+            <ToastContainer />
         </div>
     )
 }

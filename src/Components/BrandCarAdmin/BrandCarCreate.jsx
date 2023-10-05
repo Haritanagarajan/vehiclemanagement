@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState, useEffect,useContext } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import axios from 'axios';
@@ -19,8 +19,46 @@ const BrandCarCreate = () => {
     const [imageFile, setImageFile] = useState(null);
     const [brandOptions, setBrandOptions] = useState([]);
     const { userDetails, setuserDetails } = useContext(UserContext);
+    const [carNameError, setCarNameError] = useState('');
+    const [addAmountError, setAddAmountError] = useState('');
+    const [brandIdError, setBrandIdError] = useState('');
+    const [imageFileError, setImageFileError] = useState('');
+    const Navigate = useNavigate();
 
 
+    const validateForm = () => {
+        let isValid = true;
+
+        if (!carName) {
+            setCarNameError('Please enter carName');
+            isValid = false;
+        } else {
+            setCarNameError('');
+        }
+
+        if (!addAmount) {
+            setAddAmountError('Please enter addAmount');
+            isValid = false;
+        } else {
+            setAddAmountError('');
+        }
+
+        if (!brandid) {
+            setBrandIdError('Please choose a Brand');
+            isValid = false;
+        } else {
+            setBrandIdError('');
+        }
+
+        if (!imageFile) {
+            setImageFileError('Please upload an image');
+            isValid = false;
+        } else {
+            setImageFileError('');
+        }
+
+        return isValid;
+    };
     const fileupload = (e) => {
         setImageFile(e.target.files[0]);
     };
@@ -28,21 +66,26 @@ const BrandCarCreate = () => {
 
     const handleUpload = async (e) => {
         e.preventDefault();
-        const formData = new FormData();
-        formData.append('brandid', brandid);
-        formData.append('carName', carName);
-        formData.append('addAmount', addAmount);
-        formData.append('imageFile', imageFile);
+        if (validateForm()) {
+            if (!brandid) {
+                setBrandIdError('Please choose a Brand');
+                return;
+            }
+            const formData = new FormData();
+            formData.append('brandid', brandid);
+            formData.append('carName', carName);
+            formData.append('addAmount', addAmount);
+            formData.append('imageFile', imageFile);
 
-        try {
-            const response = await axios.post(`https://localhost:7229/api/BrandCars/PostBrandCar`, formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                },
-            });
+            try {
+                const response = await axios.post(`https://localhost:7229/api/BrandCars/PostBrandCar`, formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                        'Authorization': `Bearer ${userDetails.tokenResult}`,
 
-            const result = await response.data;
-            if (result) {
+                    },
+                });
+                Navigate('/BrandCarDataTable')
                 toast.success('successfully created!', {
                     position: 'top-right',
                     autoClose: 3000,
@@ -52,21 +95,25 @@ const BrandCarCreate = () => {
                     draggable: true,
                     progress: undefined,
                     className: 'error-success',
-                  });
+                });
+                // const result = await response.data;
+                // if (result) {
+
+                // }
+            } catch (error) {
+                console.log(error);
+                toast.error('Error occurred while creating !', {
+                    position: 'top-right',
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    className: 'error-success',
+                });
+                throw error;
             }
-        } catch (error) {
-            console.log(error);
-            toast.error('Error occurred while creating !', {
-                position: 'top-right',
-                autoClose: 3000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                className: 'error-success',
-              });
-            throw error;
         }
     };
 
@@ -100,10 +147,10 @@ const BrandCarCreate = () => {
                 console.error(error);
             }
         };
-    
+
         fetchData();
     }, []);
-    
+
 
 
     return (
@@ -117,7 +164,8 @@ const BrandCarCreate = () => {
                             <div class="form-group registerform">
                                 <label class="control-label col-sm-2" for="carName">CarName:</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="carName" placeholder="Enter carName" name="carName" value={carName} onChange={(e) => setcarName(e.target.value)} required />
+                                    <input type="text" class="form-control" id="carName" placeholder="Enter carName" name="carName" value={carName} onChange={(e) => setcarName(e.target.value)} />
+                                    <span className="text-danger">{carNameError}</span>
                                 </div>
                             </div>
 
@@ -131,7 +179,6 @@ const BrandCarCreate = () => {
                                             name="brandid"
                                             value={brandid}
                                             onChange={(e) => setbrandid(e.target.value)}
-                                            required
                                         >
                                             {console.log(brandid)}
                                             <option value="" disabled>Select a Brand ID</option>
@@ -142,22 +189,25 @@ const BrandCarCreate = () => {
                                             ))}
                                         </select>
                                     </div>
+                                    <span className="text-danger">{brandIdError}</span>
                                 </div>
                             )}
 
                             <div class="form-group registerform">
                                 <label class="control-label col-sm-2" for="addAmount">addAmount:</label>
                                 <div class="col-sm-10">
-                                    <input type="number" class="form-control" id="carName" placeholder="Enter addAmount" name="addAmount" value={addAmount} onChange={(e) => setaddAmount(e.target.value)} required />
+                                    <input type="number" class="form-control" id="carName" placeholder="Enter addAmount" name="addAmount" value={addAmount} onChange={(e) => setaddAmount(e.target.value)} />
                                 </div>
+                                <span className="text-danger">{addAmountError}</span>
                             </div>
 
 
                             <div class="form-group registerform" >
                                 <label class="control-label col-sm-2" for="imageSrc">File Upload:</label>
                                 <div class="col-sm-10">
-                                    <input type="file" class="form-control" id="imageSrc" accept="image/*" placeholder="Upload yor brand image " name="imageSrc" onChange={fileupload} required />
+                                    <input type="file" class="form-control" id="imageSrc" accept="image/*" placeholder="Upload yor brand image " name="imageSrc" onChange={fileupload} />
                                 </div>
+                                <span className="text-danger">{imageFileError}</span>
                             </div>
 
 
@@ -172,7 +222,7 @@ const BrandCarCreate = () => {
                         <p style={{ fontStyle: 'italic' }}>Upload images for Car Brand</p>
                     </div>
                 </div >
-                <ToastContainer/>
+                <ToastContainer />
             </div >
         </>
     )

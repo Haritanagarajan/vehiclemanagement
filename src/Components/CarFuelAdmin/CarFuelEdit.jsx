@@ -11,6 +11,10 @@ export const CarFuelEdit = () => {
     const [imageFile, setImageFile] = useState(null);
     const { fuelid } = useParams();
     const { userDetails, setuserDetails } = useContext(UserContext);
+    const [fuelNameError, setFuelNameError] = useState('');
+    const [imageFileError, setImageFileError] = useState('');
+
+    const Navigate = useNavigate();
 
     console.log(fuelid)
 
@@ -18,9 +22,32 @@ export const CarFuelEdit = () => {
         setImageFile(e.target.files[0]);
     };
 
+    const validateForm = () => {
+        let isValid = true;
+
+        // Validate fuelName
+        if (!fuelName) {
+            setFuelNameError('Please enter fuelName');
+            isValid = false;
+        } else {
+            setFuelNameError('');
+        }
+
+        // Validate imageFile
+        if (!imageFile) {
+            setImageFileError('Please upload an image');
+            isValid = false;
+        } else {
+            setImageFileError('');
+        }
+
+        return isValid;
+    };
+
 
     const handleUpload = async (e) => {
         e.preventDefault();
+        if (validateForm()) {
         const formData = new FormData();
         formData.append('fuelName', fuelName);
         formData.append('imageFile', imageFile);
@@ -35,20 +62,22 @@ export const CarFuelEdit = () => {
 
                 },
             });
+            toast.success('successfully edited !', {
+                position: 'top-right',
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                className: 'error-success',
+            });
+            Navigate('/CarFuelDataTable');
+            // const result = await response.data;
+            // if (result.Status === 200) {
 
-            const result = await response.data;
-            if (result.Status === 200) {
-                toast.success('successfully edited !', {
-                    position: 'top-right',
-                    autoClose: 3000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    className: 'error-success',
-                });
-            }
+
+            // }
         } catch (error) {
             console.log(error);
             toast.error('Error occurred while editing !', {
@@ -63,6 +92,7 @@ export const CarFuelEdit = () => {
             });
             throw error;
         }
+    }
     };
 
 
@@ -79,6 +109,7 @@ export const CarFuelEdit = () => {
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" id="fuelName" placeholder="Enter fuelName" name="fuelName" value={fuelName} onChange={(e) => setfuelName(e.target.value)} required />
                                 </div>
+                                <span className="text-danger">{fuelNameError}</span>
                             </div>
 
 
@@ -88,6 +119,7 @@ export const CarFuelEdit = () => {
                                 <div class="col-sm-10">
                                     <input type="file" class="form-control" id="imageSrc" accept="image/*" placeholder="Upload yor brand image " name="imageSrc" onChange={fileupload} required />
                                 </div>
+                                <span className="text-danger">{imageFileError}</span>
                             </div>
 
 
@@ -102,7 +134,7 @@ export const CarFuelEdit = () => {
                         <p style={{ fontStyle: 'italic' }}>Upload images for Car Brand</p>
                     </div>
                 </div>
-                <ToastContainer/>
+                <ToastContainer />
 
             </div>
         </>

@@ -42,13 +42,13 @@ const BrandCarDataTable = () => {
         {
             name: 'Edit',
             cell: (row) => (
-                <Link to={`/BrandCarEdit/${row.carid}`}>Edit</Link>
+                <Link to={`/BrandCarEdit/${row.carid}`}><i class="fa-solid fa-pen-to-square" style={{ color: 'black' }}></i></Link>
             ),
         },
         {
             name: 'Delete',
             cell: (row) => (
-                <Link to={`/BrandCarDelete/${row.carid}`}>Delete</Link>
+                <Link to={`/BrandCarDelete/${row.carid}`}><i class="fa-solid fa-trash" style={{ color: 'black' }}></i></Link>
             ),
         },
     ];
@@ -112,7 +112,7 @@ const BrandCarDataTable = () => {
 
     return (
         <div className='container mb-3'>
-            <h1 className='blogs text-center mt-5'>Car Brands</h1>
+            <h1 className='blogs text-center mt-5'>Brand Cars</h1>
             <input
                 type='text'
                 className='form-control mb-3'
@@ -135,7 +135,7 @@ const BrandCarDataTable = () => {
                     Create
                 </Link>
             </div>
-            <ToastContainer/>
+            <ToastContainer />
 
         </div>
     );

@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState, useEffect ,useContext} from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import axios from 'axios';
@@ -9,30 +9,50 @@ const CarFuelCreate = () => {
     const [fuelName, setfuelName] = useState();
     const [imageFile, setImageFile] = useState(null);
     const { userDetails, setuserDetails } = useContext(UserContext);
-
-
+    const [fuelNameError, setFuelNameError] = useState('');
+    const [imageFileError, setImageFileError] = useState('');
+    const Navigate = useNavigate();
     const fileupload = (e) => {
         setImageFile(e.target.files[0]);
     };
 
+    const validateForm = () => {
+        let isValid = true;
+
+        // Validate fuelName
+        if (!fuelName) {
+            setFuelNameError('Please enter fuelName');
+            isValid = false;
+        } else {
+            setFuelNameError('');
+        }
+
+        // Validate imageFile
+        if (!imageFile) {
+            setImageFileError('Please upload an image');
+            isValid = false;
+        } else {
+            setImageFileError('');
+        }
+
+        return isValid;
+    };
 
     const handleUpload = async (e) => {
         e.preventDefault();
-        const formData = new FormData();
-        formData.append('fuelName', fuelName);
-        formData.append('imageFile', imageFile);
+        if (validateForm()) {
+            const formData = new FormData();
+            formData.append('fuelName', fuelName);
+            formData.append('imageFile', imageFile);
 
-        try {
-            const response = await axios.post("https://localhost:7229/api/CarFuels/PostCarFuel", formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                    'Authorization': `Bearer ${userDetails.tokenResult}`,
+            try {
+                const response = await axios.post("https://localhost:7229/api/CarFuels/PostCarFuel", formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                        'Authorization': `Bearer ${userDetails.tokenResult}`,
 
-                },
-            });
-
-            const result = await response.data;
-            if (result.Status === 200) {
+                    },
+                });
                 toast.success('successfully created !', {
                     position: 'top-right',
                     autoClose: 3000,
@@ -42,20 +62,26 @@ const CarFuelCreate = () => {
                     draggable: true,
                     progress: undefined,
                     className: 'error-success',
-                  });            }
-        } catch (error) {
-            console.log(error);
-            toast.error('Error occurred while creating !', {
-                position: 'top-right',
-                autoClose: 3000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                className: 'error-success',
-              });
-            throw error;
+                });
+                Navigate('/CarFuelDataTable');
+                // const result = await response.data;
+                // if (result.Status === 200) {
+
+                // }
+            } catch (error) {
+                console.log(error);
+                toast.error('Error occurred while creating !', {
+                    position: 'top-right',
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    className: 'error-success',
+                });
+                throw error;
+            }
         }
     };
 
@@ -77,6 +103,7 @@ const CarFuelCreate = () => {
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" id="fuelName" placeholder="Enter fuelName" name="brandName" value={fuelName} onChange={(e) => setfuelName(e.target.value)} required />
                                 </div>
+                                <span className="text-danger">{fuelNameError}</span>
                             </div>
 
 
@@ -86,6 +113,7 @@ const CarFuelCreate = () => {
                                 <div class="col-sm-10">
                                     <input type="file" class="form-control" id="imageSrc" accept="image/*" placeholder="Upload yor brand image " name="imageSrc" onChange={fileupload} required />
                                 </div>
+                                <span className="text-danger">{imageFileError}</span>
                             </div>
 
 
@@ -100,7 +128,7 @@ const CarFuelCreate = () => {
                         <p style={{ fontStyle: 'italic' }}>Upload images for Car Brand</p>
                     </div>
                 </div>
-                <ToastContainer/>
+                <ToastContainer />
 
             </div>
         </>

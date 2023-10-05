@@ -20,7 +20,45 @@ const BrandCarEdit = () => {
     const [brandOptions, setBrandOptions] = useState([]);
     const { carid } = useParams();
     const { userDetails, setuserDetails } = useContext(UserContext);
+    const [carNameError, setCarNameError] = useState('');
+    const [addAmountError, setAddAmountError] = useState('');
+    const [brandIdError, setBrandIdError] = useState('');
+    const [imageFileError, setImageFileError] = useState('');
+    const Navigate = useNavigate();
 
+    const validateForm = () => {
+        let isValid = true;
+
+        if (!carName) {
+            setCarNameError('Please enter carName');
+            isValid = false;
+        } else {
+            setCarNameError('');
+        }
+
+        if (!addAmount) {
+            setAddAmountError('Please enter addAmount');
+            isValid = false;
+        } else {
+            setAddAmountError('');
+        }
+
+        if (!brandid) {
+            setBrandIdError('Please choose a Brand');
+            isValid = false;
+        } else {
+            setBrandIdError('');
+        }
+
+        if (!imageFile) {
+            setImageFileError('Please upload an image');
+            isValid = false;
+        } else {
+            setImageFileError('');
+        }
+
+        return isValid;
+    };
 
     const fileupload = (e) => {
         setImageFile(e.target.files[0]);
@@ -29,53 +67,26 @@ const BrandCarEdit = () => {
 
     const handleUpload = async (e) => {
         e.preventDefault();
-        const formData = new FormData();
-        formData.append('carid', carid);
-        formData.append('brandid', brandid);
-        formData.append('carName', carName);
-        formData.append('addAmount', addAmount);
-        formData.append('imageFile', imageFile);
-
-        try {
-            const response = await axios.put(`https://localhost:7229/api/BrandCars/PutBrandCar/${carid}`, formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                    'Authorization': `Bearer ${userDetails.tokenResult}`,
-                },
-            });
-
-            const result = await response.data;
-            if (result.Status === 200) {
-                toast.success("File uploaded");
+        if (validateForm()) {
+            if (!brandid) {
+                setBrandIdError('Please choose a Brand');
+                return;
             }
-        } catch (error) {
-            console.log(error);
-            throw error;
-        }
-    };
+            const formData = new FormData();
+            formData.append('carid', carid);
+            formData.append('brandid', brandid);
+            formData.append('carName', carName);
+            formData.append('addAmount', addAmount);
+            formData.append('imageFile', imageFile);
 
-
-    useEffect(() => {
-        const fetchData = async () => {
             try {
-                const response = await axios.get(`https://localhost:7229/api/CarBrands1/GetCarBrands`);
-                const result = response.data;
-                if (result) {
-                    toast.success('Successfully Edited !', {
-                        position: 'top-right',
-                        autoClose: 3000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined,
-                        className: 'error-success',
-                    });
-                }
-                setBrandOptions(result);
-            } catch (error) {
-                console.error(error);
-                toast.error('Error occurred while editing !', {
+                const response = await axios.put(`https://localhost:7229/api/BrandCars/PutBrandCar/${carid}`, formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                        'Authorization': `Bearer ${userDetails.tokenResult}`,
+                    },
+                });
+                toast.success('successfully edited!', {
                     position: 'top-right',
                     autoClose: 3000,
                     hideProgressBar: false,
@@ -84,7 +95,33 @@ const BrandCarEdit = () => {
                     draggable: true,
                     progress: undefined,
                     className: 'error-success',
-                  });
+                });
+                Navigate('/BrandCarDataTable')
+                // const result = await response.data;
+                // if (result.Status === 200) {
+
+                // }
+            } catch (error) {
+                console.log(error);
+                throw error;
+            }
+        }
+
+    };
+
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get(`https://localhost:7229/api/CarBrands1/GetCarBrands`, {
+                    headers: {
+                        'Authorization': `Bearer ${userDetails.tokenResult}`,
+                    }
+                });
+                const result = response.data;
+                setBrandOptions(result);
+            } catch (error) {
+                console.error(error);
             }
         };
 
@@ -104,8 +141,9 @@ const BrandCarEdit = () => {
                             <div class="form-group registerform">
                                 <label class="control-label col-sm-2" for="carName">CarName:</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="carName" placeholder="Enter carName" name="carName" value={carName} onChange={(e) => setcarName(e.target.value)} required />
+                                    <input type="text" class="form-control" id="carName" placeholder="Enter carName" name="carName" value={carName} onChange={(e) => setcarName(e.target.value)} />
                                 </div>
+                                <span className="text-danger">{carNameError}</span>
                             </div>
 
                             {brandOptions && brandOptions.length > 0 && (
@@ -118,7 +156,6 @@ const BrandCarEdit = () => {
                                             name="brandid"
                                             value={brandid}
                                             onChange={(e) => setbrandid(e.target.value)}
-                                            required
                                         >
                                             {console.log(brandid)}
                                             <option value="" disabled>Select a Brand ID</option>
@@ -128,6 +165,7 @@ const BrandCarEdit = () => {
                                                 </option>
                                             ))}
                                         </select>
+                                        <span className="text-danger">{brandIdError}</span>
                                     </div>
                                 </div>
                             )}
@@ -135,16 +173,18 @@ const BrandCarEdit = () => {
                             <div class="form-group registerform">
                                 <label class="control-label col-sm-2" for="addAmount">addAmount:</label>
                                 <div class="col-sm-10">
-                                    <input type="number" class="form-control" id="carName" placeholder="Enter addAmount" name="addAmount" value={addAmount} onChange={(e) => setaddAmount(e.target.value)} required />
+                                    <input type="number" class="form-control" id="carName" placeholder="Enter addAmount" name="addAmount" value={addAmount} onChange={(e) => setaddAmount(e.target.value)} />
                                 </div>
+                                <span className="text-danger">{addAmountError}</span>
                             </div>
 
 
                             <div class="form-group registerform" >
                                 <label class="control-label col-sm-2" for="imageFile">File Upload:</label>
                                 <div class="col-sm-10">
-                                    <input type="file" class="form-control" id="imageFile" accept="image/*" placeholder="Upload yor brand image " name="imageFile" onChange={fileupload} required />
+                                    <input type="file" class="form-control" id="imageFile" accept="image/*" placeholder="Upload yor brand image " name="imageFile" onChange={fileupload} />
                                 </div>
+                                <span className="text-danger">{imageFileError}</span>
                             </div>
 
 
@@ -159,7 +199,7 @@ const BrandCarEdit = () => {
                         <p style={{ fontStyle: 'italic' }}>Upload images for Car Brand</p>
                     </div>
                 </div >
-                <ToastContainer/>
+                <ToastContainer />
 
             </div >
         </>

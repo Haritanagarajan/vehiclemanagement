@@ -35,13 +35,13 @@ export default function CarFuelDataTable() {
         {
             name: 'Edit',
             cell: (row) => (
-                <Link to={`/CarFuelEdit/${row.fuelid}`}>Edit</Link>
+                <Link to={`/CarFuelEdit/${row.fuelid}`}><i class="fa-solid fa-pen-to-square" style={{ color: 'black' }}></i></Link>
             ),
         },
         {
             name: 'Delete',
             cell: (row) => (
-                <Link to={`/CarFuelDelete/${row.fuelid}`}>Delete</Link>
+                <Link to={`/CarFuelDelete/${row.fuelid}`}><i class="fa-solid fa-trash" style={{ color: 'black' }}></i></Link>
             ),
         },
 
@@ -102,7 +102,7 @@ export default function CarFuelDataTable() {
 
     return (
         <div className="container mt-5 text-center">
-            <h1>Car Fuel Data List</h1>
+            <h1>Car Fuel</h1>
             <DataTable
                 columns={columns}
                 data={filter}
@@ -125,7 +125,11 @@ export default function CarFuelDataTable() {
                 customStyles={tableHeaderStyle}
             />
             <ToastContainer />
-
+            <div className='text-center'>
+                <Link to='/CarFuelCreate' className='btn btn-primary'>
+                    Create
+                </Link>
+            </div>
         </div>
     );
 }

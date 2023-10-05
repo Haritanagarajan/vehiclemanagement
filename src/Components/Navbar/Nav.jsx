@@ -73,7 +73,7 @@ function Nav() {
       className: 'error-success',
     });
     navigate('/Login');
-    // window.location.reload();
+    window.location.reload();
   }
 
   return (

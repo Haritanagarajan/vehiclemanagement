@@ -1,7 +1,7 @@
 import React from 'react'
 import loginimage from '../Assets/loginimage.jpg';
 import '../Styles/Register.css';
-import { useState, useEffect,useContext } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import { UserContext } from '../Context/userContext';

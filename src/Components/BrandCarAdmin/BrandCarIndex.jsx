@@ -96,7 +96,7 @@ const BrandCarIndex = () => {
             <div className='text-center'>
                 <Link to="/BrandCarCreate" className='btn btn-primary'>Create</Link>
             </div>
-            <ToastContainer/>
+            <ToastContainer />
 
         </div>
     );

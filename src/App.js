@@ -37,6 +37,7 @@ import { AccessDenied } from './Components/AccessDenied/AccessDenied';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Thankyou } from './Components/Thanyou/Thankyou';
+import Paypal from './Components/Payment/PayPal';
 
 function App() {
   const [role, setRole] = useState(null);
@@ -57,8 +58,8 @@ function App() {
         <Routes>
           <Route exact path='/Register' element={<Register />} />
           <Route exact path='/Login' element={<Login />} />
-          <Route path='*' element={<AccessDenied />} />
           <Route exact path='/Home' element={<Home />} />
+          <Route path='*' element={<AccessDenied />} />
 
 
           {role == 'Customer' ? (
@@ -72,6 +73,9 @@ function App() {
               <Route path='/Thankyou' element={<Thankyou />} />
               <Route exact path='/Razorpays' element={<Razorpays />} />
               <Route exact path='/Gpay' element={<Gpay />} />
+              <Route exact path='/Paypal' element={<Paypal />} />
+
+              {/* <Route path='*' element={<AccessDenied />} /> */}
             </>
           ) : null}
 
@@ -101,7 +105,7 @@ function App() {
               <Route exact path='/BrandCarDataTable' element={<BrandCarDataTable />} />
               <Route exact path='/CarBrandDataTable' element={<CarBrandDataTable />} />
               <Route exact path='/Razorpays' element={<Razorpays />} />
-              <Route path='*' element={<AccessDenied />} />
+              {/* <Route path='*' element={<AccessDenied />} /> */}
             </>
           ) : null}
 
