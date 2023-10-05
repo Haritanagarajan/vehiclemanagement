@@ -22,11 +22,30 @@ export const BrandCarDelete = () => {
             });
 
             const result = await response.data;
-            if (result.Status === 200) {
-                toast.success("File uploaded");
+            if (result) {
+                toast.success('Deleted successful!', {
+                    position: 'top-right',
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    className: 'error-success',
+                });
             }
         } catch (error) {
             console.log(error);
+            toast.error('Error occurred while Deleting !', {
+                position: 'top-right',
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                className: 'error-success',
+            });
             throw error;
         }
     };
@@ -36,6 +55,8 @@ export const BrandCarDelete = () => {
         <div>
             <p>Are you sure you want to delete this id</p>
             <button className='btn' onClick={handleDelete}>Delete</button>
+            <ToastContainer/>
+
         </div>
     )
 }

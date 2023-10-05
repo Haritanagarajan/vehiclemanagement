@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState, useEffect,useContext } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import axios from 'axios';
@@ -8,21 +8,21 @@ import { UserContext } from '../Context/userContext';
 const CarBrandCreate = () => {
     const [brandName, setbrandName] = useState();
     const [imageSrc, setimageSrc] = useState();
-    const [imageFile, setImageFile] = useState(null); 
+    const [imageFile, setImageFile] = useState(null);
     const { userDetails, setuserDetails } = useContext(UserContext);
 
 
     const fileupload = (e) => {
-        setImageFile(e.target.files[0]); 
+        setImageFile(e.target.files[0]);
     };
-    
+
 
     const handleUpload = async (e) => {
         e.preventDefault();
         const formData = new FormData();
         formData.append('brandName', brandName);
-        formData.append('imageFile', imageFile); 
-    
+        formData.append('imageFile', imageFile);
+
         try {
             const response = await axios.post("https://localhost:7229/api/CarBrands1/PostCarBrand", formData, {
                 headers: {
@@ -30,13 +30,32 @@ const CarBrandCreate = () => {
                     Authorization: `Bearer ${userDetails.tokenResult}`,
                 },
             });
-    
+
             const result = await response.data;
-            if (result.Status === 200) {
-                toast.success("File uploaded");
+            if (result) {
+                toast.success('successfully created !', {
+                    position: 'top-right',
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    className: 'error-success',
+                });
             }
         } catch (error) {
             console.log(error);
+            toast.error('Error occurred while creating !', {
+                position: 'top-right',
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                className: 'error-success',
+              });
             throw error;
         }
     };
@@ -66,7 +85,7 @@ const CarBrandCreate = () => {
                             <div class="form-group registerform" >
                                 <label class="control-label col-sm-2" for="imageSrc">File Upload:</label>
                                 <div class="col-sm-10">
-                                    <input type="file" class="form-control" id="imageSrc" accept="image/*"  placeholder="Upload yor brand image " name="imageSrc" onChange={fileupload} required />
+                                    <input type="file" class="form-control" id="imageSrc" accept="image/*" placeholder="Upload yor brand image " name="imageSrc" onChange={fileupload} required />
                                 </div>
                             </div>
 

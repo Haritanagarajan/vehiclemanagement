@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState, useEffect,useContext } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import axios from 'axios';
@@ -30,18 +30,37 @@ export const CarFuelEdit = () => {
             const response = await axios.put(`https://localhost:7229/api/CarFuels/PutCarFuel/${fuelid}`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
-                   
-                        'Authorization': `Bearer ${userDetails.tokenResult}`,
-                  
+
+                    'Authorization': `Bearer ${userDetails.tokenResult}`,
+
                 },
             });
 
             const result = await response.data;
             if (result.Status === 200) {
-                toast.success("File uploaded");
+                toast.success('successfully edited !', {
+                    position: 'top-right',
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    className: 'error-success',
+                });
             }
         } catch (error) {
             console.log(error);
+            toast.error('Error occurred while editing !', {
+                position: 'top-right',
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                className: 'error-success',
+            });
             throw error;
         }
     };
@@ -83,6 +102,8 @@ export const CarFuelEdit = () => {
                         <p style={{ fontStyle: 'italic' }}>Upload images for Car Brand</p>
                     </div>
                 </div>
+                <ToastContainer/>
+
             </div>
         </>
     )

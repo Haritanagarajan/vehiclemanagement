@@ -1,9 +1,10 @@
 import React from "react";
 import DataTable from "react-data-table-component";
-import { useState, useEffect,useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { UserContext } from '../Context/userContext';
+import { ToastContainer, toast } from 'react-toastify';
 
 export default function CarFuelDataTable() {
     const { userDetails, setuserDetails } = useContext(UserContext);
@@ -63,6 +64,16 @@ export default function CarFuelDataTable() {
             setFilter(result);
         } catch (error) {
             console.error(error);
+            toast.error('Error occurred while fetching !', {
+                position: 'top-right',
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                className: 'error-success',
+            });
         }
     };
 
@@ -113,6 +124,8 @@ export default function CarFuelDataTable() {
                 subHeaderAlign="right"
                 customStyles={tableHeaderStyle}
             />
+            <ToastContainer />
+
         </div>
     );
 }

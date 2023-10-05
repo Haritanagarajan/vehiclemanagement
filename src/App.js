@@ -37,7 +37,6 @@ import { AccessDenied } from './Components/AccessDenied/AccessDenied';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Thankyou } from './Components/Thanyou/Thankyou';
-import { Razorpays } from './Components/RazorPay/Razorpays';
 
 function App() {
   const [role, setRole] = useState(null);

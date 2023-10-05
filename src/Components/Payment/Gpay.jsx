@@ -170,7 +170,7 @@ export const Gpay = () => {
                         transactionInfo: {
                             totalPriceStatus: 'FINAL',
                             totalPriceLabel: 'Total',
-                            totalPrice: '100',
+                            totalPrice: `${ServiceDetails.servicecost}`,
                             currencyCode: 'USD',
                             countryCode: 'US',
                         },

@@ -25,10 +25,28 @@ export const CarFuelDelete = () => {
 
             const result = await response.data;
             if (result.Status === 200) {
-                toast.success("File uploaded");
-            }
+                toast.success('successfully deleted !', {
+                    position: 'top-right',
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    className: 'error-success',
+                  });            }
         } catch (error) {
             console.log(error);
+            toast.error('Error occurred while deleting !', {
+                position: 'top-right',
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                className: 'error-success',
+              });
             throw error;
         }
     };
@@ -38,6 +56,8 @@ export const CarFuelDelete = () => {
         <div>
             <p>Are you sure you want to delete this id</p>
             <button className='btn' onClick={handleDelete}>Delete</button>
+            <ToastContainer/>
+
         </div>
     )
 }

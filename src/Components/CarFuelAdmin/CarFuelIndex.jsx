@@ -1,7 +1,8 @@
-import React, { useEffect, useState ,useContext} from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { UserContext } from '../Context/userContext';
+import { ToastContainer, toast } from 'react-toastify';
 
 const CarFuelIndex = () => {
     const [carFuel, setcarFuel] = useState([]);
@@ -29,10 +30,20 @@ const CarFuelIndex = () => {
             setcarFuel(result);
         } catch (error) {
             console.log(error);
+            toast.error('Error occurred while fetching !', {
+                position: 'top-right',
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                className: 'error-success',
+            });
             throw error;
         }
     };
-    
+
 
     useEffect(() => {
         fetchData();
@@ -84,6 +95,8 @@ const CarFuelIndex = () => {
             <div className='text-center'>
                 <Link to="/CarFuelCreate" className='btn btn-primary'>Create</Link>
             </div>
+            <ToastContainer/>
+
         </div>
     );
 };

@@ -33,10 +33,28 @@ const CarFuelCreate = () => {
 
             const result = await response.data;
             if (result.Status === 200) {
-                toast.success("File uploaded");
-            }
+                toast.success('successfully created !', {
+                    position: 'top-right',
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    className: 'error-success',
+                  });            }
         } catch (error) {
             console.log(error);
+            toast.error('Error occurred while creating !', {
+                position: 'top-right',
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                className: 'error-success',
+              });
             throw error;
         }
     };
@@ -82,6 +100,8 @@ const CarFuelCreate = () => {
                         <p style={{ fontStyle: 'italic' }}>Upload images for Car Brand</p>
                     </div>
                 </div>
+                <ToastContainer/>
+
             </div>
         </>
     )

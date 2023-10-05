@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState, useEffect,useContext } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import axios from 'axios';
@@ -60,9 +60,31 @@ const BrandCarEdit = () => {
             try {
                 const response = await axios.get(`https://localhost:7229/api/CarBrands1/GetCarBrands`);
                 const result = response.data;
+                if (result) {
+                    toast.success('Successfully Edited !', {
+                        position: 'top-right',
+                        autoClose: 3000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        className: 'error-success',
+                    });
+                }
                 setBrandOptions(result);
             } catch (error) {
                 console.error(error);
+                toast.error('Error occurred while editing !', {
+                    position: 'top-right',
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    className: 'error-success',
+                  });
             }
         };
 
@@ -137,6 +159,8 @@ const BrandCarEdit = () => {
                         <p style={{ fontStyle: 'italic' }}>Upload images for Car Brand</p>
                     </div>
                 </div >
+                <ToastContainer/>
+
             </div >
         </>
     )

@@ -1,7 +1,8 @@
-import React, { useEffect, useState,useContext } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { UserContext } from '../Context/userContext';
+import { ToastContainer, toast } from 'react-toastify';
 
 export const CarServiceIndex = () => {
     const [Carservice, setCarservice] = useState([]);
@@ -31,7 +32,7 @@ export const CarServiceIndex = () => {
             throw error;
         }
     };
-    
+
 
     useEffect(() => {
         fetchData();
@@ -87,6 +88,8 @@ export const CarServiceIndex = () => {
             <div className='text-center'>
                 <Link to="/CarServiceCreate" className='btn btn-primary'>Create</Link>
             </div>
+            <ToastContainer />
+
         </div>
     );
 };
