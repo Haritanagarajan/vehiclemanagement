@@ -5,10 +5,8 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { UserContext } from '../Context/userContext';
 import { ToastContainer, toast } from 'react-toastify';
-
 export default function CarFuelDataTable() {
     const { userDetails, setuserDetails } = useContext(UserContext);
-
     const columns = [
         {
             name: 'Fuel ID',
@@ -46,11 +44,9 @@ export default function CarFuelDataTable() {
         },
 
     ];
-
     const [data, setData] = useState([]);
     const [search, setSearch] = useState('');
     const [filter, setFilter] = useState([]);
-
     const fetchData = async () => {
         try {
             const response = await axios.get(
@@ -76,20 +72,15 @@ export default function CarFuelDataTable() {
             });
         }
     };
-
     useEffect(() => {
         fetchData();
     }, []);
-
     useEffect(() => {
         const result = data.filter((item) =>
             item.fuelName.toLowerCase().includes(search.toLowerCase())
         );
         setFilter(result);
     }, [search]);
-
-
-
     const tableHeaderStyle = {
         headCells: {
             style: {
@@ -99,7 +90,6 @@ export default function CarFuelDataTable() {
             },
         },
     };
-
     return (
         <div className="container mt-5 text-center">
             <h1>Car Fuel</h1>

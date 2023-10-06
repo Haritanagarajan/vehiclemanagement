@@ -4,14 +4,10 @@ import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import { UserContext } from '../Context/userContext';
 import { useContext } from 'react';
-
 export const CarServiceDelete = () => {
     const { serviceid } = useParams();
     const { userDetails, setuserDetails } = useContext(UserContext);
     const Navigate = useNavigate();
-
-
-
     const handleDelete = async (e) => {
         e.preventDefault();
         const formData = new FormData();
@@ -35,10 +31,6 @@ export const CarServiceDelete = () => {
                 className: 'error-success',
             });
             Navigate('/CarServiceDataTable')
-            // const result = await response.data;
-            // if (result.Status === 200) {
-
-            // }
         } catch (error) {
             console.log(error);
             toast.error('Error occurred while deleting !', {
@@ -54,8 +46,6 @@ export const CarServiceDelete = () => {
             throw error;
         }
     };
-
-
     return (
         <div className='container-fluid d-flex justify-content-center mt-5'>
             <h3>Are you sure you want to delete this id</h3>

@@ -5,7 +5,7 @@ import logo from '../Assets/V.gif';
 export const Footer = () => {
     return (
         <>
-            <div class="container-fluid p-0 mt-5">
+            <div class="container-fluid  mt-5">
 
                 <div class="row align-items-center footdiv" >
                     <div class="col-6">

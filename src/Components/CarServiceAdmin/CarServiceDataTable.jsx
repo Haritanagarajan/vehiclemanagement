@@ -1,16 +1,13 @@
-import React, { useEffect, useState,useContext } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import DataTable from 'react-data-table-component';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { UserContext } from '../Context/userContext';
 import { ToastContainer, toast } from 'react-toastify';
-
-
 export const CarServiceDataTable = () => {
     const [carService, setCarService] = useState([]);
     const [search, setSearch] = useState('');
     const { userDetails, setuserDetails } = useContext(UserContext);
-
     const columns = [
         {
             name: 'Service ID',
@@ -55,25 +52,24 @@ export const CarServiceDataTable = () => {
         {
             name: 'Edit',
             cell: (row) => (
-                <Link to={`/CarServiceEdit/${row.serviceid}`}><i class="fa-solid fa-pen-to-square" style={{color:'black'}}></i></Link>
+                <Link to={`/CarServiceEdit/${row.serviceid}`}><i class="fa-solid fa-pen-to-square" style={{ color: 'black' }}></i></Link>
             ),
         },
         {
             name: 'Delete',
             cell: (row) => (
-                <Link to={`/CarServiceDelete/${row.serviceid}`}><i class="fa-solid fa-trash" style={{color:'black'}}></i></Link>
+                <Link to={`/CarServiceDelete/${row.serviceid}`}><i class="fa-solid fa-trash" style={{ color: 'black' }}></i></Link>
             ),
         },
     ];
-
     const fetchData = async () => {
         try {
             const response = await axios.get(
-                'https://localhost:7229/api/CarServices/GetCarServices',{
-                    headers: {
-                        'Authorization': `Bearer ${userDetails.tokenResult}`,
-                    }
+                'https://localhost:7229/api/CarServices/GetCarServices', {
+                headers: {
+                    'Authorization': `Bearer ${userDetails.tokenResult}`,
                 }
+            }
             );
             const result = await response.data;
             setCarService(result);
@@ -88,10 +84,9 @@ export const CarServiceDataTable = () => {
                 draggable: true,
                 progress: undefined,
                 className: 'error-success',
-              });
+            });
         }
     };
-
     useEffect(() => {
         fetchData();
     }, []);
@@ -99,7 +94,6 @@ export const CarServiceDataTable = () => {
     const filteredData = carService.filter((service) =>
         service.serviceName.toLowerCase().includes(search.toLowerCase())
     );
-
     const tableHeaderStyle = {
         headCells: {
             style: {
@@ -109,7 +103,6 @@ export const CarServiceDataTable = () => {
             },
         },
     };
-
     return (
         <div className="container mb-3">
             <h1 className="blogs text-center mt-5">Car Services</h1>
@@ -135,7 +128,7 @@ export const CarServiceDataTable = () => {
                     Create
                 </Link>
             </div>
-            <ToastContainer/>
+            <ToastContainer />
 
         </div>
     );

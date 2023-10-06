@@ -6,29 +6,13 @@ import '../Styles/CarFuel.css';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { UserContext } from '../Context/userContext';
-
 const CarFuel = () => {
     const [CarFuel, setCarFuel] = useState([]);
     const { FuelDetails, setFuelDetails } = useContext(UserContext)
     const { userDetails, setuserDetails } = useContext(UserContext);
-
-
     const handleSaveDetails = (fuel) => {
         setFuelDetails(fuel);
     }
-
-    // const fetchData = async () => {
-    //     try {
-    //         const response = await axios.get(`https://localhost:7229/api/CarFuels/GetCarFuels`)
-    //         const result = await response.data;
-    //         const carfuelarray = Array.isArray(result) ? result : [result];
-    //         setCarFuel(carfuelarray);
-    //     } catch (error) {
-    //         console.log(error);
-    //         throw error;
-    //     }
-    // }
-
     const fetchData = async () => {
         try {
             const response = await axios.get(`https://localhost:7229/api/CarFuels/GetCarFuels`, {
@@ -44,12 +28,9 @@ const CarFuel = () => {
             throw error;
         }
     };
-    
     useEffect(() => {
         fetchData();
     });
-
-
     return (
         <div className='container-fluid carfuel d-flex justify-content-center'>
             <h1 className='blogs text-center pick text-white'>Pick your CarBrands</h1>
@@ -68,8 +49,5 @@ const CarFuel = () => {
         </div>
     );
 };
-
-
-
 
 export default CarFuel;

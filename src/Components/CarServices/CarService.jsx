@@ -4,34 +4,15 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
 import { UserContext } from '../Context/userContext';
-
-
-
 const CarService = () => {
     const [carservice, setcarservice] = useState([]);
     const { carid } = useParams();
     const { ServiceDetails, setServiceDetails } = useContext(UserContext);
     const { userDetails, setuserDetails } = useContext(UserContext);
-
-
     const handleSaveDetails = (services) => {
         setServiceDetails(services);
     }
-
-
     console.log("ServiceDetails", ServiceDetails);
-
-    // const fetchData = async () => {
-    //     try {
-    //         const response = await axios.get(`https://localhost:7229/api/CarServices/GetCarService/${carid}`)
-    //         const result = await response.data;
-    //         const carservicearray = Array.isArray(result) ? result : [result];
-    //         setcarservice(carservicearray);
-    //     } catch (error) {
-    //         console.log(error);
-    //         throw error;
-    //     }
-    // }
     const fetchData = async () => {
         try {
             const response = await axios.get(`https://localhost:7229/api/CarServices/GetCarService/${carid}`, {
@@ -47,12 +28,9 @@ const CarService = () => {
             throw error;
         }
     };
-    
     useEffect(() => {
         fetchData();
     }, []);
-
-
     return (
         <div className='container-fluid carservice'>
             <h1 className='blogs text-center pick text-white '>Pick your CarServices</h1>
@@ -66,7 +44,6 @@ const CarService = () => {
                                 </div>
                                 <div className='card-body  text-center '>
                                     <p>Warranty : {services.warranty}</p>
-                                    {/* <p>carid:{services.carid}</p> */}
                                     <p>SubServices : {services.subservice1}</p>
                                     <p>SubServices : {services.subservice2}</p>
                                     <p>SubServices : {services.subservice3}</p>

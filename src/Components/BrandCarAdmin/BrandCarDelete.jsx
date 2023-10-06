@@ -3,12 +3,10 @@ import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import { UserContext } from '../Context/userContext';
-
 export const BrandCarDelete = () => {
     const { carid } = useParams();
     const { userDetails, setuserDetails } = useContext(UserContext);
     const Navigate = useNavigate();
-
     const handleDelete = async (e) => {
         e.preventDefault();
         const formData = new FormData();
@@ -50,8 +48,6 @@ export const BrandCarDelete = () => {
             throw error;
         }
     };
-
-
     return (
         <div className='container-fluid d-flex justify-content-center mt-5'>
             <h3>Are you sure you want to delete this id</h3>

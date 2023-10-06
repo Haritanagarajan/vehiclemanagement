@@ -3,7 +3,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import axios from 'axios';
 import { UserContext } from '../Context/userContext';
-
 export const CarServiceEdit = () => {
     const [carid, setcarid] = useState('');
     const [serviceName, setserviceName] = useState();
@@ -18,24 +17,18 @@ export const CarServiceEdit = () => {
     const { serviceid } = useParams();
     const { userDetails, setuserDetails } = useContext(UserContext);
     const Navigate = useNavigate();
-
-    const[error,SetError] =useState('')
-
-
-
+    const [error, SetError] = useState('')
     const validateWarranty = () => {
         let isValid = true;
         if (!error) {
             SetError('This field is required');
             isValid = false;
-        } 
+        }
         else {
             SetError('');
         }
         return isValid;
     };
-
-
     const handleUpload = async (e) => {
         e.preventDefault();
         if (validateWarranty()) {
@@ -50,7 +43,6 @@ export const CarServiceEdit = () => {
             formData.append('timeTaken', timeTaken);
             formData.append('servicecost', servicecost);
             formData.append('serviceid', serviceid);
-
             try {
                 const response = await axios.put(`https://localhost:7229/api/CarServices/PutCarService/${serviceid}`, formData, {
                     headers: {
@@ -70,11 +62,6 @@ export const CarServiceEdit = () => {
                     className: 'error-success',
                 });
                 Navigate('/CarServiceDataTable')
-
-                // const result = await response.data;
-                // if (result.Status === 200) {
-
-                // }
             } catch (error) {
                 console.log(error);
                 toast.error('Error occurred while editing !', {
@@ -91,11 +78,14 @@ export const CarServiceEdit = () => {
             }
         }
     };
-
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(`https://localhost:7229/api/BrandCars/GetBrandCars`);
+                const response = await axios.get(`https://localhost:7229/api/BrandCars/GetBrandCars`, {
+                    headers: {
+                        'Authorization': `Bearer ${userDetails.tokenResult}`,
+                    }
+                });
                 const result = response.data;
                 setCarOptions(result);
             } catch (error) {
@@ -105,9 +95,6 @@ export const CarServiceEdit = () => {
 
         fetchData();
     }, []);
-
-
-
     return (
         <>
             <div class="container">
@@ -115,10 +102,6 @@ export const CarServiceEdit = () => {
                     <div class="col-6">
                         <h2 id='register' class="mt-3 pt-5 pb-3">Car Service Upload</h2>
                         <form class="form-horizontal">
-
-
-
-
                             {CarOptions && CarOptions.length > 0 && (
                                 <div class="form-group registerform">
                                     <label class="control-label col-sm-2" for="carName">Choose Car Id:</label>
@@ -143,10 +126,6 @@ export const CarServiceEdit = () => {
                                     </div>
                                 </div>
                             )}
-
-
-
-
                             <div class="form-group registerform">
                                 <label class="control-label col-sm-2" for="serviceName">serviceName:</label>
                                 <div class="col-sm-10">
@@ -154,9 +133,6 @@ export const CarServiceEdit = () => {
                                 </div>
                                 <span className="text-danger">{error}</span>
                             </div>
-
-
-
                             <div class="form-group registerform">
                                 <label class="control-label col-sm-2" for="warranty">warranty:</label>
                                 <div class="col-sm-10">
@@ -164,8 +140,6 @@ export const CarServiceEdit = () => {
                                 </div>
                                 <span className="text-danger">{error}</span>
                             </div>
-
-
                             <div class="form-group registerform">
                                 <label class="control-label col-sm-2" for="subservice1">subservice1:</label>
                                 <div class="col-sm-10">
@@ -173,8 +147,6 @@ export const CarServiceEdit = () => {
                                 </div>
                                 <span className="text-danger">{error}</span>
                             </div>
-
-
                             <div class="form-group registerform">
                                 <label class="control-label col-sm-2" for="subservice2">subservice2:</label>
                                 <div class="col-sm-10">
@@ -182,11 +154,6 @@ export const CarServiceEdit = () => {
                                 </div>
                                 <span className="text-danger">{error}</span>
                             </div>
-
-
-
-
-
                             <div class="form-group registerform">
                                 <label class="control-label col-sm-2" for="subservice3">subservice3:</label>
                                 <div class="col-sm-10">
@@ -194,9 +161,6 @@ export const CarServiceEdit = () => {
                                 </div>
                                 <span className="text-danger">{error}</span>
                             </div>
-
-
-
                             <div class="form-group registerform">
                                 <label class="control-label col-sm-2" for="subservice4">subservice4:</label>
                                 <div class="col-sm-10">
@@ -204,10 +168,6 @@ export const CarServiceEdit = () => {
                                 </div>
                                 <span className="text-danger">{error}</span>
                             </div>
-
-
-
-
                             <div class="form-group registerform">
                                 <label class="control-label col-sm-2" for="timeTaken">timeTaken:</label>
                                 <div class="col-sm-10">
@@ -215,7 +175,6 @@ export const CarServiceEdit = () => {
                                 </div>
                                 <span className="text-danger">{error}</span>
                             </div>
-
                             <div class="form-group registerform">
                                 <label class="control-label col-sm-2" for="servicecost">servicecost:</label>
                                 <div class="col-sm-10">
@@ -223,8 +182,6 @@ export const CarServiceEdit = () => {
                                 </div>
                                 <span className="text-danger">{error}</span>
                             </div>
-
-
                             <div class="form-group mt-3 registerform">
                                 <div class="col-sm-offset-2 col-sm-10">
                                     <button type="button" class="btn submit" onClick={handleUpload}>Upload</button>

@@ -4,14 +4,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import axios from 'axios';
 import { UserContext } from '../Context/userContext';
-
-
-//carid = no
-//carname yes ..
-//imagefile yes ..
-//brandid yes
-//addamount yes ..
-
 const BrandCarEdit = () => {
     const [carName, setcarName] = useState();
     const [addAmount, setaddAmount] = useState();
@@ -25,17 +17,14 @@ const BrandCarEdit = () => {
     const [brandIdError, setBrandIdError] = useState('');
     const [imageFileError, setImageFileError] = useState('');
     const Navigate = useNavigate();
-
     const validateForm = () => {
         let isValid = true;
-
         if (!carName) {
             setCarNameError('Please enter carName');
             isValid = false;
         } else {
             setCarNameError('');
         }
-
         if (!addAmount) {
             setAddAmountError('Please enter addAmount');
             isValid = false;
@@ -49,22 +38,17 @@ const BrandCarEdit = () => {
         } else {
             setBrandIdError('');
         }
-
         if (!imageFile) {
             setImageFileError('Please upload an image');
             isValid = false;
         } else {
             setImageFileError('');
         }
-
         return isValid;
     };
-
     const fileupload = (e) => {
         setImageFile(e.target.files[0]);
     };
-
-
     const handleUpload = async (e) => {
         e.preventDefault();
         if (validateForm()) {
@@ -97,10 +81,7 @@ const BrandCarEdit = () => {
                     className: 'error-success',
                 });
                 Navigate('/BrandCarDataTable')
-                // const result = await response.data;
-                // if (result.Status === 200) {
 
-                // }
             } catch (error) {
                 console.log(error);
                 throw error;
@@ -108,8 +89,6 @@ const BrandCarEdit = () => {
         }
 
     };
-
-
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -127,9 +106,6 @@ const BrandCarEdit = () => {
 
         fetchData();
     }, []);
-
-
-
     return (
         <>
             <div class="container">
@@ -137,7 +113,6 @@ const BrandCarEdit = () => {
                     <div class="col-6">
                         <h2 id='register' class="mt-3 pt-5 pb-3">Brand Car Upload</h2>
                         <form class="form-horizontal">
-
                             <div class="form-group registerform">
                                 <label class="control-label col-sm-2" for="carName">CarName:</label>
                                 <div class="col-sm-10">
@@ -145,7 +120,6 @@ const BrandCarEdit = () => {
                                 </div>
                                 <span className="text-danger">{carNameError}</span>
                             </div>
-
                             {brandOptions && brandOptions.length > 0 && (
                                 <div class="form-group registerform">
                                     <label class="control-label col-sm-2" for="carName">Choose Brand:</label>
@@ -169,7 +143,6 @@ const BrandCarEdit = () => {
                                     </div>
                                 </div>
                             )}
-
                             <div class="form-group registerform">
                                 <label class="control-label col-sm-2" for="addAmount">addAmount:</label>
                                 <div class="col-sm-10">
@@ -177,8 +150,6 @@ const BrandCarEdit = () => {
                                 </div>
                                 <span className="text-danger">{addAmountError}</span>
                             </div>
-
-
                             <div class="form-group registerform" >
                                 <label class="control-label col-sm-2" for="imageFile">File Upload:</label>
                                 <div class="col-sm-10">
@@ -186,8 +157,6 @@ const BrandCarEdit = () => {
                                 </div>
                                 <span className="text-danger">{imageFileError}</span>
                             </div>
-
-
                             <div class="form-group mt-3 registerform">
                                 <div class="col-sm-offset-2 col-sm-10">
                                     <button type="button" class="btn submit" onClick={handleUpload}>Upload</button>
@@ -200,7 +169,6 @@ const BrandCarEdit = () => {
                     </div>
                 </div >
                 <ToastContainer />
-
             </div >
         </>
     )

@@ -1,7 +1,6 @@
 
 import React from 'react'
 import '../Styles/AccessDenied.css';
-
 export const AccessDenied = () => {
     return (
         <>
@@ -15,7 +14,5 @@ export const AccessDenied = () => {
                 </div>
             </div>
         </>
-
     )
-
 }

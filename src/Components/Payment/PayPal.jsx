@@ -1,25 +1,28 @@
 
 import { CLIENT_ID } from '../Payment/Config'
-import React, { useState, useEffect, useNavigate } from "react";
+import React, { useState, useEffect } from "react";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { toast } from 'react-toastify';
 import { UserContext } from '../Context/userContext';
 import { useContext } from 'react';
 import axios from 'axios';
+// import { useNavigate } from 'react-router-dom';
 
 
 const Paypal = () => {
 
     const [show, setShow] = useState(true);
-    // const navigate = useNavigate();
     const [success, setSuccess] = useState(false);
     const [ErrorMessage, setErrorMessage] = useState("");
     const [orderID, setOrderID] = useState(false);
     const { FuelDetails, CarDetails, BrandDetails, ServiceDetails, userDetails, userName, uEmail } = useContext(
         UserContext
     );
+    // const Navigate = useNavigate();
+    console.log(userDetails.vUserid)
 
-    const handleMail = async () => {
+    const handleMail = async (e) => {
+        e.preventDefault();
         const data1 = {
             Vuserid: userDetails.vUserid,
             From: "20bsca150vigneshr@skacas.ac.in",
@@ -29,7 +32,7 @@ const Paypal = () => {
         try {
             const response = await axios.post('https://localhost:7229/api/CarDetails/Mailer', data1);
             if (response) {
-                toast.success('Payment6 and Mail is successfully!', {
+                toast.success('Mail is successfully!', {
                     position: 'top-right',
                     autoClose: 3000,
                     hideProgressBar: false,
@@ -52,14 +55,12 @@ const Paypal = () => {
                 progress: undefined,
                 className: 'error-success',
             });
-            // navigate('/ThankYou');
         }
 
     };
 
 
     const handleSubmit = async () => {
-
         const data = {
             VUserid: userDetails.vUserid,
             VUserName: userName,
@@ -81,10 +82,6 @@ const Paypal = () => {
                     'Authorization': `Bearer ${userDetails.tokenResult}`,
                 }
             });
-
-            if (response) {
-                handleMail();
-            }
         } catch (error) {
             console.error('Error:', error);
             toast.error('Error while processing your Payment', {
@@ -133,26 +130,35 @@ const Paypal = () => {
     };
 
     useEffect(() => {
-
         if (success) {
-            toast('Payment Successfull :)')
             handleSubmit();
+            toast('Payment Successfull :)')
             console.log('Order successful . Your order id is--', orderID);
         }
     }, [success]);
 
     return (
-        <PayPalScriptProvider options={{ "client-id": CLIENT_ID }}>
-            <div >
-                {show ? (
-                    <PayPalButtons
-                        style={{}}
-                        createOrder={createOrder}
-                        onApprove={onApprove}
-                    />
-                ) : null}
+        <>
+            <h3 style={{ fontStyle: 'italic' }} className='text-center mt-5'>Pay your service</h3>
+            <div className='container-fluid d-flex justify-content-center mt-5 pt-5' style={{ backgroundColor: 'black', width: '50%' }}>
+                <PayPalScriptProvider options={{ "client-id": CLIENT_ID }}>
+                    <div >
+                        {show ? (
+                            <PayPalButtons
+                                style={{}}
+                                createOrder={createOrder}
+                                onApprove={onApprove}
+                            />
+                        ) : null}
+                    </div>
+                </PayPalScriptProvider>
             </div>
-        </PayPalScriptProvider>
+            {success == true ? (
+                <div className='container-fluid d-flex justify-content-center mt-5'>
+                    <button className='btn bg-black text-white' onClick={handleMail}>Do you want a mail for this service</button>
+                </div>
+            ) : null}
+        </>
     );
 }
 

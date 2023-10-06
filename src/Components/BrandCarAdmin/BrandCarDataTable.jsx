@@ -4,14 +4,10 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { UserContext } from '../Context/userContext';
 import { ToastContainer, toast } from 'react-toastify';
-
-
-
 const BrandCarDataTable = () => {
     const [brandCar, setBrandCar] = useState([]);
     const [search, setSearch] = useState('');
     const { userDetails, setuserDetails } = useContext(UserContext);
-
     const columns = [
         {
             name: 'Brand ID',
@@ -52,18 +48,6 @@ const BrandCarDataTable = () => {
             ),
         },
     ];
-
-    // const fetchData = async () => {
-    //     try {
-    //         const response = await axios.get(
-    //             'https://localhost:7229/api/BrandCars/GetBrandCars'
-    //         );
-    //         const result = await response.data;
-    //         setBrandCar(result);
-    //     } catch (error) {
-    //         console.error(error);
-    //     }
-    // };
     const fetchData = async () => {
         try {
             const response = await axios.get(
@@ -90,8 +74,6 @@ const BrandCarDataTable = () => {
             });
         }
     };
-
-
     useEffect(() => {
         fetchData();
     }, []);
@@ -99,7 +81,6 @@ const BrandCarDataTable = () => {
     const filteredData = brandCar.filter((cars) =>
         cars.carName.toLowerCase().includes(search.toLowerCase())
     );
-
     const tableHeaderStyle = {
         headCells: {
             style: {
@@ -109,7 +90,6 @@ const BrandCarDataTable = () => {
             },
         },
     };
-
     return (
         <div className='container mb-3'>
             <h1 className='blogs text-center mt-5'>Brand Cars</h1>

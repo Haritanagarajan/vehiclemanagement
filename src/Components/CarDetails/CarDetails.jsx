@@ -5,19 +5,15 @@ import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Paypal from '../Payment/PayPal';
-
 export const CarDetails = () => {
   const { FuelDetails, CarDetails, BrandDetails, ServiceDetails, userDetails, userName, uEmail } = useContext(
     UserContext
   );
-
   const navigate = useNavigate();
 
   const handlepayment = () => {
     navigate('/Paypal');
   }
-
-
   return (
     <>
       <div className='container-fluid cardetails' >
@@ -40,11 +36,9 @@ export const CarDetails = () => {
                 <p>Service Cost: {ServiceDetails.servicecost}</p>
                 <h3>{CarDetails.brandName}</h3>
                 <p>Car Name: {BrandDetails.carName}</p>
-                {/* <img src={CarDetails.imageSrc} alt='Car Image' width='100px'/> */}
                 <h3>Fuel Details</h3>
                 <p>Fuel Name: {FuelDetails.fuelName}</p>
                 <button className='btn bg-black text-white' onClick={handlepayment}>PayNow</button>
-                {/* <Paypal /> */}
               </div>
             </div>
           </div>

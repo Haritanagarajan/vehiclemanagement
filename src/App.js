@@ -31,14 +31,11 @@ import { CarServiceDataTable } from './Components/CarServiceAdmin/CarServiceData
 import BrandCarDataTable from './Components/BrandCarAdmin/BrandCarDataTable';
 import CarBrandDataTable from './Components/CarBrandAdmin/CarBrandDataTable';
 import { Footer } from './Components/Footer/Footer';
-import { Gpay } from './Components/Payment/Gpay';
-import { Razorpays } from './Components/RazorPay/Razorpays';
 import { AccessDenied } from './Components/AccessDenied/AccessDenied';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Thankyou } from './Components/Thanyou/Thankyou';
 import Paypal from './Components/Payment/PayPal';
-
 function App() {
   const [role, setRole] = useState(null);
 
@@ -49,8 +46,6 @@ function App() {
       setRole(role);
     }
   }, []);
-
-
   return (
     <div>
       <UserContextProvider>
@@ -60,8 +55,6 @@ function App() {
           <Route exact path='/Login' element={<Login />} />
           <Route exact path='/Home' element={<Home />} />
           <Route path='*' element={<AccessDenied />} />
-
-
           {role == 'Customer' ? (
             <>
               <Route exact path='/CarService/:carid' element={<CarService />} />
@@ -71,17 +64,9 @@ function App() {
               <Route exact path='/CarDetails' element={<CarDetails />} />
               <Route path='*' element={<AccessDenied />} />
               <Route path='/Thankyou' element={<Thankyou />} />
-              <Route exact path='/Razorpays' element={<Razorpays />} />
-              <Route exact path='/Gpay' element={<Gpay />} />
               <Route exact path='/Paypal' element={<Paypal />} />
-
-              {/* <Route path='*' element={<AccessDenied />} /> */}
             </>
           ) : null}
-
-
-
-
           {role == 'Admin' ? (
             <>
               <Route exact path='/CarBrandCreate' element={<CarBrandCreate />} />
@@ -104,13 +89,10 @@ function App() {
               <Route exact path='/CarServiceDataTable' element={<CarServiceDataTable />} />
               <Route exact path='/BrandCarDataTable' element={<BrandCarDataTable />} />
               <Route exact path='/CarBrandDataTable' element={<CarBrandDataTable />} />
-              <Route exact path='/Razorpays' element={<Razorpays />} />
-              {/* <Route path='*' element={<AccessDenied />} /> */}
             </>
           ) : null}
-
         </Routes>
-        {/* <Footer/> */}
+        <Footer/>
         <ToastContainer />
       </UserContextProvider>
     </div>

@@ -5,13 +5,6 @@ import { ToastContainer, toast } from 'react-toastify';
 import axios from 'axios';
 import { UserContext } from '../Context/userContext';
 
-
-//carid = no
-//carname yes ..
-//imagefile yes ..
-//brandid yes
-//addamount yes ..
-
 const BrandCarCreate = () => {
     const [carName, setcarName] = useState();
     const [addAmount, setaddAmount] = useState();
@@ -24,46 +17,37 @@ const BrandCarCreate = () => {
     const [brandIdError, setBrandIdError] = useState('');
     const [imageFileError, setImageFileError] = useState('');
     const Navigate = useNavigate();
-
-
     const validateForm = () => {
         let isValid = true;
-
         if (!carName) {
             setCarNameError('Please enter carName');
             isValid = false;
         } else {
             setCarNameError('');
         }
-
         if (!addAmount) {
             setAddAmountError('Please enter addAmount');
             isValid = false;
         } else {
             setAddAmountError('');
         }
-
         if (!brandid) {
             setBrandIdError('Please choose a Brand');
             isValid = false;
         } else {
             setBrandIdError('');
         }
-
         if (!imageFile) {
             setImageFileError('Please upload an image');
             isValid = false;
         } else {
             setImageFileError('');
         }
-
         return isValid;
     };
     const fileupload = (e) => {
         setImageFile(e.target.files[0]);
     };
-
-
     const handleUpload = async (e) => {
         e.preventDefault();
         if (validateForm()) {
@@ -76,7 +60,6 @@ const BrandCarCreate = () => {
             formData.append('carName', carName);
             formData.append('addAmount', addAmount);
             formData.append('imageFile', imageFile);
-
             try {
                 const response = await axios.post(`https://localhost:7229/api/BrandCars/PostBrandCar`, formData, {
                     headers: {
@@ -96,10 +79,6 @@ const BrandCarCreate = () => {
                     progress: undefined,
                     className: 'error-success',
                 });
-                // const result = await response.data;
-                // if (result) {
-
-                // }
             } catch (error) {
                 console.log(error);
                 toast.error('Error occurred while creating !', {
@@ -116,23 +95,6 @@ const BrandCarCreate = () => {
             }
         }
     };
-
-
-    // useEffect(() => {
-    //     const fetchData = async () => {
-    //         try {
-    //             const response = await axios.get(`https://localhost:7229/api/CarBrands1/GetCarBrands`);
-    //             const result = response.data;
-    //             setBrandOptions(result);
-    //         } catch (error) {
-    //             console.error(error);
-    //         }
-    //     };
-
-    //     fetchData();
-    // }, []);
-
-
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -150,9 +112,6 @@ const BrandCarCreate = () => {
 
         fetchData();
     }, []);
-
-
-
     return (
         <>
             <div class="container">
@@ -160,7 +119,6 @@ const BrandCarCreate = () => {
                     <div class="col-6">
                         <h2 id='register' class="mt-3 pt-5 pb-3">Brand Car Upload</h2>
                         <form class="form-horizontal">
-
                             <div class="form-group registerform">
                                 <label class="control-label col-sm-2" for="carName">CarName:</label>
                                 <div class="col-sm-10">
@@ -168,7 +126,6 @@ const BrandCarCreate = () => {
                                     <span className="text-danger">{carNameError}</span>
                                 </div>
                             </div>
-
                             {brandOptions && brandOptions.length > 0 && (
                                 <div class="form-group registerform">
                                     <label class="control-label col-sm-2" for="carName">Choose Brand:</label>
@@ -192,7 +149,6 @@ const BrandCarCreate = () => {
                                     <span className="text-danger">{brandIdError}</span>
                                 </div>
                             )}
-
                             <div class="form-group registerform">
                                 <label class="control-label col-sm-2" for="addAmount">addAmount:</label>
                                 <div class="col-sm-10">
@@ -200,8 +156,6 @@ const BrandCarCreate = () => {
                                 </div>
                                 <span className="text-danger">{addAmountError}</span>
                             </div>
-
-
                             <div class="form-group registerform" >
                                 <label class="control-label col-sm-2" for="imageSrc">File Upload:</label>
                                 <div class="col-sm-10">
@@ -209,8 +163,6 @@ const BrandCarCreate = () => {
                                 </div>
                                 <span className="text-danger">{imageFileError}</span>
                             </div>
-
-
                             <div class="form-group mt-3 registerform">
                                 <div class="col-sm-offset-2 col-sm-10">
                                     <button type="button" class="btn submit" onClick={handleUpload}>Upload</button>

@@ -1,16 +1,13 @@
-import React, { useEffect, useState,useContext } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import DataTable from 'react-data-table-component';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { UserContext } from '../Context/userContext';
 import { ToastContainer, toast } from 'react-toastify';
-
-
 const CarBrandDataTable = () => {
     const [carBrands, setCarBrands] = useState([]);
     const [search, setSearch] = useState('');
     const { userDetails, setuserDetails } = useContext(UserContext);
-
     const columns = [
         {
             name: 'Brand ID',
@@ -37,28 +34,16 @@ const CarBrandDataTable = () => {
         {
             name: 'Edit',
             cell: (row) => (
-                <Link to={`/CarBrandEdit/${row.brandid}`}><i class="fa-solid fa-pen-to-square" style={{color:'black'}}></i></Link>
+                <Link to={`/CarBrandEdit/${row.brandid}`}><i class="fa-solid fa-pen-to-square" style={{ color: 'black' }}></i></Link>
             ),
         },
         {
             name: 'Delete',
             cell: (row) => (
-                <Link to={`/CarBrandDelete/${row.brandid}`}><i class="fa-solid fa-trash" style={{color:'black'}}></i></Link>
+                <Link to={`/CarBrandDelete/${row.brandid}`}><i class="fa-solid fa-trash" style={{ color: 'black' }}></i></Link>
             ),
         },
     ];
-
-    // const fetchData = async () => {
-    //     try {
-    //         const response = await axios.get(
-    //             'https://localhost:7229/api/CarBrands1/GetCarBrands'
-    //         );
-    //         const result = await response.data;
-    //         setCarBrands(result);
-    //     } catch (error) {
-    //         console.error(error);
-    //     }
-    // };
     const fetchData = async () => {
         try {
             const response = await axios.get(
@@ -82,18 +67,15 @@ const CarBrandDataTable = () => {
                 draggable: true,
                 progress: undefined,
                 className: 'error-success',
-              });
+            });
         }
     };
-    
     useEffect(() => {
         fetchData();
     }, []);
-
     const filteredData = carBrands.filter((brand) =>
         brand.brandName.toLowerCase().includes(search.toLowerCase())
     );
-
     const tableHeaderStyle = {
         headCells: {
             style: {
@@ -103,7 +85,6 @@ const CarBrandDataTable = () => {
             },
         },
     };
-
     return (
         <div className='container mb-3'>
             <h1 className='blogs text-center mt-5'>Car Brands</h1>
@@ -129,7 +110,7 @@ const CarBrandDataTable = () => {
                     Create
                 </Link>
             </div>
-            <ToastContainer/>
+            <ToastContainer />
 
         </div>
     );

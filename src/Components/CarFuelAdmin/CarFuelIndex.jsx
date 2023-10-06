@@ -3,22 +3,9 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { UserContext } from '../Context/userContext';
 import { ToastContainer, toast } from 'react-toastify';
-
 const CarFuelIndex = () => {
     const [carFuel, setcarFuel] = useState([]);
     const { userDetails, setuserDetails } = useContext(UserContext);
-
-    // const fetchData = async () => {
-    //     try {
-    //         const response = await axios.get(`https://localhost:7229/api/CarFuels/GetCarFuels`);
-    //         const result = await response.data;
-    //         setcarFuel(result);
-    //     } catch (error) {
-    //         console.log(error);
-    //         throw error;
-    //     }
-    // }
-
     const fetchData = async () => {
         try {
             const response = await axios.get(`https://localhost:7229/api/CarFuels/GetCarFuels`, {
@@ -43,8 +30,6 @@ const CarFuelIndex = () => {
             throw error;
         }
     };
-
-
     useEffect(() => {
         fetchData();
     }, []);
@@ -95,10 +80,8 @@ const CarFuelIndex = () => {
             <div className='text-center'>
                 <Link to="/CarFuelCreate" className='btn btn-primary'>Create</Link>
             </div>
-            <ToastContainer/>
-
+            <ToastContainer />
         </div>
     );
 };
-
 export default CarFuelIndex;

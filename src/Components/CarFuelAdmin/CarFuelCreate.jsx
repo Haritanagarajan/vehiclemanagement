@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import axios from 'axios';
 import { UserContext } from '../Context/userContext';
-
 const CarFuelCreate = () => {
     const [fuelName, setfuelName] = useState();
     const [imageFile, setImageFile] = useState(null);
@@ -15,36 +14,28 @@ const CarFuelCreate = () => {
     const fileupload = (e) => {
         setImageFile(e.target.files[0]);
     };
-
     const validateForm = () => {
         let isValid = true;
-
-        // Validate fuelName
         if (!fuelName) {
             setFuelNameError('Please enter fuelName');
             isValid = false;
         } else {
             setFuelNameError('');
         }
-
-        // Validate imageFile
         if (!imageFile) {
             setImageFileError('Please upload an image');
             isValid = false;
         } else {
             setImageFileError('');
         }
-
         return isValid;
     };
-
     const handleUpload = async (e) => {
         e.preventDefault();
         if (validateForm()) {
             const formData = new FormData();
             formData.append('fuelName', fuelName);
             formData.append('imageFile', imageFile);
-
             try {
                 const response = await axios.post("https://localhost:7229/api/CarFuels/PostCarFuel", formData, {
                     headers: {
@@ -64,10 +55,6 @@ const CarFuelCreate = () => {
                     className: 'error-success',
                 });
                 Navigate('/CarFuelDataTable');
-                // const result = await response.data;
-                // if (result.Status === 200) {
-
-                // }
             } catch (error) {
                 console.log(error);
                 toast.error('Error occurred while creating !', {
@@ -84,12 +71,6 @@ const CarFuelCreate = () => {
             }
         }
     };
-
-
-
-
-
-
     return (
         <>
             <div class="container">
@@ -97,7 +78,6 @@ const CarFuelCreate = () => {
                     <div class="col-6">
                         <h2 id='register' class="mt-3 pt-5 pb-3">Car Brand Upload</h2>
                         <form class="form-horizontal">
-
                             <div class="form-group registerform">
                                 <label class="control-label col-sm-2" for="fuelName">fuelName:</label>
                                 <div class="col-sm-10">
@@ -105,9 +85,6 @@ const CarFuelCreate = () => {
                                 </div>
                                 <span className="text-danger">{fuelNameError}</span>
                             </div>
-
-
-
                             <div class="form-group registerform" >
                                 <label class="control-label col-sm-2" for="imageSrc">File Upload:</label>
                                 <div class="col-sm-10">
@@ -115,8 +92,6 @@ const CarFuelCreate = () => {
                                 </div>
                                 <span className="text-danger">{imageFileError}</span>
                             </div>
-
-
                             <div class="form-group mt-3 registerform">
                                 <div class="col-sm-offset-2 col-sm-10">
                                     <button type="button" class="btn submit" onClick={handleUpload}>Upload</button>

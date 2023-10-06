@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import axios from 'axios';
 import { UserContext } from '../Context/userContext';
-
 export const CarServiceCreate = () => {
     const [carid, setcarid] = useState();
     const [serviceName, setserviceName] = useState();
@@ -18,11 +17,7 @@ export const CarServiceCreate = () => {
     const [CarOptions, setCarOptions] = useState();
     const { userDetails, setuserDetails } = useContext(UserContext);
     const Navigate = useNavigate();
-
     const [error, SetError] = useState('')
-
-
-
     const validateWarranty = () => {
         let isValid = true;
         if (!error) {
@@ -34,7 +29,6 @@ export const CarServiceCreate = () => {
         }
         return isValid;
     };
-
     const handleUpload = async (e) => {
         e.preventDefault();
         if (validateWarranty()) {
@@ -48,18 +42,13 @@ export const CarServiceCreate = () => {
             formData.append('subservice4', subservice4);
             formData.append('timeTaken', timeTaken);
             formData.append('servicecost', servicecost);
-
             try {
                 const response = await axios.post("https://localhost:7229/api/CarServices/PostCarService", formData, {
                     headers: {
                         'Content-Type': 'application/json',
-
                         'Authorization': `Bearer ${userDetails.tokenResult}`,
-
                     }
-
                 });
-
                 toast.success('successfully created !', {
                     position: 'top-right',
                     autoClose: 3000,
@@ -71,10 +60,6 @@ export const CarServiceCreate = () => {
                     className: 'error-success',
                 });
                 Navigate('/CarServiceDataTable')
-                // const result = await response.data;
-                // if (result.Status === 200) {
-
-                // }
             } catch (error) {
                 console.log(error);
                 toast.error('Error occurred while creating !', {
@@ -91,26 +76,23 @@ export const CarServiceCreate = () => {
             }
         }
     };
-
-
-
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(`https://localhost:7229/api/BrandCars/GetBrandCars`);
+                const response = await axios.get(`https://localhost:7229/api/BrandCars/GetBrandCars`, {
+                    headers: {
+                        'Authorization': `Bearer ${userDetails.tokenResult}`,
+                    }
+                });
                 const result = response.data;
                 setCarOptions(result);
             } catch (error) {
                 console.error(error);
             }
         };
+
         fetchData();
-
     }, []);
-
-
-
-
     return (
         <>
             <div class="container">
@@ -118,10 +100,6 @@ export const CarServiceCreate = () => {
                     <div class="col-6">
                         <h2 id='register' class="mt-3 pt-5 pb-3">Car Service Upload</h2>
                         <form class="form-horizontal">
-
-
-
-
                             <div class="form-group registerform">
                                 <label class="control-label col-sm-2" for="serviceName">serviceName:</label>
                                 <div class="col-sm-10">
@@ -129,7 +107,6 @@ export const CarServiceCreate = () => {
                                 </div>
                                 <span className="text-danger">{error}</span>
                             </div>
-
                             {CarOptions && CarOptions.length > 0 && (
                                 <div class="form-group registerform">
                                     <label class="control-label col-sm-2" for="carName">Choose Car Id:</label>
@@ -154,7 +131,6 @@ export const CarServiceCreate = () => {
                                     </div>
                                 </div>
                             )}
-
                             <div class="form-group registerform">
                                 <label class="control-label col-sm-2" for="warranty">warranty:</label>
                                 <div class="col-sm-10">
@@ -162,8 +138,6 @@ export const CarServiceCreate = () => {
                                 </div>
                                 <span className="text-danger">{error}</span>
                             </div>
-
-
                             <div class="form-group registerform">
                                 <label class="control-label col-sm-2" for="subservice1">subservice1:</label>
                                 <div class="col-sm-10">
@@ -171,8 +145,6 @@ export const CarServiceCreate = () => {
                                 </div>
                                 <span className="text-danger">{error}</span>
                             </div>
-
-
                             <div class="form-group registerform">
                                 <label class="control-label col-sm-2" for="subservice2">subservice2:</label>
                                 <div class="col-sm-10">
@@ -180,11 +152,6 @@ export const CarServiceCreate = () => {
                                 </div>
                                 <span className="text-danger">{error}</span>
                             </div>
-
-
-
-
-
                             <div class="form-group registerform">
                                 <label class="control-label col-sm-2" for="subservice3">subservice3:</label>
                                 <div class="col-sm-10">
@@ -192,9 +159,6 @@ export const CarServiceCreate = () => {
                                 </div>
                                 <span className="text-danger">{error}</span>
                             </div>
-
-
-
                             <div class="form-group registerform">
                                 <label class="control-label col-sm-2" for="subservice4">subservice4:</label>
                                 <div class="col-sm-10">
@@ -202,10 +166,6 @@ export const CarServiceCreate = () => {
                                 </div>
                                 <span className="text-danger">{error}</span>
                             </div>
-
-
-
-
                             <div class="form-group registerform">
                                 <label class="control-label col-sm-2" for="timeTaken">timeTaken:</label>
                                 <div class="col-sm-10">
@@ -213,7 +173,6 @@ export const CarServiceCreate = () => {
                                 </div>
                                 <span className="text-danger">{error}</span>
                             </div>
-
                             <div class="form-group registerform">
                                 <label class="control-label col-sm-2" for="servicecost">servicecost:</label>
                                 <div class="col-sm-10">
@@ -221,8 +180,6 @@ export const CarServiceCreate = () => {
                                 </div>
                                 <span className="text-danger">{error}</span>
                             </div>
-
-
                             <div class="form-group mt-3 registerform">
                                 <div class="col-sm-offset-2 col-sm-10">
                                     <button type="button" class="btn submit" onClick={handleUpload}>Upload</button>

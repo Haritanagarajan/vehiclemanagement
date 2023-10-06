@@ -3,22 +3,9 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { UserContext } from '../Context/userContext';
 import { ToastContainer, toast } from 'react-toastify';
-
 const BrandCarIndex = () => {
     const [BrandCar, setBrandCar] = useState([]);
     const { userDetails, setuserDetails } = useContext(UserContext);
-
-    // const fetchData = async () => {
-    //     try {
-    //         const response = await axios.get(`https://localhost:7229/api/BrandCars/GetBrandCars`);
-    //         const result = await response.data;
-    //         setBrandCar(result);
-    //     } catch (error) {
-    //         console.log(error);
-    //         throw error;
-    //     }
-    // }
-
     const fetchData = async () => {
         try {
             const response = await axios.get(`https://localhost:7229/api/BrandCars/GetBrandCars`, {
@@ -43,11 +30,9 @@ const BrandCarIndex = () => {
             throw error;
         }
     };
-
     useEffect(() => {
         fetchData();
     }, []);
-
     return (
         <div className='container mb-3'>
             <h1 className='blogs text-center mt-5'>Car Brands</h1>
@@ -101,5 +86,4 @@ const BrandCarIndex = () => {
         </div>
     );
 };
-
 export default BrandCarIndex;

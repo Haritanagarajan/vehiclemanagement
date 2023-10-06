@@ -5,7 +5,6 @@ import { ToastContainer, toast } from 'react-toastify';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { UserContext } from '../Context/userContext';
-
 export const CarFuelEdit = () => {
     const [fuelName, setfuelName] = useState();
     const [imageFile, setImageFile] = useState(null);
@@ -13,89 +12,70 @@ export const CarFuelEdit = () => {
     const { userDetails, setuserDetails } = useContext(UserContext);
     const [fuelNameError, setFuelNameError] = useState('');
     const [imageFileError, setImageFileError] = useState('');
-
     const Navigate = useNavigate();
-
     console.log(fuelid)
-
     const fileupload = (e) => {
         setImageFile(e.target.files[0]);
     };
-
     const validateForm = () => {
         let isValid = true;
-
-        // Validate fuelName
         if (!fuelName) {
             setFuelNameError('Please enter fuelName');
             isValid = false;
         } else {
             setFuelNameError('');
         }
-
-        // Validate imageFile
         if (!imageFile) {
             setImageFileError('Please upload an image');
             isValid = false;
         } else {
             setImageFileError('');
         }
-
         return isValid;
     };
-
-
     const handleUpload = async (e) => {
         e.preventDefault();
         if (validateForm()) {
-        const formData = new FormData();
-        formData.append('fuelName', fuelName);
-        formData.append('imageFile', imageFile);
-        formData.append('fuelid', fuelid);
+            const formData = new FormData();
+            formData.append('fuelName', fuelName);
+            formData.append('imageFile', imageFile);
+            formData.append('fuelid', fuelid);
+            try {
+                const response = await axios.put(`https://localhost:7229/api/CarFuels/PutCarFuel/${fuelid}`, formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
 
-        try {
-            const response = await axios.put(`https://localhost:7229/api/CarFuels/PutCarFuel/${fuelid}`, formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
+                        'Authorization': `Bearer ${userDetails.tokenResult}`,
 
-                    'Authorization': `Bearer ${userDetails.tokenResult}`,
-
-                },
-            });
-            toast.success('successfully edited !', {
-                position: 'top-right',
-                autoClose: 3000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                className: 'error-success',
-            });
-            Navigate('/CarFuelDataTable');
-            // const result = await response.data;
-            // if (result.Status === 200) {
-
-
-            // }
-        } catch (error) {
-            console.log(error);
-            toast.error('Error occurred while editing !', {
-                position: 'top-right',
-                autoClose: 3000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                className: 'error-success',
-            });
-            throw error;
+                    },
+                });
+                toast.success('successfully edited !', {
+                    position: 'top-right',
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    className: 'error-success',
+                });
+                Navigate('/CarFuelDataTable');
+            } catch (error) {
+                console.log(error);
+                toast.error('Error occurred while editing !', {
+                    position: 'top-right',
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    className: 'error-success',
+                });
+                throw error;
+            }
         }
-    }
     };
-
-
     return (
         <>
             <div class="container">
@@ -103,7 +83,6 @@ export const CarFuelEdit = () => {
                     <div class="col-6">
                         <h2 id='register' class="mt-3 pt-5 pb-3">Car Brand Upload</h2>
                         <form class="form-horizontal">
-
                             <div class="form-group registerform">
                                 <label class="control-label col-sm-2" for="Username">fuelName:</label>
                                 <div class="col-sm-10">
@@ -111,9 +90,6 @@ export const CarFuelEdit = () => {
                                 </div>
                                 <span className="text-danger">{fuelNameError}</span>
                             </div>
-
-
-
                             <div class="form-group registerform" >
                                 <label class="control-label col-sm-2" for="imageSrc">File Upload:</label>
                                 <div class="col-sm-10">
@@ -121,8 +97,6 @@ export const CarFuelEdit = () => {
                                 </div>
                                 <span className="text-danger">{imageFileError}</span>
                             </div>
-
-
                             <div class="form-group mt-3 registerform">
                                 <div class="col-sm-offset-2 col-sm-10">
                                     <button type="button" class="btn submit" onClick={handleUpload}>Upload</button>
@@ -135,7 +109,6 @@ export const CarFuelEdit = () => {
                     </div>
                 </div>
                 <ToastContainer />
-
             </div>
         </>
     )
