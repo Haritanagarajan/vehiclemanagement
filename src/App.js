@@ -37,15 +37,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Thankyou } from './Components/Thanyou/Thankyou';
 import Paypal from './Components/Payment/PayPal';
 function App() {
-  const [role, setRole] = useState(null);
-
-  useEffect(() => {
-    const role = localStorage.getItem("role");
-    console.log(role);
-    if (role) {
-      setRole(role);
-    }
-  }, []);
   return (
     <div>
       <UserContextProvider>
@@ -55,8 +46,6 @@ function App() {
           <Route exact path='/Login' element={<Login />} />
           <Route exact path='/Home' element={<Home />} />
           <Route path='*' element={<AccessDenied />} />
-          {role == 'Customer' ? (
-            <>
               <Route exact path='/CarService/:carid' element={<CarService />} />
               <Route exact path='/CarBrand' element={<CarBrand />} />
               <Route exact path='/BrandCar/:brandid' element={<BrandCar />} />
@@ -65,10 +54,6 @@ function App() {
               <Route path='*' element={<AccessDenied />} />
               <Route path='/Thankyou' element={<Thankyou />} />
               <Route exact path='/Paypal' element={<Paypal />} />
-            </>
-          ) : null}
-          {role == 'Admin' ? (
-            <>
               <Route exact path='/CarBrandCreate' element={<CarBrandCreate />} />
               <Route exact path='/CarBrandIndex' element={<CarBrandIndex />} />
               <Route exact path='/CarBrandEdit/:brandid' element={<CarBrandEdit />} />
@@ -89,8 +74,6 @@ function App() {
               <Route exact path='/CarServiceDataTable' element={<CarServiceDataTable />} />
               <Route exact path='/BrandCarDataTable' element={<BrandCarDataTable />} />
               <Route exact path='/CarBrandDataTable' element={<CarBrandDataTable />} />
-            </>
-          ) : null}
         </Routes>
         <Footer/>
         <ToastContainer />

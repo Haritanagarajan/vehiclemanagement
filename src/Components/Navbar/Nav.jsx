@@ -86,7 +86,7 @@ function Nav() {
               textDecoration: 'none',
             }}
           >
-            <Link to='/Home' class='vehipro'>   VehiPro</Link>
+            <Link to='/Home' className='vehipro'>   VehiPro</Link>
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton

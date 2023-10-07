@@ -6,9 +6,6 @@ import { toast } from 'react-toastify';
 import { UserContext } from '../Context/userContext';
 import { useContext } from 'react';
 import axios from 'axios';
-// import { useNavigate } from 'react-router-dom';
-
-
 const Paypal = () => {
 
     const [show, setShow] = useState(true);
@@ -18,7 +15,6 @@ const Paypal = () => {
     const { FuelDetails, CarDetails, BrandDetails, ServiceDetails, userDetails, userName, uEmail } = useContext(
         UserContext
     );
-    // const Navigate = useNavigate();
     console.log(userDetails.vUserid)
 
     const handleMail = async (e) => {
@@ -45,7 +41,7 @@ const Paypal = () => {
             }
         } catch (error) {
             console.error('Error:', error);
-            toast.error('Not a successfull payment!', {
+            toast.success('Mail sent!', {
                 position: 'top-right',
                 autoClose: 3000,
                 hideProgressBar: false,
@@ -58,8 +54,6 @@ const Paypal = () => {
         }
 
     };
-
-
     const handleSubmit = async () => {
         const data = {
             VUserid: userDetails.vUserid,
@@ -96,9 +90,6 @@ const Paypal = () => {
             });
         }
     }
-
-
-
     const createOrder = (data, actions) => {
         return actions.order.create({
             purchase_units: [

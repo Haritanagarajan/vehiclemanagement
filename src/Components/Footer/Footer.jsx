@@ -5,33 +5,33 @@ import logo from '../Assets/V.gif';
 export const Footer = () => {
     return (
         <>
-            <div class="container-fluid  mt-5">
+            <div className="container-fluid  mt-5">
 
-                <div class="row align-items-center footdiv" >
-                    <div class="col-6">
-                        <p class="text-center followus">follow us on</p>
-                        <div class="container d-flex justify-content-center pt-3">
-                            <button type="button foot" class="btn  btn-lg btn-floating mx-2 text-white" >
-                                <i class="fab fa-facebook-f"></i>
+                <div className="row align-items-center footdiv" >
+                    <div className="col-6">
+                        <p className="text-center followus">follow us on</p>
+                        <div className="container d-flex justify-content-center pt-3">
+                            <button type="button foot" className="btn  btn-lg btn-floating mx-2 text-white" >
+                                <i className="fab fa-facebook-f"></i>
                             </button>
-                            <button type="button foot" class="btn btn-lg btn-floating mx-2 text-white">
-                                <i class="fab fa-youtube"></i>
+                            <button type="button foot" className="btn btn-lg btn-floating mx-2 text-white">
+                                <i className="fab fa-youtube"></i>
                             </button>
-                            <button type="button foot" class="btn  btn-lg btn-floating mx-2 text-white" >
-                                <i class="fab fa-instagram"></i>
+                            <button type="button foot" className="btn  btn-lg btn-floating mx-2 text-white" >
+                                <i className="fab fa-instagram"></i>
                             </button>
-                            <button type="button foot" class="btn  btn-lg btn-floating mx-2 text-white" >
-                                <i class="fab fa-twitter"></i>
+                            <button type="button foot" className="btn  btn-lg btn-floating mx-2 text-white" >
+                                <i className="fab fa-twitter"></i>
                             </button>
                         </div>
                     </div>
-                    <div class="col-6">
-                        <div class="section-2 navbar-brand d-flex justify-content-center mt-5">
+                    <div className="col-6">
+                        <div className="section-2 navbar-brand d-flex justify-content-center mt-5">
                             <img src={logo} width="29%" />
                         </div>
                     </div>
 
-                    <div class="text-center text-white p-3 cpy" >
+                    <div className="text-center text-white p-3 cpy" >
                         © 2020 Copyright: VehiPro
                     </div>
                 </div>

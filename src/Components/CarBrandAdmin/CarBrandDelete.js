@@ -19,7 +19,7 @@ export const CarBrandDelete = () => {
                     'Authorization': `Bearer ${userDetails.tokenResult}`,
                 },
             });
-            toast.success('Successfully created !', {
+            toast.success('Successfully deleted !', {
                 position: 'top-right',
                 autoClose: 3000,
                 hideProgressBar: false,

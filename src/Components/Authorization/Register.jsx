@@ -108,52 +108,49 @@ const Register = () => {
     };
     return (
         <>
-            <div class="container text-white mt-3 mb-2">
+            <div className="container text-white mt-3 mb-2">
                 <div className='row justify-content-center'>
-                    <div class="col-lg-6 logincontainer">
-                        <h2 id='register' class="mt-3 pt-5 pb-3 text-center">Register your Details</h2>
+                    <div className="col-lg-6 logincontainer">
+                        <h2 id='register' className="mt-3 pt-5 pb-3 text-center">Register your Details</h2>
                         <form class="form-horizontal ps-2">
-                            <div class="form-group registerform pt-3">
-                                <label class="control-label col-sm-2" for="Username">Username:</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="Username" placeholder="Enter Username" name="vusername" value={vusername} onChange={(e) => setvusername(e.target.value)} />
+                            <div className="form-group registerform pt-3">
+                                <label className="control-label col-sm-2" for="Username">Username:</label>
+                                <div className="col-sm-10">
+                                    <input type="text" className="form-control" id="Username" placeholder="Enter Username" name="vusername" value={vusername} onChange={(e) => setvusername(e.target.value)} />
                                     {errors.vusername && <span className="error">{errors.vusername}</span>}
                                 </div>
                             </div>
-                            <div class="form-group registerform pt-3">
-                                <label class="control-label col-sm-2" for="email">Email:</label>
+                            <div className="form-group registerform pt-3">
+                                <label className="control-label col-sm-2" for="email">Email:</label>
                                 <div class="col-sm-10">
-                                    <input type="email" class="form-control" id="email" placeholder="Enter email" name="vemail" value={vemail} onChange={(e) => setvemail(e.target.value)} />
+                                    <input type="email" className="form-control" id="email" placeholder="Enter email" name="vemail" value={vemail} onChange={(e) => setvemail(e.target.value)} />
                                     {errors.vemail && <span className="error">{errors.vemail}</span>}
                                 </div>
                             </div>
-                            <div class="form-group registerform pt-3">
-                                <label class="control-label col-sm-2" for="pwd">Password:</label>
+                            <div className="form-group registerform pt-3">
+                                <label className="control-label col-sm-2" for="pwd">Password:</label>
                                 <div class="col-sm-10">
                                     <input type="password" class="form-control" id="Password" placeholder="Enter password" name="vpassword" value={vpassword} onChange={(e) => setvpassword(e.target.value)} />
                                     {errors.vpassword && <span className="error">{errors.vpassword}</span>}
                                 </div>
                             </div>
-
-
-                            <div class="form-group registerform pt-3">
-                                <label class="control-label col-sm-2" for="pwd">ConfirmPassword:</label>
-                                <div class="col-sm-10">
+                            <div className="form-group registerform pt-3">
+                                <label className="control-label col-sm-2" for="pwd">ConfirmPassword:</label>
+                                <div className="col-sm-10">
                                     <input type="password" class="form-control" id="ConfirmPassword" placeholder="Enter password again" name="vconfirmPassword" value={vconfirmPassword} onChange={(e) => setvconfirmPassword(e.target.value)} />
                                     {errors.vconfirmPassword && <span className="error">{errors.vconfirmPassword}</span>}
                                 </div>
                             </div>
-                            <div class="form-group registerform pt-3" >
-                                <label class="control-label col-sm-2" for="Contact">Contact:</label>
-                                <div class="col-sm-10">
-                                    <input type="number" class="form-control" id="Contact" placeholder="Enter Contact" name="vmobile" value={vmobile} onChange={(e) => setvmobile(e.target.value)} />
+                            <div className="form-group registerform pt-3" >
+                                <label className="control-label col-sm-2" for="Contact">Contact:</label>
+                                <div className="col-sm-10">
+                                    <input type="number" className="form-control" id="Contact" placeholder="Enter Contact" name="vmobile" value={vmobile} onChange={(e) => setvmobile(e.target.value)} />
                                     {errors.vmobile && <span className="error">{errors.vmobile}</span>}
                                 </div>
                             </div>
-
-                            <div class="form-group mt-3 registerform pt-3 pb-5">
-                                <div class="col-sm-offset-2 col-sm-10">
-                                    <button type="button" class="btn submit login" onClick={handleRegister}>Submit</button>
+                            <div className="form-group mt-3 registerform pt-3 pb-5">
+                                <div className="col-sm-offset-2 col-sm-10">
+                                    <button type="button" className="btn submit login" onClick={handleRegister}>Submit</button>
                                 </div>
                             </div>
                         </form>

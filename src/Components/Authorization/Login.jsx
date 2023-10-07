@@ -56,32 +56,32 @@ const Login = () => {
   }
   return (
     <>
-      <div class="container text-white">
+      <div className="container text-white">
         <div className='row justify-content-center'>
-          <div class="col-6 logincontainer mt-5">
-            <h2 id='register' class="mt-3 pt-5 pb-3 text-center">Login Into VehiPro</h2>
-            <form class="form-horizontal ps-2" onSubmit={handleLogin}>
-              <div class="form-group registerform pt-3">
-                <label class="control-label col-sm-2" for="Username">Username:</label>
-                <div class="col-sm-10">
-                  <input type="text" class="form-control" id="Username" placeholder="Enter Username" name="vusername" value={vusername} onChange={(e) => setvusername(e.target.value)} required />
+          <div className="col-6 logincontainer mt-5">
+            <h2 id='register' className="mt-3 pt-5 pb-3 text-center">Login Into VehiPro</h2>
+            <form className="form-horizontal ps-2" onSubmit={handleLogin}>
+              <div className="form-group registerform pt-3">
+                <label className="control-label col-sm-2" for="Username">Username:</label>
+                <div className="col-sm-10">
+                  <input type="text" className="form-control" id="Username" placeholder="Enter Username" name="vusername" value={vusername} onChange={(e) => setvusername(e.target.value)} required />
                 </div>
               </div>
-              <div class="form-group registerform pt-3">
-                <label class="control-label col-sm-2" for="pwd">Password:</label>
-                <div class="col-sm-10">
-                  <input type="password" class="form-control" id="Password" placeholder="Enter password" name="vpassword" value={vpassword} onChange={(e) => setvpassword(e.target.value)} required />
+              <div className="form-group registerform pt-3">
+                <label className="control-label col-sm-2" for="pwd">Password:</label>
+                <div className="col-sm-10">
+                  <input type="password" className="form-control" id="Password" placeholder="Enter password" name="vpassword" value={vpassword} onChange={(e) => setvpassword(e.target.value)} required />
                 </div>
               </div>
-              <div class="form-group registerform pt-3">
-                <label class="control-label col-sm-2" for="Email">Email:</label>
-                <div class="col-sm-10">
-                  <input type="email" class="form-control" id="Email" placeholder="Enter Email" name="Email" value={Email} onChange={(e) => setEmail(e.target.value)} required />
+              <div className="form-group registerform pt-3">
+                <label className="control-label col-sm-2" for="Email">Email:</label>
+                <div className="col-sm-10">
+                  <input type="email" className="form-control" id="Email" placeholder="Enter Email" name="Email" value={Email} onChange={(e) => setEmail(e.target.value)} required />
                 </div>
               </div>
-              <div class="form-group mt-3 registerform pt-3 pb-5">
-                <div class="col-sm-offset-2 col-sm-10">
-                  <button type="submit" class="btn submit login">Login</button>      <ToastContainer />
+              <div className="form-group mt-3 registerform pt-3 pb-5">
+                <div className="col-sm-offset-2 col-sm-10">
+                  <button type="submit" className="btn submit login">Login</button>      <ToastContainer />
                   {error && <p className="text-danger">{error}</p>}
                 </div>
               </div>

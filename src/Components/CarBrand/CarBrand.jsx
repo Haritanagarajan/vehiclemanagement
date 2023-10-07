@@ -20,19 +20,6 @@ const CarBrand = () => {
 
     console.log("CarDetails", CarDetails);
 
-
-    // const fetchData = async () => {
-    //     try {
-    //         const response = await axios.get(`https://localhost:7229/api/CarBrands1/GetCarBrands`)
-    //         const result = await response.data;
-    //         setCarBrand(result);
-    //         { console.log(result.branndImage) }
-
-    //     } catch (error) {
-    //         console.log(error);
-    //         throw error;
-    //     }
-    // }
     const fetchData = async () => {
         try {
             const response = await axios.get(`https://localhost:7229/api/CarBrands1/GetCarBrands`, {
@@ -65,9 +52,6 @@ const CarBrand = () => {
                             {console.log(brands.brandid)}
                             <div className="card carbrandcard">
                                 <div className='card-body  text-center '>
-                                    {/* {brands.brandName}
-                                    <br /> */}
-                                    {/* {brands.brandid} */}
                                     <img
                                         src={brands.imageSrc}
                                         width='200px'
